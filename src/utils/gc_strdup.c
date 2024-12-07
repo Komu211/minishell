@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gc_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 16:22:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 15:41:14 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 15:42:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "wrapper.h"
 
-// Include libraries
-# include "env.h"
-# include "error.h"
-# include "garbage_collector.h"
-# include "libft.h"
-# include "struct.h"
-# include "utils.h"
-# include "wrapper.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void   *gc_strdup(const char *s)
+{
+	char    *str;
+	size_t  len;
 
-#endif
+	len = ft_strlen(s);
+	str = gc_malloc(len + 1);
+	ft_memcpy(str, s, len);
+	str[len] = '\0';
+	return (str);
+}

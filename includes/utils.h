@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 16:22:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 16:20:31 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef UTILS_H
+# define UTILS_H
 
-// Include libraries
-# include "env.h"
-# include "error.h"
-# include "garbage_collector.h"
-# include "libft.h"
-# include "struct.h"
-# include "utils.h"
 # include "wrapper.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
+void	*gc_strdup(const char *s);
+char	*gc_strjoin(char const *s1, char const *s2);
 
 #endif

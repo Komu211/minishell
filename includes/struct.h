@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 16:22:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 16:14:01 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
-// Include libraries
-# include "env.h"
-# include "error.h"
-# include "garbage_collector.h"
 # include "libft.h"
-# include "struct.h"
-# include "utils.h"
-# include "wrapper.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+}			t_env;
+
+typedef struct s_minishell
+{
+    char    *pwd;
+    char    *hist_file;
+    int     error;
+    int     exit_status;
+    t_list  *env_list;
+}           t_minishell;
 
 #endif

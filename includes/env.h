@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 16:22:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 15:18:25 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 16:03:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ENV_H
+# define ENV_H
 
-// Include libraries
-# include "env.h"
-# include "error.h"
-# include "garbage_collector.h"
 # include "libft.h"
 # include "struct.h"
-# include "utils.h"
-# include "wrapper.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+
+// Function headers
+void	env_init(t_minishell *mini, char **envp);
+void	env_destroy(void *env);
+void	env_empty(t_list **env);
 
 #endif

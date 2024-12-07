@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env_empty.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 16:22:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 15:33:08 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 16:14:42 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "env.h"
+#include "minishell.h"
 
-// Include libraries
-# include "env.h"
-# include "error.h"
-# include "garbage_collector.h"
-# include "libft.h"
-# include "struct.h"
-# include "utils.h"
-# include "wrapper.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	env_destroy(void *param)
+{
+	t_env	*env;
 
-#endif
+	env = (t_env *)param;
+	gc_free(env->key);
+	gc_free(env->value);
+	gc_free(env);
+}
+
+void	env_empty(t_list **env_list)
+{
+	ft_lstclear(env_list, env_destroy);
+}
