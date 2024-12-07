@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:30:06 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:32:23 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:41:01 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define GC_SIZE 20
 
-# include "wrappers.h"
 # include "error.h"
 # include "libft.h"
 

@@ -5,7 +5,7 @@ NAME		=	minishell
 SRC_DIR			=	src
 OBJ_DIR			=	obj
 INC_DIR			=	inc
-WRAPPER_DIR		=	$(SRC_DIR)/wrappers
+WRAPPER_DIR		=	$(SRC_DIR)/wrapper
 GC_DIR			=	$(SRC_DIR)/gc
 ERROR_DIR		=	$(SRC_DIR)/error
 
@@ -23,16 +23,16 @@ DEBUG_FLAGS		=	-g -fsanitize=address -fcolor-diagnostics -fansi-escape-codes
 RM				=	rm -f
 
 # Source files and corresponding object files
-WRAPPERS		= wrappers.c
+WRAPPER			= gc_malloc.c gc_calloc.c gc_realloc.c gc_free.c
 GC				= gc_holder.c gc_add.c gc_remove.c gc_empty.c
 ERROR			= error_handler.c
 
-WRAPPERS		:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPERS))
+WRAPPER			:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPER))
 GC				:=	$(addprefix $(GC_DIR)/, $(GC))
 ERROR			:=	$(addprefix $(ERROR_DIR)/, $(ERROR))
 
 SRCS			= $(SRC_DIR)/main.c \
-				$(WRAPPERS) \
+				$(WRAPPER) \
 				$(GC) \
 				$(ERROR)
 
@@ -71,13 +71,18 @@ $(LIBFT):
 
 # Clean object files from both fdf and libft
 clean:
-	@rm -rf $(OBJ_DIR)
 	@echo "Deleting $(NAME) objects"
+	@rm -rf $(OBJ_DIR)
+	@echo "Deleting libft objects"
+	@$(MAKE) -C $(LIBFT_DIR) clean
+
 
 # Full clean: also remove the executable and libft objects
 fclean: clean
-	@$(RM) $(NAME)
 	@echo "Deleting $(NAME) executable"
+	@$(RM) $(NAME)
+	@echo "Deleting libft library"
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 # Rebuild everything
 re: fclean all

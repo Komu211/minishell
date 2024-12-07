@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   gc_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:56:34 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 13:39:17 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 10:44:34 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 13:12:37 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "wrapper.h"
 
-# include "libft.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
+void	*gc_malloc(size_t size)
+{
+	void	*ptr;
 
-// Color codes
-# define RED "\033[0;31m"
-# define GREEN "\033[0;32m"
-# define YELLOW "\033[0;33m"
-
-// Function prototypes
-
-void	error_handler(char *message, int status);
-
-#endif
+	ptr = malloc(size);
+	if (!ptr)
+		error_handler("Failed to allocate memory in gc_malloc", 1);
+	garbage_collector_add(ptr);
+	return (ptr);
+}

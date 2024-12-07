@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wrappers.h                                         :+:      :+:    :+:   */
+/*   gc_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:31:50 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 11:57:48 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 12:44:19 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 13:14:42 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRAPPERS_H
-# define WRAPPERS_H
+#include "wrapper.h"
 
-# include "libft.h"
-# include "error.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+void	*gc_realloc(void *ptr, size_t size)
+{
+	void	*new_ptr;
 
-// Function prototypes
-void	*gc_malloc(size_t size);
-void	*gc_calloc(size_t num, size_t size);
-void	*gc_realloc(void *ptr, size_t size);
-void	gc_free(void *ptr);
-
-#endif
+	if (size == 0)
+	{
+		gc_free(ptr);
+		return (NULL);
+	}
+	new_ptr = gc_malloc(size);
+	if (ptr)
+		ft_memcpy(new_ptr, ptr, size);
+	gc_free(ptr);
+	return (new_ptr);
+}

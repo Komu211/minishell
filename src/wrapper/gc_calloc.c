@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   gc_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:56:34 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 13:39:17 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 12:43:01 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 13:02:15 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "wrapper.h"
 
-# include "libft.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
+void	*gc_calloc(size_t num, size_t size)
+{
+	void	*ptr;
 
-// Color codes
-# define RED "\033[0;31m"
-# define GREEN "\033[0;32m"
-# define YELLOW "\033[0;33m"
-
-// Function prototypes
-
-void	error_handler(char *message, int status);
-
-#endif
+	ptr = gc_malloc(num * size);
+	ft_bzero(ptr, num * size);
+	return (ptr);
+}
