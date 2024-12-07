@@ -20,6 +20,7 @@ LIBFT_FLAGS		=	-L$(LIBFT_DIR) -lft
 # Compiler and flags
 CC				=	cc
 INCLUDES		=	-I$(INC_DIR) -I$(LIBFT_INC_DIR)
+READLINE_FLAGS	=	-lreadline -ltermcap
 CFLAGS			=	-Wall -Wextra -Werror $(INCLUDES)
 DEBUG_FLAGS		=	-g -fsanitize=address
 RM				=	rm -f
@@ -29,7 +30,7 @@ WRAPPER			= gc_malloc.c gc_calloc.c gc_realloc.c gc_free.c gc_getcwd.c
 GC				= gc_holder.c gc_add.c gc_remove.c gc_empty.c
 ERROR			= error_handler.c
 ENV				= env.c env_empty.c
-UTILS			= gc_strdup.c gc_strjoin.c
+UTILS			= gc_strdup.c gc_strjoin.c cleanup.c
 
 WRAPPER			:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPER))
 GC				:=	$(addprefix $(GC_DIR)/, $(GC))
@@ -52,15 +53,15 @@ all: $(NAME)
 # Link object files and libft to create the final executable
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "Compiling $(NAME) project"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(READLINE_FLAGS)
 
 debug: fclean $(LIBFT) $(OBJS)
 	@echo "Compiling $(NAME) project with debug flags"
-	@$(CC) $(DEBUG_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@$(CC) $(DEBUG_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(READLINE_FLAGS)
 
 docker: fclean $(LIBFT) $(OBJS)
 	@echo "Compiling $(NAME) project with debug flags for docker"
-	@$(CC) -g $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	@$(CC) -g $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(READLINE_FLAGS)
 
 # Compile source files into object files in the obj/ folder
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)

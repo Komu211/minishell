@@ -1,6 +1,6 @@
-  - Redo gc_getcwd - Konrad
-
-
+- Redo gc_getcwd 								- Konrad
+- Do nicer welcome banner
+- Make Path when starting relative to $HOME
 
 ---- FINAL CHECK ----
 
