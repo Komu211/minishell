@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 21:59:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/07 22:08:50 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	main(int argc, char **argv, char **envp)
 				printf("\nCommand entered: %s\n", user_in);
 				debug_ast(mini.ast);
 				// Free previous AST before next iteration
-				ast_empty(mini.ast);
-				mini.ast = NULL;
+				mini.ast = ast_empty(mini.ast);
 			}
 			add_history(user_in); // Add command to readline history
 		}

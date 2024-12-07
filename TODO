@@ -2,6 +2,10 @@
 - Do nicer welcome banner
 - Make Path when starting relative to $HOME
 - Finish Gabage collector free
+- Modified ARGV list with seperated values
+- Fix Parenthese 
+- Restructure 
+- Check LEAKS
 
 
 ---- FINAL CHECK ----

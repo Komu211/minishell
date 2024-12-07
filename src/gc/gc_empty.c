@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 12:23:35 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:25:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/12/07 22:11:16 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "garbage_collector.h"
 
-void	gc_empty(void)
+void	garbage_collector_empty(void)
 {
 	t_list	**holder;
 	t_list	*tmp;
@@ -25,4 +25,3 @@ void	gc_empty(void)
 		ft_lstdelone(tmp, free);
 	}
 }
-
