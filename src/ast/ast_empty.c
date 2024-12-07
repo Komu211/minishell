@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_new_node.c                                     :+:      :+:    :+:   */
+/*   ast_empty.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 18:50:05 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 20:04:06 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 20:16:06 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 20:26:44 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-t_ast_node	*ast_new_node(t_token_type type)
+void	*ast_empty(t_ast_node *node)
 {
-	t_ast_node	*node;
+	int	i;
 
-	node = gc_calloc(1, sizeof(t_ast_node));
-	node->type = type;
-	node->left = NULL;
-	node->right = NULL;
-	node->args = NULL;
-	return (node);
+	i = 0;
+	if (node)
+	{
+		if (node->left)
+			ast_empty(node->left);
+		if (node->right)
+			ast_empty(node->right);
+		if (node->args)
+		{
+			while (node->args[i])
+				gc_free(node->args[i++]);
+			gc_free(node->args);
+		}
+		gc_free(node);
+	}
+	return (NULL);
 }

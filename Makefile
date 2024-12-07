@@ -32,7 +32,8 @@ GC				= gc_holder.c gc_add.c gc_remove.c gc_empty.c
 ERROR			= error_handler.c
 ENV				= env.c env_empty.c
 UTILS			= gc_strdup.c gc_strjoin.c gc_split.c gc_substr.c
-AST				= ast_build.c ast_init.c ast_new_node.c
+AST				= ast_build.c ast_init.c ast_new_node.c ast_parse_pipe.c ast_parse_parentheses.c \
+				ast_parse_command.c ast_parse_logical_ops.c ast_empty.c ast_print.c
 
 WRAPPER			:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPER))
 GC				:=	$(addprefix $(GC_DIR)/, $(GC))

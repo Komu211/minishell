@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_parse_logical_ops.c                            :+:      :+:    :+:   */
+/*   ast_parse_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 19:57:29 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 22:00:21 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 20:28:07 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 21:57:56 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-t_ast_node	*parse_logical_ops(t_token_type **tokens, char ***instructions)
+t_ast_node	*parse_pipe(t_token_type **tokens, char ***instructions)
 {
 	t_ast_node	*left;
 	t_ast_node	*node;
 
-	left = parse_pipe(tokens, instructions);
+	left = parse_parentheses(tokens, instructions);
 	if (!left)
 		return (NULL);
-	while (**tokens != TOKEN_EMPTY && (**tokens == TOKEN_AND || **tokens == TOKEN_OR))
+	while (**tokens != TOKEN_EMPTY && **tokens == TOKEN_PIPE)
 	{
-		node = ast_new_node(**tokens);
+		node = ast_new_node(TOKEN_PIPE);
 		++(*tokens);
 		++(*instructions);
 		node->left = left;

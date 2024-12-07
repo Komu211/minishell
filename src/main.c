@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 19:51:08 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:59:22 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,20 @@ int	main(int argc, char **argv, char **envp)
 		user_in = readline(prompt);
 		if (!user_in)
 			break ;
-		ast_init(&mini.ast, user_in);
+		if (*user_in) // Only process non-empty input
+		{
+			ast_init(&mini.ast, user_in);
+			if (mini.ast)
+			{
+				printf("\nCommand entered: %s\n", user_in);
+				debug_ast(mini.ast);
+				// Free previous AST before next iteration
+				ast_empty(mini.ast);
+				mini.ast = NULL;
+			}
+			add_history(user_in); // Add command to readline history
+		}
+		free(user_in); // readline allocated memory needs to be freed
 		gc_free(prompt);
 	}
 	cleanup_main(&mini);
