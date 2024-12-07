@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:28:07 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 21:57:56 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/07 22:04:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ast_node	*parse_pipe(t_token_type **tokens, char ***instructions)
 		++(*tokens);
 		++(*instructions);
 		node->left = left;
-		node->right = parse_logical_ops(tokens, instructions);
+		node->right = parse_command(tokens, instructions);
 		if (!node->right)
 			return (ast_empty(node));
 		left = node;
