@@ -4,11 +4,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-// Color codes for better test output
-#define GREEN "\x1b[32m"
-#define RED "\x1b[31m"
-#define RESET "\x1b[0m"
-
 // Comprehensive test for gc_malloc
 void test_gc_malloc()
 {

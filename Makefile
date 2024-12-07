@@ -3,8 +3,8 @@ NAME		=	minishell
 
 # Directories
 SRC_DIR			=	src
-OBJ_DIR			=	obj
-INC_DIR			=	inc
+OBJ_DIR			=	out
+INC_DIR			=	includes
 WRAPPER_DIR		=	$(SRC_DIR)/wrapper
 GC_DIR			=	$(SRC_DIR)/gc
 ERROR_DIR		=	$(SRC_DIR)/error
@@ -90,7 +90,7 @@ re: fclean all
 # Norm rule
 norm:
 	@echo "Norminette for $(NAME):"
-	@-norminette src libft inc || true
+	@-norminette $(SRC_DIR) $(LIBFT_DIR) $(INC_DIR) || true
 
 # PHONY prevents conflicts with files named like the targets
 .PHONY: all clean fclean re

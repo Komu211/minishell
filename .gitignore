@@ -2,7 +2,7 @@
 minishell
 
 # Object files
-obj/
+out/
 
 # Libft objects and library
 libft/obj/
@@ -10,3 +10,6 @@ libft/libft.a
 
 # VS Code stuff
 .vscode/
+
+# Ignore subject PDFs
+*pdf
