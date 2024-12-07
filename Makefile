@@ -6,6 +6,8 @@ SRC_DIR			=	src
 OBJ_DIR			=	obj
 INC_DIR			=	inc
 WRAPPER_DIR		=	$(SRC_DIR)/wrappers
+GC_DIR			=	$(SRC_DIR)/gc
+ERROR_DIR		=	$(SRC_DIR)/error
 
 # Libft
 LIBFT_DIR		=	libft
@@ -22,11 +24,17 @@ RM				=	rm -f
 
 # Source files and corresponding object files
 WRAPPERS		= wrappers.c
+GC				= gc_holder.c gc_add.c gc_remove.c gc_empty.c
+ERROR			= error_handler.c
 
 WRAPPERS		:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPERS))
+GC				:=	$(addprefix $(GC_DIR)/, $(GC))
+ERROR			:=	$(addprefix $(ERROR_DIR)/, $(ERROR))
 
 SRCS			= $(SRC_DIR)/main.c \
 				$(WRAPPERS) \
+				$(GC) \
+				$(ERROR)
 
 OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -77,7 +85,7 @@ re: fclean all
 # Norm rule
 norm:
 	@echo "Norminette for $(NAME):"
-	@-norminette src
+	@-norminette src libft inc || true
 
 # PHONY prevents conflicts with files named like the targets
 .PHONY: all clean fclean re

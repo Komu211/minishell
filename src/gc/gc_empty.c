@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gc_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 12:23:35 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:25:42 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "garbage_collector.h"
 
-// Include libraries
-# include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
-# include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	gc_empty(void)
+{
+	t_list	**holder;
+	t_list	*tmp;
 
-#endif
+	holder = garbage_holder();
+	while (*holder)
+	{
+		tmp = *holder;
+		*holder = (*holder)->next;
+		ft_lstdelone(tmp, free);
+	}
+}
+

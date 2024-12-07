@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:40:33 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/19 09:30:09 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:33:15 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstremove(t_list **lst, void *ptr);
+int		ft_lstcontains(t_list *lst, void *ptr);
 int		ft_atoi_base(const char *str, int base);
 size_t	ft_count_words(char *string, char separator);
 

@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstcontains.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 12:14:13 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:14:41 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-// Include libraries
-# include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
-# include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+int	ft_lstcontains(t_list *lst, void *ptr)
+{
+	while (lst)
+	{
+		if (lst->content == ptr)
+			return (1);
+		lst = lst->next;
+	}
+	return (0);
+}

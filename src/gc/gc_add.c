@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gc_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 11:23:31 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:32:02 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-// Include libraries
-# include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
-# include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	garbage_collector_add(void *ptr)
+{
+	t_list	*new;
 
-#endif
+	new = ft_lstnew(ptr);
+	if (!new)
+		error_handler("Failed to allocate memory for garbage collector", 1);
+	ft_lstadd_front(garbage_holder(), new);
+}

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 11:54:20 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:34:19 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "error.h"
 
-// Include libraries
-# include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
-# include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+void	error_handler(char *message, int status)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(message, 2);
+	exit(status);
+}

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 11:31:50 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 11:57:48 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef WRAPPERS_H
+# define WRAPPERS_H
 
-// Include libraries
 # include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
 # include "error.h"
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+
+// Function prototypes
+void	*gc_malloc(size_t size);
+void	*gc_calloc(size_t num, size_t size);
+void	*gc_realloc(void *ptr, size_t size);
+void	gc_free(void *ptr);
 
 #endif

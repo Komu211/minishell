@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 11:30:06 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:32:23 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef GARBAGE_COLLECTOR_H
+# define GARBAGE_COLLECTOR_H
 
-// Include libraries
-# include "libft.h"
+# define GC_SIZE 20
+
 # include "wrappers.h"
-# include "garbage_collector.h"
 # include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include "libft.h"
+
+t_list	**garbage_holder(void);
+void	garbage_collector_add(void *ptr);
+int		garbage_collector_remove(void *ptr);
+void	garbage_collector_empty(void);
 
 #endif

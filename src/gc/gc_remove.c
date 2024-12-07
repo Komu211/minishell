@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   gc_remove.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 12:27:35 by obehavka         ###   ########.fr       */
+/*   Created: 2024/12/07 12:02:14 by obehavka          #+#    #+#             */
+/*   Updated: 2024/12/07 12:33:30 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "garbage_collector.h"
 
-// Include libraries
-# include "libft.h"
-# include "wrappers.h"
-# include "garbage_collector.h"
-# include "error.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+int	garbage_collector_remove(void *ptr)
+{
+	if (!ft_lstcontains(*garbage_holder(), ptr))
+		return (0);
+	ft_lstremove(garbage_holder(), ptr);
+	return (1);
+}
