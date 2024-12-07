@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 16:57:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:51:08 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_welcome(void)
 {
-	printf("Welcome to minishell!\n");
+	printf("Welcome to the OKeay Shell!\n\n");
 }
 
 void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
@@ -34,30 +34,37 @@ void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
 	(void)argv;
 }
 
-void	print_envs(t_list *env_list)
-{
-	t_list	*tmp;
-	t_env	*envs;
+// void	print_envs(t_list *env_list)
+// {
+// 	t_list	*tmp;
+// 	t_env	*envs;
 
-	tmp = env_list;
-	while (tmp)
-	{
-		envs = (t_env *)tmp->content;
-		printf("%s: %s\n", envs->key, envs->value);
-		tmp = tmp->next;
-	}
-}
+// 	tmp = env_list;
+// 	while (tmp)
+// 	{
+// 		envs = (t_env *)tmp->content;
+// 		printf("%s: %s\n", envs->key, envs->value);
+// 		tmp = tmp->next;
+// 	}
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	mini;
+	char		*user_in;
+	char		*prompt;
 
 	print_welcome();
 	mini_init(argc, argv, envp, &mini);
-	print_envs(mini.env_list);
-	env_empty(&mini.env_list);
-	ft_putendl_fd("env_list is empty\n", 1);
-	gc_free(mini.hist_file);
-	gc_free(mini.pwd);
+	while (1)
+	{
+		prompt = gc_strjoin(mini.pwd, " > ");
+		user_in = readline(prompt);
+		if (!user_in)
+			break ;
+		ast_init(&mini.ast, user_in);
+		gc_free(prompt);
+	}
+	cleanup_main(&mini);
 	return (0);
 }

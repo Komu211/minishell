@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ast_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:54:20 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 19:30:12 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 19:19:53 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 19:49:44 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "ast.h"
 
-void	error_handler(char *message, int status)
+t_ast_node	*ast_build(t_token_type *tokens, char **split_line)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(message, 2);
-	exit(status);
+	(void)tokens;
+	(void)split_line;
+	printf("ast_build\n");
+	return (NULL);
+	// if (!tokens)
+	//     return (NULL);
+	// return (parse_logical_ops(&tokens));
 }

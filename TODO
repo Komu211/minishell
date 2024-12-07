@@ -1,7 +1,9 @@
 - Redo gc_getcwd 								- Konrad
 - Do nicer welcome banner
 - Make Path when starting relative to $HOME
+- Finish Gabage collector free
+
 
 ---- FINAL CHECK ----
-
-REMOVE TODO
+- check if split should be done with just space or isspace(char)
+- REMOVE TODO

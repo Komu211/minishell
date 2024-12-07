@@ -6,11 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:18:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 16:18:35 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:33:28 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrapper.h"
+#include "utils.h"
 
 char	*gc_strjoin(char const *s1, char const *s2)
 {

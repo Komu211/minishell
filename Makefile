@@ -10,6 +10,7 @@ GC_DIR			=	$(SRC_DIR)/gc
 ERROR_DIR		=	$(SRC_DIR)/error
 ENV_DIR			=	$(SRC_DIR)/env
 UTILS_DIR		=	$(SRC_DIR)/utils
+AST_DIR			=	$(SRC_DIR)/ast
 
 # Libft
 LIBFT_DIR		=	libft
@@ -30,20 +31,23 @@ WRAPPER			= gc_malloc.c gc_calloc.c gc_realloc.c gc_free.c gc_getcwd.c
 GC				= gc_holder.c gc_add.c gc_remove.c gc_empty.c
 ERROR			= error_handler.c
 ENV				= env.c env_empty.c
-UTILS			= gc_strdup.c gc_strjoin.c cleanup.c
+UTILS			= gc_strdup.c gc_strjoin.c gc_split.c gc_substr.c
+AST				= ast_build.c ast_init.c ast_new_node.c
 
 WRAPPER			:=	$(addprefix $(WRAPPER_DIR)/, $(WRAPPER))
 GC				:=	$(addprefix $(GC_DIR)/, $(GC))
 ERROR			:=	$(addprefix $(ERROR_DIR)/, $(ERROR))
 ENV 			:=	$(addprefix $(ENV_DIR)/, $(ENV))
 UTILS			:=	$(addprefix $(UTILS_DIR)/, $(UTILS))
+AST				:=	$(addprefix $(AST_DIR)/, $(AST))
 
-SRCS			= $(SRC_DIR)/main.c \
+SRCS			= $(SRC_DIR)/main.c $(SRC_DIR)/cleanup.c \
 				$(WRAPPER) \
 				$(GC) \
 				$(ERROR) \
 				$(ENV) \
-				$(UTILS)
+				$(UTILS) \
+				$(AST)
 
 OBJS			=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

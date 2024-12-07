@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ast_new_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:54:20 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/07 19:30:12 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/07 18:50:05 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2024/12/07 18:51:12 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "ast.h"
 
-void	error_handler(char *message, int status)
+t_ast_node	*ast_new_node(t_token_type type)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(message, 2);
-	exit(status);
+	t_ast_node	*node;
+
+	node = gc_calloc(1, sizeof(t_ast_node));
+	if (!node)
+		error_handler("gc_calloc failed", 1);
+	node->type = type;
+	node->left = NULL;
+	node->right = NULL;
+	node->args = NULL;
+	return (node);
 }
