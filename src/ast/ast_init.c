@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 22:09:25 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:04:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void	ast_init(t_ast_node **node, char *line)
 {
 	char			**split_line;
 	t_token_type	*tokens;
-	int				i;
 
 	split_line = gc_split(line);
 	tokens = gc_tokenizer(split_line);
-	i = 0;
 	*node = ast_build(tokens, split_line);
 	gc_free(split_line);
 	gc_free(tokens);
