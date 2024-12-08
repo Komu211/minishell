@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 21:23:05 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:25:58 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "struct.h"
 # include "utils.h"
 # include "wrapper.h"
+
+# define SPECIAL_TOKENS "()<>|"
 
 // Function prototypes
 t_ast_node	*ast_new_node(t_token_type type);
