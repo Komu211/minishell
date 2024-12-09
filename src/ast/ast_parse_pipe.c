@@ -26,7 +26,7 @@ t_ast_node	*parse_pipe(t_token_type **tokens, char ***instructions)
 		++(*tokens);
 		++(*instructions);
 		node->left = left;
-		node->right = parse_command(tokens, instructions);
+		node->right = parse_parentheses(tokens, instructions);
 		if (!node->right)
 			return (ast_empty(node));
 		left = node;
