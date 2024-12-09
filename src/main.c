@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 22:08:50 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:02:31 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,26 @@
 
 void	print_welcome(void)
 {
-	printf("Welcome to the OKeay Shell!\n\n");
+	ft_putstr_fd("\033[1;36m", 1); // Bright cyan color
+	ft_putendl_fd("┌──────────────────────────────────────────────────────┐",
+		1);
+	ft_putendl_fd("│    ____  __ __                  _____ __         ____│",
+		1);
+	ft_putendl_fd("│   / __ \\/ //_/__  ____ ___  __ / ___// /_  ___  / / /│",
+		1);
+	ft_putendl_fd("│  / / / / ,< / _ \\/ __ `/ / / / \\__ \\/ __ \\/ _ \\/ / "
+					"/ │",
+					1);
+	ft_putendl_fd("│ / /_/ / /| /  __/ /_/ / /_/ / ___/ / / / /  __/ / /  │",
+		1);
+	ft_putendl_fd("│ \\____/_/ |_\\___/\\__,_/\\__, / /____/_/ /_/\\___/_/_"
+					"/   │",
+					1);
+	ft_putendl_fd("│                      /____/                          │",
+		1);
+	ft_putendl_fd("└──────────────────────────────────────────────────────┘",
+		1);
+	ft_putstr_fd("\033[0m\n", 1); // Reset color and add newline
 }
 
 void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
