@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/08 22:23:21 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:54:17 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,55 +45,6 @@ static t_token_type	*gc_tokenizer(char **split_line)
 		tokens[i] = get_token_type(split_line[i]);
 	tokens[i] = TOKEN_EMPTY;
 	return (tokens);
-}
-
-static int	get_mod_len(char *line)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (line[i])
-	{
-		if ((ft_strncmp(&line[i], "&&", 2) == 0 || ft_strncmp(&line[i], "||",
-					2) == 0) && line[i + 2] != ' ')
-			len += 2;
-		else if (ft_strchr(SPECIAL_TOKENS, line[i]) && line[i + 1] != ' ')
-			len += 1;
-		++len;
-		++i;
-	}
-	return (len);
-}
-
-static void	*transform_line(char *line, char *mod_line)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if ((ft_strncmp(&line[i], "&&", 2) == 0 || ft_strncmp(&line[i], "||",
-					2) == 0) && line[i + 2] != ' ')
-		{
-			mod_line[j++] = ' ';
-			mod_line[j++] = line[i++];
-			mod_line[j++] = line[i++];
-			mod_line[j++] = ' ';
-		}
-		else if (ft_strchr(SPECIAL_TOKENS, line[i]) && line[i + 1] != ' ')
-		{
-			mod_line[j++] = ' ';
-			mod_line[j++] = line[i++];
-			mod_line[j++] = ' ';
-		}
-		else
-			mod_line[j++] = line[i++];
-	}
-	return (mod_line);
 }
 
 void	ast_init(t_ast_node **node, char *line)

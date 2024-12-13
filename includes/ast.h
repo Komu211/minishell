@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/08 14:25:58 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:59:24 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ t_ast_node	*parse_command(t_token_type **tokens, char ***instructions);
 void		test_ast_construction(void);
 void		debug_ast(t_ast_node *root);
 void		print_ast(t_ast_node *node, int level);
+void		*transform_line(char *line, char *mod_line);
+int			get_mod_len(char *line);
 #endif
