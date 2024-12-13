@@ -7,7 +7,7 @@ INC_DIR = includes
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins
 
 SRCS = main.c \
        cleanup.c \
@@ -36,7 +36,8 @@ SRCS = main.c \
        ast_parse_logical_ops.c \
        ast_empty.c \
        ast_print.c \
-       input_transformation.c
+       input_transformation.c \
+       echo.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 
