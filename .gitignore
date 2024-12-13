@@ -13,3 +13,6 @@ libft/libft.a
 
 # Ignore subject PDFs
 *pdf
+
+# Ignore .idea folder
+.idea/
