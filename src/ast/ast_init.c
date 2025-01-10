@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/13 02:54:17 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:48:08 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static t_token_type	get_token_type(char *word)
 		return (TOKEN_REDIRECT_IN);
 	if (!ft_strcmp(word, ">"))
 		return (TOKEN_REDIRECT_OUT);
+	if (!ft_strcmp(word, ">>"))
+		return (TOKEN_REDIRECT_OUT_APPEND);
+	if (!ft_strcmp(word, "<<"))
+		return (TOKEN_REDIRECT_HERE_DOC);
 	return (TOKEN_COMMAND);
 }
 

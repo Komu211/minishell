@@ -44,6 +44,8 @@ SRCS = main.c \
        execute_logical.c \
        execute_utils.c \
        test_execution.c
+       input_transformation.c \
+       ast_parse_redirection.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

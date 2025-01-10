@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:50:05 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 20:04:06 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:08:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_ast_node	*ast_new_node(t_token_type type)
 	node->type = type;
 	node->left = NULL;
 	node->right = NULL;
+	node->redirection = NULL;
 	node->args = NULL;
 	return (node);
 }

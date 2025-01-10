@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 19:50:57 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:07:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,18 @@ typedef struct s_minishell
 	t_ast_node				*ast;
 }							t_minishell;
 
+typedef struct s_redirection
+{
+	t_redirection_type		type;
+	char					*file;
+}							t_redirection;
+
 struct						s_ast_node
 {
 	t_token_type			type;
 	t_ast_node				*left;
 	t_ast_node				*right;
+	t_redirection			*redirection;
 	char					**args;
 };
 
