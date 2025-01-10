@@ -36,14 +36,14 @@ SRCS = main.c \
        ast_parse_logical_ops.c \
        ast_empty.c \
        ast_print.c \
-       input_transformation.c
+       input_transformation.c \
        execute.c \
        execute_builtin.c \
        execute_external.c \
        execute_pipe.c \
        execute_logical.c \
        execute_utils.c \
-       test_execution.c
+       test_execution.c \
        input_transformation.c \
        ast_parse_redirection.c
 
