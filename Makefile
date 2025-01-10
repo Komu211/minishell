@@ -36,7 +36,8 @@ SRCS = main.c \
        ast_parse_logical_ops.c \
        ast_empty.c \
        ast_print.c \
-       input_transformation.c
+       input_transformation.c \
+       ast_parse_redirection.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 
