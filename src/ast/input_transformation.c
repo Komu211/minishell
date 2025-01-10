@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 02:51:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/13 02:56:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:42:57 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	get_mod_len(char *line)
 	}
 	return (len);
 }
-
 static void	handle_operator(char *line, char *mod_line, int *i, int *j)
 {
 	if ((*i) > 0 && line[(*i) - 1] != ' ')
@@ -79,7 +78,8 @@ void	*transform_line(char *line, char *mod_line)
 	while (line[i])
 	{
 		if ((ft_strncmp(&line[i], "&&", 2) == 0 || ft_strncmp(&line[i], "||",
-					2) == 0))
+					2) == 0) || ft_strncmp(&line[i], ">>", 2) == 0
+			|| ft_strncmp(&line[i], "<<", 2) == 0)
 			handle_operator(line, mod_line, &i, &j);
 		else if (ft_strchr(SPECIAL_TOKENS, line[i]))
 		{

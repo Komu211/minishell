@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 19:36:43 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:24:32 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ void	*gc_strdup(const char *s);
 char	*gc_strjoin(char const *s1, char const *s2);
 char	*gc_substr(char const *s, unsigned int start, size_t len);
 char	**gc_split(char const *s);
+char	**gc_split_at(char const *s, char c);
+void	gc_split_free(char ***split);
 
 #endif

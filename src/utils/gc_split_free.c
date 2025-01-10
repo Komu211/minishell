@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_empty.c                                        :+:      :+:    :+:   */
+/*   gc_split_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 20:16:06 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 12:50:52 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/10 16:20:59 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/10 16:26:28 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "utils.h"
 
-void	*ast_empty(t_ast_node *node)
+void gc_split_free(char ***split)
 {
 	int	i;
 
 	i = 0;
-	if (node)
+	while ((*split)[i])
 	{
-		if (node->left)
-			ast_empty(node->left);
-		if (node->right)
-			ast_empty(node->right);
-		if (node->args)
-		{
-			while (node->args[i])
-				gc_free(node->args[i++]);
-			gc_free(node->args);
-		}
-		gc_free(node);
+		gc_free((*split)[i]);
+		i++;
 	}
-	return (NULL);
+	gc_free(*split);
+	*split = NULL;
 }

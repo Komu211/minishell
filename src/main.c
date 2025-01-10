@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/07 12:34:13 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:49:45 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt = gc_strjoin(mini.pwd, " > ");
 		user_in = readline(prompt);
-		if (!user_in)
+		if (!user_in || strcmp(user_in, "exit") == 0)
 			break ;
 		if (*user_in) // Only process non-empty input
 		{
@@ -88,6 +88,7 @@ int	main(int argc, char **argv, char **envp)
 			{
 				printf("\nCommand entered: %s\n", user_in);
 				debug_ast(mini.ast);
+				execute_ast(&mini, mini.ast);
 				// Free previous AST before next iteration
 				mini.ast = ast_empty(mini.ast);
 			}

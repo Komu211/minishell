@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_empty.c                                        :+:      :+:    :+:   */
+/*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 20:16:06 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 12:50:52 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/10 12:53:19 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "execution.h"
 
-void	*ast_empty(t_ast_node *node)
+int	execute_pipe(t_minishell *mini, t_ast_node *ast)
 {
-	int	i;
-
-	i = 0;
-	if (node)
-	{
-		if (node->left)
-			ast_empty(node->left);
-		if (node->right)
-			ast_empty(node->right);
-		if (node->args)
-		{
-			while (node->args[i])
-				gc_free(node->args[i++]);
-			gc_free(node->args);
-		}
-		gc_free(node);
-	}
-	return (NULL);
+	// TODO: Implement pipe execution
+	(void)mini;
+	(void)ast;
+	return (0);
 }
