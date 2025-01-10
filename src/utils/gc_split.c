@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:00:13 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 19:41:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 09:50:33 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,28 @@ static size_t	ft_word_count(const char *string)
 	return (words);
 }
 
+static size_t	get_word_size(const char *s)
+{
+	size_t	size;
+	char	quote;
+
+	size = 0;
+	while (s[size] && !ft_isspace(s[size]))
+	{
+		if (s[size] == '\'' || s[size] == '\"')
+		{
+			quote = s[size++];
+			while (s[size] && s[size] != quote)
+				size++;
+			if (s[size])
+				size++;
+		}
+		else
+			size++;
+	}
+	return (size);
+}
+
 char	**gc_split(const char *s)
 {
 	size_t	word_size;
@@ -60,13 +82,10 @@ char	**gc_split(const char *s)
 	tmp_ptr = ret_ptr;
 	while (word_count--)
 	{
-		word_size = 0;
 		while (ft_isspace(*s))
 			++s;
-		while (s[word_size] && !ft_isspace(s[word_size]))
-			++word_size;
-		*tmp_ptr = gc_substr(s, 0, word_size);
-		++tmp_ptr;
+		word_size = get_word_size(s);
+		*tmp_ptr++ = gc_substr(s, 0, word_size);
 		s += word_size;
 	}
 	return (ret_ptr);

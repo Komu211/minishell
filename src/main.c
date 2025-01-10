@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/09 13:02:31 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:34:13 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_welcome(void)
 		1);
 	ft_putendl_fd("└──────────────────────────────────────────────────────┘",
 		1);
-	ft_putstr_fd("\033[0m\n", 1); // Reset color and add newline
+	ft_putstr_fd("\033[0m\n", 1);
 }
 
 void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
