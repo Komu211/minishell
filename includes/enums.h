@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:48:07 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:31:35 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 17:50:51 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,17 @@ typedef enum e_redirection_type
 	REDIRECT_OUT_APPEND,
 	REDIRECT_HERE_DOC
 }	t_redirection_type;
+
+typedef enum e_builtin_type
+{
+	BUILTIN_NONE,
+	BUILTIN_ECHO,
+	BUILTIN_CD,
+	BUILTIN_PWD,
+	BUILTIN_EXPORT,
+	BUILTIN_UNSET,
+	BUILTIN_ENV,
+	BUILTIN_EXIT
+}	t_builtin_type;
 
 #endif

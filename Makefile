@@ -7,7 +7,7 @@ INC_DIR = includes
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env
 
 SRCS = main.c \
        cleanup.c \
@@ -22,6 +22,7 @@ SRCS = main.c \
        gc_empty.c \
        error_handler.c \
        env.c \
+       env_init.c \
        env_empty.c \
        gc_strdup.c \
        gc_strjoin.c \
