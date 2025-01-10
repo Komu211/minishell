@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 12:53:21 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:40:18 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,4 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 		return (execute_or(mini, ast));
 	return (0);
 }
+

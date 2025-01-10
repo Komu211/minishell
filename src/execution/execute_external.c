@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 12:53:16 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:31:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 int	execute_external_command(t_minishell *mini, t_ast_node *ast)
 {
 	pid_t	pid;
-		int status;
+	int		status;
+	char	*command_path;
 
+	command_path = get_command_path(ast->args[0], mini->env_list);
+	if (!command_path)
+		return (1);
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	else if (pid == 0)
 	{
-		execve(ast->args[0], ast->args, NULL);
+		execve(command_path, ast->args, NULL);
 		exit(1);
 	}
 	else

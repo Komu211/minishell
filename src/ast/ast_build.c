@@ -6,12 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:19:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:55:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:35:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-
 
 t_ast_node	*ast_build(t_token_type *tokens, char **split_line)
 {
@@ -23,7 +22,8 @@ t_ast_node	*ast_build(t_token_type *tokens, char **split_line)
 	if (!node)
 	{
 		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
-		ft_putstr_fd(*split_line, 2);
+		if (*split_line)
+			ft_putstr_fd(*split_line, 2);
 		ft_putstr_fd("'\n", 2);
 	}
 	return (node);
