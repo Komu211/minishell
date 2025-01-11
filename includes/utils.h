@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 16:24:32 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:32:22 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define UTILS_H
 
 # include "wrapper.h"
+#include "enums.h"
 
 void	*gc_strdup(const char *s);
 char	*gc_strjoin(char const *s1, char const *s2);
@@ -21,5 +22,6 @@ char	*gc_substr(char const *s, unsigned int start, size_t len);
 char	**gc_split(char const *s);
 char	**gc_split_at(char const *s, char c);
 void	gc_split_free(char ***split);
+int		is_redirection(t_token_type token);
 
 #endif

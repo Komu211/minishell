@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:15:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 18:14:05 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:50:38 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@
 // 	return (REDIRECT_HERE_DOC);
 // }
 
-static int	is_redirection(t_token_type token)
-{
-	return (token == TOKEN_REDIRECT_IN || token == TOKEN_REDIRECT_OUT
-		|| token == TOKEN_REDIRECT_OUT_APPEND
-		|| token == TOKEN_REDIRECT_HERE_DOC);
-}
-
 t_ast_node	*parse_redirection(t_token_type **tokens, char ***instructions)
 {
 	t_ast_node	*left;
@@ -44,7 +37,7 @@ t_ast_node	*parse_redirection(t_token_type **tokens, char ***instructions)
 		++(*tokens);
 		++(*instructions);
 		node->left = left;
-		node->right = parse_parentheses(tokens, instructions);
+		node->right = parse_command(tokens, instructions);
 		if (!node->right)
 			return (ast_empty(node));
 		left = node;

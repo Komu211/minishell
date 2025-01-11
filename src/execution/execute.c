@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 17:56:59 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:33:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 		return (execute_and(mini, ast));
 	else if (ast->type == TOKEN_OR)
 		return (execute_or(mini, ast));
+	else if (is_redirection(ast->type))
+		return (execute_redirection(mini, ast));
 	return (0);
 }
