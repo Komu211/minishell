@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_parse_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:15:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:35:42 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 10:55:35 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_redirection_type	get_redirection_type(t_token_type token)
 
 t_redirection	*parse_redirection(t_token_type **tokens, char ***instructions)
 {
-	t_redirection *redirection;
+	t_redirection	*redirection;
 
 	redirection = gc_calloc(1, sizeof(t_redirection));
 	redirection->type = get_redirection_type(**tokens);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:18:25 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 16:25:52 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 10:56:21 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ void	env_init(t_minishell *mini, char **envp);
 void	env_destroy(void *env);
 void	env_empty(t_list **env);
 char	*get_env_value(char *key, t_list *env_list);
-
 
 #endif
