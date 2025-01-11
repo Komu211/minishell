@@ -6,34 +6,30 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:07:27 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:35:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:16:35 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
 // Lookup table for token types
-static const char	*g_token_names[] = {[TOKEN_AND] = "AND", [TOKEN_OR] = "OR",
-		[TOKEN_PIPE] = "PIPE", [TOKEN_PAREN_OPEN] = "(",
-		[TOKEN_PAREN_CLOSE] = ")", [TOKEN_REDIRECT_IN] = "<",
-		[TOKEN_REDIRECT_OUT] = ">", [TOKEN_COMMAND] = "CMD"};
+static const char	*g_token_names[] = {
+	[TOKEN_AND] = "AND",
+	[TOKEN_OR] = "OR",
+	[TOKEN_PIPE] = "PIPE",
+	[TOKEN_PAREN_OPEN] = "(",
+	[TOKEN_PAREN_CLOSE] = ")",
+	[TOKEN_REDIRECT_IN] = "<",
+	[TOKEN_REDIRECT_OUT] = ">",
+	[TOKEN_REDIRECT_OUT_APPEND] = ">>",
+	[TOKEN_REDIRECT_HERE_DOC] = "<<",
+	[TOKEN_COMMAND] = "CMD",
+};
 
 static void	print_indent(int level)
 {
 	for (int i = 0; i < level * 4; i++)
 		printf(" ");
-}
-
-static void	print_redirection(t_redirection *redirection)
-{
-	if (redirection->type == REDIRECT_IN)
-		printf(" < [ %s ]", redirection->file);
-	else if (redirection->type == REDIRECT_OUT)
-		printf(" > [ %s ]", redirection->file);
-	else if (redirection->type == REDIRECT_OUT_APPEND)
-		printf(" >> [ %s ]", redirection->file);
-	else if (redirection->type == REDIRECT_HERE_DOC)
-		printf(" << [ %s ]", redirection->file);
 }
 
 static void	print_command_args(char **args)
@@ -60,8 +56,6 @@ void	print_ast(t_ast_node *node, int level)
 	{
 		printf(" ");
 		print_command_args(node->args);
-		if (node->redirection)
-			print_redirection(node->redirection);
 	}
 	printf("\n");
 	if (node->left)

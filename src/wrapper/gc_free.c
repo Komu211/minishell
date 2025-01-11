@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 12:57:34 by obehavka          #+#    #+#             */
-/*   Updated: 2024/12/13 03:08:23 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:17:38 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	gc_free(void *ptr)
 		return ;
 	if (!garbage_collector_remove(ptr))
 		error_handler("Possible double free:\n"
-			"Trying to gc_free pointer that was not gc_malloced, "
-			"gc_calloced or gc_realloced ",
-			1);
+						"Trying to gc_free pointer that was not gc_malloced, "
+						"gc_calloced or gc_realloced ",
+						1);
 }
