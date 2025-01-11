@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:07:27 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:35:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:55:49 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	print_redirection(t_redirection *redirection)
 		printf(" >> [ %s ]", redirection->file);
 	else if (redirection->type == REDIRECT_HERE_DOC)
 		printf(" << [ %s ]", redirection->file);
+	if (redirection->next)
+	{
+		printf(" ");
+		print_redirection(redirection->next);
+	}
 }
 
 static void	print_command_args(char **args)
@@ -60,9 +65,11 @@ void	print_ast(t_ast_node *node, int level)
 	{
 		printf(" ");
 		print_command_args(node->args);
-		if (node->redirection)
-			print_redirection(node->redirection);
 	}
+	if (node->redirections_in)
+		print_redirection(node->redirections_in);
+	if (node->redirections_out)
+		print_redirection(node->redirections_out);
 	printf("\n");
 	if (node->left)
 		print_ast(node->left, level + 1);

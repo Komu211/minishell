@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:48:08 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:59:16 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ast_init(t_ast_node **node, char *line)
 
 	mod_line = gc_calloc(get_mod_len(line) + 1, sizeof(char));
 	transform_line(line, mod_line);
-	printf("mod_line: %s\n", mod_line);
 	split_line = gc_split(mod_line);
 	tokens = gc_tokenizer(split_line);
 	*node = ast_build(tokens, split_line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enums.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:48:07 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 17:50:51 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:37:37 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ typedef enum e_token_type
 	TOKEN_AND,
 	TOKEN_OR,
 	TOKEN_PIPE,
-	TOKEN_PAREN_OPEN,
-	TOKEN_PAREN_CLOSE,
 	TOKEN_REDIRECT_IN,
 	TOKEN_REDIRECT_OUT,
 	TOKEN_REDIRECT_OUT_APPEND,
 	TOKEN_REDIRECT_HERE_DOC,
+	TOKEN_PAREN_OPEN,
+	TOKEN_PAREN_CLOSE,
 	TOKEN_COMMAND
 }	t_token_type;
 

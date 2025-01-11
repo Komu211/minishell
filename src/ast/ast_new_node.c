@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_new_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:50:05 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:08:43 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:53:13 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_ast_node	*ast_new_node(t_token_type type)
 	node->type = type;
 	node->left = NULL;
 	node->right = NULL;
-	node->redirection = NULL;
+	node->redirections_in = NULL;
+	node->redirections_out = NULL;
 	node->args = NULL;
 	return (node);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 17:56:59 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:56:40 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 {
 	t_builtin_type	builtin_type;
 
+	// int				fd[2];
+	// fd[0] = STDIN_FILENO;
+	// fd[1] = STDOUT_FILENO;
+	// if (ast->redirections_in || ast->redirections_out)
+	// 	handle_redirections(ast, fd);
 	if (ast->type == TOKEN_COMMAND)
 	{
 		builtin_type = is_own_builtin(ast->args[0], ast->args);
@@ -30,5 +35,6 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 		return (execute_and(mini, ast));
 	else if (ast->type == TOKEN_OR)
 		return (execute_or(mini, ast));
+	// redirection_reset(fd);
 	return (0);
 }

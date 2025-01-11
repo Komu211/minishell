@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ast_parse_parentheses.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:33:26 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 22:04:15 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:52:50 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+
+// static int	is_redirection(t_token_type **tokens)
+// {
+// 	return (**tokens == TOKEN_REDIRECT_IN || **tokens == TOKEN_REDIRECT_OUT
+// 		|| **tokens == TOKEN_REDIRECT_OUT_APPEND
+// 		|| **tokens == TOKEN_REDIRECT_HERE_DOC);
+// }
 
 t_ast_node	*parse_parentheses(t_token_type **tokens, char ***instructions)
 {
