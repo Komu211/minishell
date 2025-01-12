@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 16:31:39 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:33:01 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int	execute_external_command(t_minishell *mini, t_ast_node *ast)
 		return (1);
 	else if (pid == 0)
 	{
-		execve(command_path, ast->args, NULL);
-		exit(1);
+		execve(command_path, ast->args, mini->env_list_orig);
+		perror(ast->args[0]);
+		exit(126);
 	}
 	else
 	{

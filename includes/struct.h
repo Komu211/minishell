@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 15:22:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:27:23 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_minishell
 	int							exit_status;
 	t_list						*env_list;
 	t_ast_node					*ast;
+	char						**env_list_orig;
 }								t_minishell;
 
 struct							s_redirection

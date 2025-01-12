@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:47:16 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 12:30:57 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:11 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	add_redirection(t_redirection **redirections,
 {
 	t_redirection	*tmp;
 
-	printf("add redirection: %s\n", redirection->file);
 	if (!*redirections)
 	{
 		*redirections = redirection;
