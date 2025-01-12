@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 17:11:57 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:36:04 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,19 @@ int	main(int argc, char **argv, char **envp)
 	mini_init(argc, argv, envp, &mini);
 	while (1)
 	{
-		prompt = gc_strjoin(mini.pwd, " > ");
+		prompt = gc_strjoin(mini.pwd, " > \n");
 		if (isatty(fileno(stdin)))
 			user_in = readline(prompt);
 		else
 		{
 			line = get_next_line(fileno(stdin));
-			user_in = ft_strtrim(line, "\n");
-			free(line);
+			if (line)
+			{
+				user_in = ft_strtrim(line, "\n");
+				free(line);
+			}
+			else
+				user_in = NULL;
 		}
 		if (!user_in || strcmp(user_in, "exit") == 0)
 			break ;
@@ -103,5 +108,5 @@ int	main(int argc, char **argv, char **envp)
 		gc_free(prompt);
 	}
 	cleanup_main(&mini);
-	return (0);
+	return (mini.exit_status);
 }
