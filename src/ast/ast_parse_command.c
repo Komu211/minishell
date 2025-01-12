@@ -6,89 +6,47 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:54:54 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 16:29:05 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:39:38 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static int	is_redirection_in(t_token_type *tokens)
-{
-	return (*tokens == TOKEN_REDIRECT_IN || *tokens == TOKEN_REDIRECT_HERE_DOC);
-}
-
-static int	is_redirection_out(t_token_type *tokens)
-{
-	return (*tokens == TOKEN_REDIRECT_OUT
-		|| *tokens == TOKEN_REDIRECT_OUT_APPEND);
-}
-
-static int	add_redirection(t_redirection **redirections,
-		t_redirection *redirection)
-{
-	t_redirection	*tmp;
-
-	if (!redirection)
-		return (0);
-	printf("add redirection: %s\n", redirection->file);
-	if (!*redirections)
-	{
-		*redirections = redirection;
-		return (1);
-	}
-	tmp = *redirections;
-	printf("added redirection: %s\n", redirection->file);
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = redirection;
-	return (1);
-}
-
 t_ast_node	*parse_command(t_token_type **tokens, char ***instructions)
 {
-	int			arg_count;
-	int			redir_count;
-	t_ast_node	*node;
-	int			i;
+	t_ast_node		*node;
+	t_redirection	*redirection;
+	int				has_command;
+	t_token_type	current_token;
+	int				arg_count;
 
-	if (!*tokens || **tokens != TOKEN_COMMAND)
-		return (NULL);
 	node = ast_new_node(TOKEN_COMMAND);
+	has_command = 0;
 	arg_count = 0;
-	redir_count = 0;
-	while ((*tokens)[arg_count] == TOKEN_COMMAND || is_redirection_in(*tokens
-			+ arg_count) || is_redirection_out(*tokens + arg_count))
+	if (*tokens && (**tokens == TOKEN_COMMAND || is_redirection(**tokens)))
+		node->args = gc_calloc(count_arguments(*tokens), sizeof(char *));
+	while (*tokens && (**tokens == TOKEN_COMMAND || is_redirection(**tokens)))
 	{
-		arg_count++;
-		if (is_redirection_in(*tokens + arg_count) || is_redirection_out(*tokens
-				+ arg_count))
-			redir_count++;
-	}
-	node->args = gc_calloc(sizeof(char *), (arg_count - (redir_count * 2) + 1));
-	i = -1;
-	while (++i < arg_count)
-	{
-		printf("arg: %s\n", **instructions);
-		if (is_redirection_in(*tokens))
+		current_token = **tokens;
+		if (current_token == TOKEN_COMMAND)
 		{
-			if (!add_redirection(&(node->redirections_in),
-					parse_redirection(tokens, instructions)))
-				return (ast_empty(node));
-			++i;
-		}
-		else if (is_redirection_out(*tokens))
-		{
-			if (!add_redirection(&(node->redirections_out),
-					parse_redirection(tokens, instructions)))
-				return (ast_empty(node));
-			++i;
+			node->args[arg_count++] = gc_strdup(**instructions);
+			has_command = 1;
+			++(*tokens);
+			++(*instructions);
 		}
 		else
 		{
-			node->args[i] = gc_strdup(**instructions);
-			++(*instructions);
-			++(*tokens);
+			redirection = parse_redirection(tokens, instructions);
+			if (!redirection)
+				return (ast_empty(node));
+			if (is_redirection_in(current_token))
+				add_redirection(&node->redirections_in, redirection);
+			else
+				add_redirection(&node->redirections_out, redirection);
 		}
 	}
+	if (!has_command && !node->redirections_in && !node->redirections_out)
+		return (ast_empty(node));
 	return (node);
 }

@@ -6,22 +6,17 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:33:26 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 15:52:50 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:40:47 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-// static int	is_redirection(t_token_type **tokens)
-// {
-// 	return (**tokens == TOKEN_REDIRECT_IN || **tokens == TOKEN_REDIRECT_OUT
-// 		|| **tokens == TOKEN_REDIRECT_OUT_APPEND
-// 		|| **tokens == TOKEN_REDIRECT_HERE_DOC);
-// }
-
 t_ast_node	*parse_parentheses(t_token_type **tokens, char ***instructions)
 {
-	t_ast_node	*node;
+	t_ast_node		*node;
+	t_redirection	*redirection;
+	t_token_type	tmp;
 
 	if (!(*tokens))
 		return (NULL);
@@ -34,6 +29,17 @@ t_ast_node	*parse_parentheses(t_token_type **tokens, char ***instructions)
 			return (ast_empty(node));
 		++(*tokens);
 		++(*instructions);
+		while (*tokens && is_redirection(**tokens))
+		{
+			tmp = **tokens;
+			redirection = parse_redirection(tokens, instructions);
+			if (!redirection)
+				return (ast_empty(node));
+			if (is_redirection_in(tmp))
+				add_redirection(&node->redirections_in, redirection);
+			else
+				add_redirection(&node->redirections_out, redirection);
+		}
 		return (node);
 	}
 	return (parse_command(tokens, instructions));

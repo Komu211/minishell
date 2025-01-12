@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 13:49:35 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:37:34 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,8 @@ void			debug_ast(t_ast_node *root);
 void			print_ast(t_ast_node *node, int level);
 void			*transform_line(char *line, char *mod_line);
 int				get_mod_len(char *line);
+int				count_arguments(t_token_type *tokens);
+void			add_redirection(t_redirection **redirections,
+					t_redirection *redirection);
+
 #endif

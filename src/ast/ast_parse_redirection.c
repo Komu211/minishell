@@ -6,18 +6,11 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:15:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 16:33:31 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:41:28 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-
-static int	is_redirection(t_token_type **tokens)
-{
-	return (**tokens == TOKEN_REDIRECT_IN || **tokens == TOKEN_REDIRECT_OUT
-		|| **tokens == TOKEN_REDIRECT_OUT_APPEND
-		|| **tokens == TOKEN_REDIRECT_HERE_DOC);
-}
 
 static t_redirection_type	get_redirection_type(t_token_type token)
 {
@@ -34,7 +27,7 @@ t_redirection	*parse_redirection(t_token_type **tokens, char ***instructions)
 {
 	t_redirection	*redirection;
 
-	if (!*tokens || !is_redirection(tokens))
+	if (!*tokens || !is_redirection(**tokens))
 		return (NULL);
 	redirection = gc_calloc(1, sizeof(t_redirection));
 	redirection->type = get_redirection_type(**tokens);
