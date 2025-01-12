@@ -48,7 +48,9 @@ SRCS = main.c \
        test_execution.c \
        ast_parse_redirection.c \
        gc_split_at.c \
-       gc_split_free.c
+       gc_split_free.c \
+       execute_redirection.c \
+       is_redirection.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

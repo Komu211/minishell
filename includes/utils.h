@@ -6,15 +6,15 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 18:32:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 10:20:33 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "enums.h"
 # include "wrapper.h"
-#include "enums.h"
 
 void	*gc_strdup(const char *s);
 char	*gc_strjoin(char const *s1, char const *s2);
