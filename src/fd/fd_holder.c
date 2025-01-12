@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   fd_holder.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:28:04 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
+/*   Updated: 2025/01/12 14:16:17 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "fd_collector.h"
 
-void	cleanup_main(t_minishell *mini)
+t_list  **fd_collector(void)
 {
-	env_empty(&mini->env_list);
-	gc_free(mini->hist_file);
-	gc_free(mini->pwd);
-	fd_collector_empty();
-	garbage_collector_empty();
-	printf("Cleaned up and Goodbye!\n");
+    static t_list    *ptr = NULL;
+
+    return (&ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/10 16:00:49 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:36:07 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "env.h"
 # include "error.h"
 # include "execution.h"
+# include "fd_collector.h"
 # include "garbage_collector.h"
 # include "libft.h"
 # include "struct.h"

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   fdc_dup2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:28:04 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/12 14:29:49 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/12 14:31:49 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrapper.h"
 
-void	cleanup_main(t_minishell *mini)
+int	fdc_dup2(int oldfd, int newfd)
 {
-	env_empty(&mini->env_list);
-	gc_free(mini->hist_file);
-	gc_free(mini->pwd);
-	fd_collector_empty();
-	garbage_collector_empty();
-	printf("Cleaned up and Goodbye!\n");
+	int result;
+
+	result = dup2(oldfd, newfd);
+	if (result != -1)
+	{
+		fd_collector_remove(newfd);
+		fd_collector_add(newfd, "dup2_fd");
+	}
+	return (result);
 }
+

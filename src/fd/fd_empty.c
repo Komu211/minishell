@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   fd_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:28:04 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
+/*   Updated: 2025/01/12 14:27:36 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "fd_collector.h"
 
-void	cleanup_main(t_minishell *mini)
+static void	fd_destroy(void *content)
 {
-	env_empty(&mini->env_list);
-	gc_free(mini->hist_file);
-	gc_free(mini->pwd);
-	fd_collector_empty();
-	garbage_collector_empty();
-	printf("Cleaned up and Goodbye!\n");
+	t_fd	*fd_info;
+
+	fd_info = (t_fd *)content;
+	close(fd_info->fd);
+	if (fd_info->filename)
+		gc_free(fd_info->filename);
+	gc_free(fd_info);
 }
+
+void	fd_collector_empty(void)
+{
+	t_list	**holder;
+
+	holder = fd_collector();
+	gc_lstclear(holder, fd_destroy);
+} 

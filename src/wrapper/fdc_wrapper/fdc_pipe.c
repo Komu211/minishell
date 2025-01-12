@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   fdc_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:28:04 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/12 14:31:29 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/12 14:31:33 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrapper.h"
 
-void	cleanup_main(t_minishell *mini)
+int	fdc_pipe(int pipefd[2])
 {
-	env_empty(&mini->env_list);
-	gc_free(mini->hist_file);
-	gc_free(mini->pwd);
-	fd_collector_empty();
-	garbage_collector_empty();
-	printf("Cleaned up and Goodbye!\n");
+	int	result;
+
+	result = pipe(pipefd);
+	if (result == 0)
+	{
+		fd_collector_add(pipefd[0], "pipe_read");
+		fd_collector_add(pipefd[1], "pipe_write");
+	}
+	return (result);
 }
