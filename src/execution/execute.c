@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 15:56:40 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:41:52 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 int	execute_ast(t_minishell *mini, t_ast_node *ast)
 {
 	t_builtin_type	builtin_type;
+	t_saved_fds		saved;
+	int				ret;
 
-	// int				fd[2];
-	// fd[0] = STDIN_FILENO;
-	// fd[1] = STDOUT_FILENO;
-	// if (ast->redirections_in || ast->redirections_out)
-	// 	handle_redirections(ast, fd);
+	if (!ast)
+		return (0);
+	handle_redirections(ast, &saved);
 	if (ast->type == TOKEN_COMMAND)
 	{
 		builtin_type = is_own_builtin(ast->args[0], ast->args);
 		if (builtin_type != BUILTIN_NONE)
-			return (execute_own_builtin(mini, ast, builtin_type));
+			ret = execute_own_builtin(mini, ast, builtin_type);
 		else
-			return (execute_external_command(mini, ast));
+			ret = execute_external_command(mini, ast);
 	}
 	else if (ast->type == TOKEN_PIPE)
-		return (execute_pipe(mini, ast));
+		ret = execute_pipe(mini, ast);
 	else if (ast->type == TOKEN_AND)
-		return (execute_and(mini, ast));
+		ret = execute_and(mini, ast);
 	else if (ast->type == TOKEN_OR)
-		return (execute_or(mini, ast));
-	// redirection_reset(fd);
-	return (0);
+		ret = execute_or(mini, ast);
+	else
+		ret = 0;
+	reset_fds(&saved);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:31:50 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 14:40:31 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:38:15 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	gc_lstdelone(t_list *lst, void (*del)(void *));
 void	gc_lstremove(t_list **lst, void *ptr);
 
 int		fdc_open(const char *pathname, int flags);
-int		fdc_open_mode(const char *pathname, int flags, mode_t mode);
+int		fdc_open_mode(const char *pathname, int flags, int mode);
 int		fdc_close(int fd);
 int		fdc_pipe(int pipefd[2]);
 int		fdc_dup(int oldfd);

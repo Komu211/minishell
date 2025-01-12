@@ -7,7 +7,7 @@ INC_DIR = includes
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd
 
 SRCS = main.c \
        cleanup.c \
@@ -56,7 +56,6 @@ SRCS = main.c \
        fd_add.c \
        fd_empty.c \
        fdc_open.c \
-       fdc_open_mode.c \
        fdc_close.c \
        fdc_dup.c \
        fdc_dup2.c \
@@ -64,7 +63,10 @@ SRCS = main.c \
        gc_lstclear.c \
        gc_lstnew.c \
        gc_lstremove.c \
-       gc_lstdelone.c
+       gc_lstdelone.c \
+       handle_redirections.c \
+       handle_in_redirections.c \
+       handle_out_redirections.c
        
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

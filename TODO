@@ -12,3 +12,8 @@
 - check if split should be done with just space or isspace(char)
 - REMOVE TODO
 - Remove readline.supp
+
+
+
+
+fd_saved_in = dup()

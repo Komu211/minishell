@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:28:04 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:54:09 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,4 @@ void	cleanup_main(t_minishell *mini)
 	gc_free(mini->pwd);
 	fd_collector_empty();
 	garbage_collector_empty();
-	printf("Cleaned up and Goodbye!\n");
 }

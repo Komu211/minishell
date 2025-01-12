@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 14:32:37 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:22:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef struct s_env
 	char						*key;
 	char						*value;
 }								t_env;
+
+typedef struct s_saved_fds
+{
+	int							o_stdin;
+	int							o_stdout;
+}								t_saved_fds;
 
 typedef struct s_minishell
 {

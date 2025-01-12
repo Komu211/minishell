@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 11:59:16 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:48:23 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ast_init(t_ast_node **node, char *line)
 	split_line = gc_split(mod_line);
 	tokens = gc_tokenizer(split_line);
 	*node = ast_build(tokens, split_line);
-	gc_free(split_line);
+	gc_split_free(&split_line);
 	gc_free(mod_line);
 	gc_free(tokens);
 }
