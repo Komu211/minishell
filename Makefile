@@ -66,8 +66,9 @@ SRCS = main.c \
        gc_lstdelone.c \
        handle_redirections.c \
        handle_in_redirections.c \
-       handle_out_redirections.c
-       
+       handle_out_redirections.c \
+       expand_env.c
+
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 
 CC = cc

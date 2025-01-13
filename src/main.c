@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/13 00:20:46 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:21:59 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		if (*user_in) // Only process non-empty input
 		{
-			ast_init(&mini.ast, user_in);
+			ast_init(&mini.ast, user_in, mini.env_list);
 			if (mini.ast)
 			{
 				mini.exit_status = execute_ast(&mini, mini.ast);

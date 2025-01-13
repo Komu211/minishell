@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:00:13 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 16:11:43 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:54:41 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,31 @@ static int	ft_isspace(char c)
 	return (0);
 }
 
-static size_t	ft_word_count(const char *string)
+static size_t	ft_word_count(const char *s)
 {
 	size_t	words;
+	char	quote;
 
 	words = 0;
-	while (*string)
+	while (*s)
 	{
-		while (*string && ft_isspace(*string))
-			++string;
-		if (*string)
-			++words;
-		while (*string && !ft_isspace(*string))
-			++string;
+		while (*s && ft_isspace(*s))
+			s++;
+		if (*s)
+		{
+			words++;
+			while (*s && !ft_isspace(*s))
+			{
+				if (*s == '\'' || *s == '\"')
+				{
+					quote = *s++;
+					while (*s && *s != quote)
+						s++;
+				}
+				if (*s)
+					s++;
+			}
+		}
 	}
 	return (words);
 }

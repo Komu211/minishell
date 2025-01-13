@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_transformation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 02:51:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 12:42:57 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:02:49 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

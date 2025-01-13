@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 12:37:34 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:46:57 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 // Function prototypes
 t_ast_node		*ast_new_node(t_token_type type);
-void			ast_init(t_ast_node **node, char *line);
+void			ast_init(t_ast_node **node, char *line, t_list *env_list);
 void			*ast_empty(t_ast_node *node);
 t_ast_node		*ast_build(t_token_type *tokens, char **split_line);
 t_ast_node		*parse_logical_ops(t_token_type **tokens, char ***instructions);
@@ -39,5 +39,6 @@ int				get_mod_len(char *line);
 int				count_arguments(t_token_type *tokens);
 void			add_redirection(t_redirection **redirections,
 					t_redirection *redirection);
+void			expand_env_vars(char **line, t_list *env_list);
 
 #endif
