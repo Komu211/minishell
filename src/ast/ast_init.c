@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 11:08:23 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:43:14 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ static t_token_type	get_token_type(char *word)
 	return (TOKEN_COMMAND);
 }
 
-static char			*g_token_names[] = {[TOKEN_AND] = "AND", [TOKEN_OR] = "OR",
-				[TOKEN_PIPE] = "PIPE", [TOKEN_PAREN_OPEN] = "PAREN_OPEN",
-				[TOKEN_PAREN_CLOSE] = "PAREN_CLOSE",
-				[TOKEN_REDIRECT_IN] = "REDIRECT_IN",
-				[TOKEN_REDIRECT_OUT] = "REDIRECT_OUT",
-				[TOKEN_REDIRECT_OUT_APPEND] = "REDIRECT_OUT_APPEND",
-				[TOKEN_REDIRECT_HERE_DOC] = " REDIRECT_HERE_DOC",
-				[TOKEN_COMMAND] = "COMMAND", [TOKEN_EMPTY] = "EMPTY"};
+// static char			*g_token_names[] = {[TOKEN_AND] = "AND",
+//				[TOKEN_OR] = "OR",
+// 				[TOKEN_PIPE] = "PIPE", [TOKEN_PAREN_OPEN] = "PAREN_OPEN",
+// 				[TOKEN_PAREN_CLOSE] = "PAREN_CLOSE",
+// 				[TOKEN_REDIRECT_IN] = "REDIRECT_IN",
+// 				[TOKEN_REDIRECT_OUT] = "REDIRECT_OUT",
+// 				[TOKEN_REDIRECT_OUT_APPEND] = "REDIRECT_OUT_APPEND",
+// 				[TOKEN_REDIRECT_HERE_DOC] = " REDIRECT_HERE_DOC",
+// 				[TOKEN_COMMAND] = "COMMAND", [TOKEN_EMPTY] = "EMPTY"};
 
 static void	validate_quotes(char *line)
 {
@@ -77,8 +78,8 @@ static t_token_type	*gc_tokenizer(char **split_line)
 	while (split_line[++i])
 	{
 		tokens[i] = get_token_type(split_line[i]);
-		printf("Token: %s, word: %s\n", g_token_names[tokens[i]],
-			split_line[i]);
+		// printf("Token: %s, word: %s\n", g_token_names[tokens[i]],
+		// 	split_line[i]);
 	}
 	tokens[i] = TOKEN_EMPTY;
 	return (tokens);
@@ -90,8 +91,8 @@ void	ast_init(t_ast_node **node, char *line, t_minishell *minishell)
 	t_token_type	*tokens;
 	char			*mod_line;
 
+	(void)minishell;
 	validate_quotes(line);
-	expand_env_vars(&line, minishell->env_list, minishell->exit_status);
 	mod_line = gc_calloc(get_mod_len(line) + 1, sizeof(char));
 	transform_line(line, mod_line);
 	split_line = gc_split(mod_line);

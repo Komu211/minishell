@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 10:52:35 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:53:11 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ int				get_mod_len(char *line);
 int				count_arguments(t_token_type *tokens);
 void			add_redirection(t_redirection **redirections,
 					t_redirection *redirection);
-void			expand_env_vars(char **line, t_list *env_list, int exit_status);
 
 #endif

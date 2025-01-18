@@ -1,56 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_env.c                                       :+:      :+:    :+:   */
+/*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 11:22:54 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 10:39:48 by obehavka         ###   ########.fr       */
+/*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
+/*   Updated: 2025/01/18 16:36:06 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "execution.h"
 
-static void	append_char(char **dest, char c)
+static void	split_again(char ***args)
 {
-	char	*tmp;
-	size_t	len;
+	char	*oneliner;
+	char	**new_split;
 
-	if (!*dest)
-	{
-		*dest = gc_calloc(2, sizeof(char));
-		(*dest)[0] = c;
-		return ;
-	}
-	len = ft_strlen(*dest);
-	tmp = gc_calloc(len + 2, sizeof(char));
-	ft_memcpy(tmp, *dest, len);
-	tmp[len] = c;
-	gc_free(*dest);
-	*dest = tmp;
-}
-
-static void	append_string(char **dest, const char *src)
-{
-	char	*tmp;
-	size_t	len_dest;
-	size_t	len_src;
-
-	if (!src)
-		return ;
-	if (!*dest)
-	{
-		*dest = gc_strdup(src);
-		return ;
-	}
-	len_dest = ft_strlen(*dest);
-	len_src = ft_strlen(src);
-	tmp = gc_calloc(len_dest + len_src + 1, sizeof(char));
-	ft_memcpy(tmp, *dest, len_dest);
-	ft_memcpy(tmp + len_dest, src, len_src);
-	gc_free(*dest);
-	*dest = tmp;
+	oneliner = gc_unsplit(*args);
+	new_split = gc_split(oneliner);
+	gc_free(oneliner);
+	gc_split_free(args);
+	*args = new_split;
 }
 
 static void	expand_variable(char **line, char **result, t_list *env_list,
@@ -81,15 +52,15 @@ static void	expand_variable(char **line, char **result, t_list *env_list,
 		append_string(result, expanded);
 }
 
-void	expand_env_vars(char **line, t_list *env_list, int exit_status)
+static void	expand_env(t_minishell *mini, char **args)
 {
 	char	*src;
 	char	*result;
 	int		in_single_quote;
 
-	if (!line || !*line)
+	if (!args || !*args)
 		return ;
-	src = *line;
+	src = *args;
 	result = NULL;
 	in_single_quote = 0;
 	while (*src)
@@ -100,9 +71,21 @@ void	expand_env_vars(char **line, t_list *env_list, int exit_status)
 			append_char(&result, *src++);
 		}
 		else if (!in_single_quote && *src == '$')
-			expand_variable(&src, &result, env_list, exit_status);
+			expand_variable(&src, &result, mini->env_list, mini->exit_status);
 		else
 			append_char(&result, *src++);
 	}
-	*line = result;
+	gc_free(*args);
+	*args = result;
+}
+
+void	expand_args(t_minishell *mini, char ***args)
+{
+	int	i;
+
+	i = -1;
+	while ((*args)[++i])
+		expand_env(mini, (*args) + i);
+	split_again(args);
+	// remove_quotes(*args);
 }
