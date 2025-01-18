@@ -6,41 +6,51 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/17 01:52:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:22:15 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "custom_builtins.h"
 
-int	builtin_export(t_minishell *minishell, t_ast_node *ast)
+static void	print_declare_export(t_list *env_list)
 {
-	(void)minishell;
-	(void)ast;
-	// char	**args;
-	// t_env	*env;
-	// char	*equals_pos;
-	// int		i;
-	// args = ast->args;
-	// if (!args[1])
-	//{
-	//	print_sorted_env(minishell->env_list);
-	//	return (0);
-	//}
-	// i = 1;
-	// while (args[i])
-	//{
-	//	equals_pos = ft_strchr(args[i], '=');
-	//	if (equals_pos)
-	//	{
-	//		*equals_pos = '\0';
-	//		env = env_find(minishell->env_list, args[i]);
-	//		if (env)
-	//			env_update(env, equals_pos + 1);
-	//		else
-	//			env_add(&minishell->env_list, args[i], equals_pos + 1);
-	//		*equals_pos = '=';
-	//	}
-	//	i++;
-	//}
+	t_env	*env;
+	t_list	*tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		env = (t_env *)tmp->content;
+		tmp = tmp->next;
+		if (env->value)
+			printf("declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			printf("declare -x %s\n", env->key);
+	}
+}
+
+int	builtin_export(t_minishell *minishell, char **args)
+{
+	char	**split;
+	
+	if (!args[1])
+		print_declare_export(minishell->env_list);
+	else
+	{
+		if (ft_strchr(args[1], '='))
+		{
+			split = gc_split_at(args[1], '=');
+			if (!split || !split[0] || !split[1])
+			{
+				gc_split_free(&split);
+				return (error_handler("Invalid export format", 1), 1);
+			}
+			env_set(minishell, split[0], split[1]);
+			gc_split_free(&split);
+		}
+		else
+			env_add(minishell, args[1], NULL);
+	}
 	return (0);
 }
+

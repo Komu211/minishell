@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:18:25 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 10:56:21 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:59:57 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 # include "libft.h"
 # include "struct.h"
+# include "wrapper.h"
 
 // Function headers
 void	env_init(t_minishell *mini, char **envp);
 void	env_destroy(void *env);
 void	env_empty(t_list **env);
 char	*get_env_value(char *key, t_list *env_list);
+void	env_add(t_minishell *mini, char *key, char *value);
+void	env_set(t_minishell *mini, char *key, char *value);
 
 #endif

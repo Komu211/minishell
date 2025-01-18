@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 12:52:28 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:01:20 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int	fake_builtin(t_minishell *mini, t_ast_node *ast,
 		return (0);
 	if (builtin_type == BUILTIN_PWD)
 		return (builtin_pwd(mini));
-	//	if (builtin_type == BUILTIN_EXPORT)
-	//		return (0);
+	if (builtin_type == BUILTIN_EXPORT)
+		return (0);
 	//	if (builtin_type == BUILTIN_UNSET)
 	//		return (0);
 	if (builtin_type == BUILTIN_EXIT)
@@ -45,8 +45,8 @@ int	execute_own_builtin(t_minishell *mini, t_ast_node *ast,
 		return (builtin_cd(mini, ast->args));
 	else if (builtin_type == BUILTIN_PWD)
 		return (builtin_pwd(mini));
-	// else if (builtin_type == BUILTIN_EXPORT)
-	// 	return (builtin_export(ast->args, &mini->env_list));
+	else if (builtin_type == BUILTIN_EXPORT)
+		return (builtin_export(mini, ast->args));
 	// else if (builtin_type == BUILTIN_UNSET)
 	// 	return (builtin_unset(ast->args, &mini->env_list));
 	else if (builtin_type == BUILTIN_EXIT)
