@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 13:28:19 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:36:58 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	builtin_cd(t_minishell *minishell, char **args)
 	if (!args[1])
 		path = getenv("HOME");
 	else if (args[1][0] == '-')
-		path = minishell->old_pwd;
+		if (minishell->old_pwd)
+			path = minishell->old_pwd;
+		else
+			printf("cd: OLDPWD not set\n");
 	else
 		path = args[1];
 	if (chdir(path) == -1)
