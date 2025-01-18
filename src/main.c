@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/17 01:25:29 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:50:07 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		user_in = readline(prompt);
 		if (!user_in || ft_strcmp(user_in, "exit") == 0)
 			break ;
+		garbage_collector_add(user_in);
 		if (*user_in) // Only process non-empty input
 		{
 			ast_init(&mini.ast, user_in);
@@ -94,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 			}
 			add_history(user_in); // Add command to readline history
 		}
-		free(user_in); // readline allocated memory needs to be freed
+		gc_free(user_in);
 		gc_free(prompt);
 	}
 	cleanup_main(&mini);

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 17:50:23 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:00:49 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 t_builtin_type	is_own_builtin(char *command, char **args)
 {
 	(void)args;
-	(void)command;
-	// Not implemented yet
-	// if (ft_strncmp(command, "cd", 2) == 0)
-	// 	return (1);
-	// if (ft_strncmp(command, "echo", 4) == 0)
-	// 	return (1);
+	if (ft_strncmp(command, "cd", 2) == 0)
+		return (BUILTIN_CD);
+	if (ft_strncmp(command, "echo", 4) == 0)
+		return (BUILTIN_ECHO);
 	if (ft_strncmp(command, "env", 3) == 0)
 		return (BUILTIN_ENV);
-	// if (ft_strncmp(command, "exit", 4) == 0)
-	// 	return (1);
+	if (ft_strncmp(command, "exit", 4) == 0)
+		return (BUILTIN_EXIT);
 	// if (ft_strncmp(command, "export", 6) == 0)
 	// 	return (1);
-	// if (ft_strncmp(command, "pwd", 3) == 0)
-	// 	return (1);
+	if (ft_strncmp(command, "pwd", 3) == 0)
+		return (BUILTIN_PWD);
 	// if (ft_strncmp(command, "unset", 5) == 0)
 	// 	return (1);
 	return (BUILTIN_NONE);

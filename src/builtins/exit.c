@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:35:44 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/17 01:24:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:02:19 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,27 @@
 #include "minishell.h"
 #include "struct.h"
 
-int	builtin_exit(t_minishell *minishell)
+static int	is_numeric(char *str)
 {
-	(void)minishell;
-	cleanup_main(minishell);
-	exit(0);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }
+
+int	builtin_exit(t_minishell *minishell, char **args)
+{
+	if (args[1] && !is_numeric(args[1]))
+	{
+		minishell->exit_status = 255;
+		cleanup_main(minishell);
+		exit(255);
+	}
+	minishell->exit_status = ft_atoi(args[1]);
+	cleanup_main(minishell);
+	exit(minishell->exit_status);
+}
+
