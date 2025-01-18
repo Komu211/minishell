@@ -7,7 +7,7 @@ INC_DIR = includes
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd:$(SRC_DIR)/builtins
 
 SRCS = main.c \
        cleanup.c \
@@ -66,7 +66,10 @@ SRCS = main.c \
        gc_lstdelone.c \
        handle_redirections.c \
        handle_in_redirections.c \
-       handle_out_redirections.c
+       handle_out_redirections.c \
+       export.c \
+       unset.c \
+       exit.c
        
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

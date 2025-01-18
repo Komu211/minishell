@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 16:32:11 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/17 01:50:53 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTION_H
 
 # include "ast.h"
-# include "builtins.h"
+# include "custom_builtins.h"
 # include "enums.h"
 # include "env.h"
 # include "struct.h"

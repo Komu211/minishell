@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 15:22:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/17 01:07:52 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ struct							s_ast_node
 	t_redirection				*redirections_in;
 	t_redirection				*redirections_out;
 	char						**args;
+	int							in_parentheses;
 };
 
 #endif

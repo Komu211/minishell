@@ -6,11 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:32:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/13 19:07:24 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/17 01:24:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "custom_builtins.h"
 
 static int	is_n_flag(char *arg)
 {
