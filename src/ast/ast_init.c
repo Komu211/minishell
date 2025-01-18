@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:43:14 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:08:15 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,12 @@ void	ast_init(t_ast_node **node, char *line, t_minishell *minishell)
 	t_token_type	*tokens;
 	char			*mod_line;
 
-	(void)minishell;
 	validate_quotes(line);
 	mod_line = gc_calloc(get_mod_len(line) + 1, sizeof(char));
 	transform_line(line, mod_line);
 	split_line = gc_split(mod_line);
 	tokens = gc_tokenizer(split_line);
-	*node = ast_build(tokens, split_line);
+	*node = ast_build(tokens, split_line, minishell);
 	gc_split_free(&split_line);
 	gc_free(mod_line);
 	gc_free(tokens);

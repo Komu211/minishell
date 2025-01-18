@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:35:29 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:54:26 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void			reset_fds(t_saved_fds *saved);
 void			handle_all_outputs(t_redirection *redir, t_saved_fds *saved);
 void			handle_all_inputs(t_redirection *redir, t_saved_fds *saved);
 void			expand_args(t_minishell *mini, char ***args);
+void	remove_quotes(char **str);
 
 #endif

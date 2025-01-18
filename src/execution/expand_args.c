@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 16:36:06 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:01:38 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,24 @@ static void	expand_env(t_minishell *mini, char **args)
 	char	*src;
 	char	*result;
 	int		in_single_quote;
+	int		in_double_quote;
 
 	if (!args || !*args)
 		return ;
 	src = *args;
 	result = NULL;
 	in_single_quote = 0;
+	in_double_quote = 0;
 	while (*src)
 	{
-		if (*src == '\'')
+		if (*src == '\'' && !in_double_quote)
 		{
 			in_single_quote = !in_single_quote;
+			append_char(&result, *src++);
+		}
+		else if (*src == '"' && !in_single_quote)
+		{
+			in_double_quote = !in_double_quote;
 			append_char(&result, *src++);
 		}
 		else if (!in_single_quote && *src == '$')
@@ -87,5 +94,7 @@ void	expand_args(t_minishell *mini, char ***args)
 	while ((*args)[++i])
 		expand_env(mini, (*args) + i);
 	split_again(args);
-	// remove_quotes(*args);
+	i = -1;
+	while ((*args)[++i])
+		remove_quotes((*args) + i);
 }

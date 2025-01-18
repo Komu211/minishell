@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build.c                                        :+:      :+:    :+:   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 19:19:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 17:09:40 by obehavka         ###   ########.fr       */
+/*   Created: 2025/01/18 16:50:37 by obehavka          #+#    #+#             */
+/*   Updated: 2025/01/18 16:54:43 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "execution.h"
 
-t_ast_node	*ast_build(t_token_type *tokens, char **split_line,
-		t_minishell *mini)
+void	remove_quotes(char **str)
 {
-	t_ast_node	*node;
+	char	*src;
+	char	*dst;
 
-	if (!tokens)
-		return (NULL);
-	node = parse_logical_ops(&tokens, &split_line);
-	if (!node)
+	src = *str;
+	dst = *str;
+	while (*src)
 	{
-		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
-		if (*split_line)
-			ft_putstr_fd(*split_line, 2);
-		ft_putstr_fd("'\n", 2);
-		mini->exit_status = 2;
+		if (*src == '\'')
+			while (*(++src) && *src != '\'')
+				*dst++ = *src;
+		else if (*src == '\"')
+			while (*(++src) && *src != '\"')
+				*dst++ = *src;
+		else
+			*dst++ = *src++;
 	}
-	return (node);
+	*dst = '\0';
 }
