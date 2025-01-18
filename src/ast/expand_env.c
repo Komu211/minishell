@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:22:54 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 09:54:03 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:39:48 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	append_string(char **dest, const char *src)
 	*dest = tmp;
 }
 
-static void	expand_variable(char **line, char **result, t_list *env_list)
+static void	expand_variable(char **line, char **result, t_list *env_list,
+		int exit_status)
 {
 	int			i;
 	char		var_name[256];
@@ -61,6 +62,12 @@ static void	expand_variable(char **line, char **result, t_list *env_list)
 
 	i = 0;
 	(*line)++;
+	if (*line && **line == '?')
+	{
+		(*line)++;
+		append_string(result, ft_itoa(exit_status));
+		return ;
+	}
 	while (**line && (ft_isalnum(**line) || **line == '_') && i < 255)
 		var_name[i++] = *(*line)++;
 	var_name[i] = '\0';
@@ -74,7 +81,7 @@ static void	expand_variable(char **line, char **result, t_list *env_list)
 		append_string(result, expanded);
 }
 
-void	expand_env_vars(char **line, t_list *env_list)
+void	expand_env_vars(char **line, t_list *env_list, int exit_status)
 {
 	char	*src;
 	char	*result;
@@ -93,10 +100,9 @@ void	expand_env_vars(char **line, t_list *env_list)
 			append_char(&result, *src++);
 		}
 		else if (!in_single_quote && *src == '$')
-			expand_variable(&src, &result, env_list);
+			expand_variable(&src, &result, env_list, exit_status);
 		else
 			append_char(&result, *src++);
 	}
-	// gc_free(*line);
 	*line = result;
 }

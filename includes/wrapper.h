@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrapper.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:31:50 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 15:38:15 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:48:13 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

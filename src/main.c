@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 08:08:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:58:57 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		if (*user_in) // Only process non-empty input
 		{
-			ast_init(&mini.ast, user_in, mini.env_list);
+			ast_init(&mini.ast, user_in, &mini);
 			if (mini.ast)
 			{
 				mini.exit_status = execute_ast(&mini, mini.ast);

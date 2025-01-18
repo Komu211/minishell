@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:30:06 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 14:38:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:47:50 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

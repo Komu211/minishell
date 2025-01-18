@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   gc_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:09:47 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 10:40:54 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:43:17 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-static size_t	ft_numlen(int n)
+static size_t	numlen(int n)
 {
 	size_t	len;
 
@@ -27,16 +27,14 @@ static size_t	ft_numlen(int n)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*gc_itoa(int n)
 {
 	int		n_temp;
 	char	*ret_ptr;
 	size_t	num_len;
 
-	num_len = ft_numlen(n);
-	ret_ptr = (char *) ft_calloc(num_len + 1 + (n < 0), sizeof (char));
-	if (!ret_ptr)
-		return (NULL);
+	num_len = numlen(n);
+	ret_ptr = (char *)gc_calloc(num_len + 1 + (n < 0), sizeof(char));
 	if (n > 0)
 		n = -n;
 	else if (n < 0)

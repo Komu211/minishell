@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 17:50:23 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:08:44 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ t_builtin_type	is_own_builtin(char *command, char **args)
 
 char	*get_command_path(char *command, t_list *env_list)
 {
-	char	**path;
-	char	*env_path;
-	char	*command_path;
-	int		i;
-	char	*tmp;
+	char		**path;
+	const char	*env_path;
+	char		*command_path;
+	int			i;
+	char		*tmp;
 
 	if (access(command, F_OK) == 0)
 		return (gc_strdup(command));

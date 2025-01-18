@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/13 11:52:02 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:08:23 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ static t_token_type	*gc_tokenizer(char **split_line)
 	return (tokens);
 }
 
-void	ast_init(t_ast_node **node, char *line, t_list *env_list)
+void	ast_init(t_ast_node **node, char *line, t_minishell *minishell)
 {
 	char			**split_line;
 	t_token_type	*tokens;
 	char			*mod_line;
 
 	validate_quotes(line);
-	expand_env_vars(&line, env_list);
+	expand_env_vars(&line, minishell->env_list, minishell->exit_status);
 	mod_line = gc_calloc(get_mod_len(line) + 1, sizeof(char));
 	transform_line(line, mod_line);
 	split_line = gc_split(mod_line);
