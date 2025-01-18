@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/13 11:21:59 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 08:08:42 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	mini_init(argc, argv, envp, &mini);
 	while (1)
 	{
-		prompt = gc_strjoin(mini.pwd, " > \n");
+		prompt = gc_strjoin(mini.pwd, " > ");
 		if (isatty(fileno(stdin)))
 			user_in = readline(prompt);
 		else

@@ -67,7 +67,8 @@ SRCS = main.c \
        handle_redirections.c \
        handle_in_redirections.c \
        handle_out_redirections.c \
-       expand_env.c
+       expand_env.c \
+       get_env.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:15:19 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/13 11:46:57 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/18 08:19:11 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define AST_H
 
 # include "enums.h"
+# include "env.h"
 # include "libft.h"
 # include "struct.h"
 # include "utils.h"

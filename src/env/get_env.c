@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 15:18:25 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 08:18:37 by obehavka         ###   ########.fr       */
+/*   Created: 2025/01/18 09:17:39 by obehavka          #+#    #+#             */
+/*   Updated: 2025/01/18 09:17:46 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "env.h"
 
-# include "libft.h"
-# include "struct.h"
+const char	*get_env_value(char *key, t_list *env_list)
+{
+	t_env	*env;
 
-// Function headers
-void		env_init(t_minishell *mini, char **envp);
-void		env_destroy(void *env);
-void		env_empty(t_list **env);
-const char	*get_env_value(char *key, t_list *env_list);
-
-#endif
+	while (env_list)
+	{
+		env = (t_env *)env_list->content;
+		if (ft_strcmp(env->key, key) == 0)
+			return (env->value);
+		env_list = env_list->next;
+	}
+	return (NULL);
+}

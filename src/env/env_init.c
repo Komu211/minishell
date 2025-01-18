@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 18:29:25 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:17:32 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,4 @@ void	env_init(t_minishell *mini, char **envp)
 		ft_lstadd_back(&mini->env_list, tmp);
 		i++;
 	}
-}
-
-char	*get_env_value(char *key, t_list *env_list)
-{
-	t_env	*env;
-
-	while (env_list)
-	{
-		env = (t_env *)env_list->content;
-		if (ft_strcmp(env->key, key) == 0)
-			return (env->value);
-		env_list = env_list->next;
-	}
-	return (NULL);
 }
