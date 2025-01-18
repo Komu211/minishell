@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/17 01:07:52 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:26:52 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_saved_fds
 typedef struct s_minishell
 {
 	char						*pwd;
+	char						*old_pwd;
 	char						*hist_file;
 	int							error;
 	int							exit_status;
