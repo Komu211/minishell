@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_parse_parentheses.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:33:26 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 12:40:47 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:33:16 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_ast_node	*parse_parentheses(t_token_type **tokens, char ***instructions)
 			else
 				add_redirection(&node->redirections_out, redirection);
 		}
+		if (**tokens == TOKEN_PAREN_OPEN || **tokens == TOKEN_COMMAND)
+			return (ast_empty(node));
 		return (node);
 	}
 	return (parse_command(tokens, instructions));
