@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:33:08 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 15:09:58 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:42:33 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	env_destroy(void *param)
 
 void	env_empty(t_list **env_list)
 {
-	ft_lstclear(env_list, env_destroy);
+	gc_lstclear(env_list, env_destroy);
 }
