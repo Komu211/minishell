@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/19 10:53:51 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:54:38 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	split_again(char ***args)
 	*args = new_split;
 }
 
-static void	expand_variable(char **line, char **result, t_list *env_list,
-		int exit_status)
+static void	expand_variable(char **line, char **result, t_minishell *mini,
+		int quotes)
 {
 	int			i;
 	char		var_name[256];
@@ -36,18 +36,18 @@ static void	expand_variable(char **line, char **result, t_list *env_list,
 	if (*line && **line == '?')
 	{
 		(*line)++;
-		append_string(result, ft_itoa(exit_status));
+		append_string(result, ft_itoa(mini->exit_status));
 		return ;
 	}
 	while (**line && (ft_isalnum(**line) || **line == '_') && i < 255)
 		var_name[i++] = *(*line)++;
 	var_name[i] = '\0';
-	if (i == 0)
+	if (i == 0 && (**line == '\0' || quotes))
 	{
 		append_char(result, '$');
 		return ;
 	}
-	expanded = get_env_value(var_name, env_list);
+	expanded = get_env_value(var_name, mini->env_list);
 	if (expanded)
 		append_string(result, expanded);
 }
@@ -78,7 +78,7 @@ void	expand_env(t_minishell *mini, char **args)
 			append_char(&result, *src++);
 		}
 		else if (!in_single_quote && *src == '$')
-			expand_variable(&src, &result, mini->env_list, mini->exit_status);
+			expand_variable(&src, &result, mini, in_double_quote);
 		else
 			append_char(&result, *src++);
 	}

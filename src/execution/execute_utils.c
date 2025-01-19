@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:18:58 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:27:04 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 t_builtin_type	is_own_builtin(char *command, char **args)
 {
 	(void)args;
-	if (ft_strncmp(command, "cd", 2) == 0)
+	if (ft_strncmp(command, "cd", 3) == 0)
 		return (BUILTIN_CD);
-	if (ft_strncmp(command, "echo", 4) == 0)
+	if (ft_strncmp(command, "echo", 5) == 0)
 		return (BUILTIN_ECHO);
-	if (ft_strncmp(command, "env", 3) == 0)
+	if (ft_strncmp(command, "env", 4) == 0)
 		return (BUILTIN_ENV);
-	if (ft_strncmp(command, "exit", 4) == 0)
+	if (ft_strncmp(command, "exit", 5) == 0)
 		return (BUILTIN_EXIT);
-	if (ft_strncmp(command, "export", 6) == 0)
+	if (ft_strncmp(command, "export", 7) == 0)
 		return (BUILTIN_EXPORT);
-	if (ft_strncmp(command, "pwd", 3) == 0)
+	if (ft_strncmp(command, "pwd", 4) == 0)
 		return (BUILTIN_PWD);
 	// if (ft_strncmp(command, "unset", 5) == 0)
 	// 	return (1);
@@ -40,8 +40,10 @@ char	*get_command_path(char *command, t_list *env_list)
 	int			i;
 	char		*tmp;
 
-	if (access(command, F_OK) == 0)
+	if (access(command, F_OK) == 0 && ft_strchr(command, '/'))
 		return (gc_strdup(command));
+	else if (ft_strchr(command, '/'))
+		return (NULL);
 	env_path = get_env_value("PATH", env_list);
 	if (!env_path)
 		return (NULL);

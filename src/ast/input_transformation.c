@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 02:51:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 13:54:25 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:09:22 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ static void	handle_operator(char *line, char *mod_line, int *i, int *j)
 
 void	*transform_line(char *line, char *mod_line)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	quote_char;
 
 	i = 0;
 	j = 0;
@@ -88,6 +89,15 @@ void	*transform_line(char *line, char *mod_line)
 			mod_line[j++] = line[i++];
 			if (line[i] && line[i] != ' ')
 				mod_line[j++] = ' ';
+		}
+		else if (line[i] == '\'' || line[i] == '\"')
+		{
+			quote_char = line[i];
+			mod_line[j++] = line[i++];
+			while (line[i] && line[i] != quote_char)
+				mod_line[j++] = line[i++];
+			if (line[i])
+				mod_line[j++] = line[i++];
 		}
 		else
 			mod_line[j++] = line[i++];
