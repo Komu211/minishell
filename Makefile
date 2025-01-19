@@ -72,7 +72,8 @@ SRCS = main.c \
        gc_unsplit.c \
        gc_append.c \
        expand_args.c \
-       remove_quotes.c
+       remove_quotes.c \
+       gc_split_size.c
 
 OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:35:04 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:54:04 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*gc_itoa(int n);
 void	append_char(char **dest, char c);
 void	append_string(char **dest, const char *src);
 char	*gc_unsplit(char **split);
+int		gc_split_size(char **split);
 
 #endif

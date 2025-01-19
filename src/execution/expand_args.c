@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 17:01:38 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:53:51 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	expand_variable(char **line, char **result, t_list *env_list,
 		append_string(result, expanded);
 }
 
-static void	expand_env(t_minishell *mini, char **args)
+void	expand_env(t_minishell *mini, char **args)
 {
 	char	*src;
 	char	*result;
