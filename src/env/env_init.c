@@ -3,15 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:18:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:04:00 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "minishell.h"
+
+static void	verify_env(t_minishell *mini)
+{
+	t_list	*tmp;
+	t_env	*env;
+	int		shlvl;
+	char	*pwd;
+
+	tmp = mini->env_list;
+	shlvl = -1;
+	pwd = NULL;
+	while (tmp)
+	{
+		env = (t_env *)tmp->content;
+		if (ft_strcmp(env->key, "SHLVL") == 0)
+			shlvl = ft_atoi(env->value);
+		if (ft_strcmp(env->key, "PWD") == 0)
+			pwd = env->value;
+		tmp = tmp->next;
+	}
+	if (shlvl == -1)
+		env_add(mini, "SHLVL", "1");
+	else
+		env_set(mini, "SHLVL", gc_itoa(shlvl + 1));
+	if (pwd == NULL)
+		env_add(mini, "PWD", mini->pwd);
+}
 
 void	env_init(t_minishell *mini, char **envp)
 {
@@ -37,4 +64,5 @@ void	env_init(t_minishell *mini, char **envp)
 			error_handler("ft_lstnew failed", 1);
 		ft_lstadd_back(&mini->env_list, tmp);
 	}
+	verify_env(mini);
 }

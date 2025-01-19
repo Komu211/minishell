@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:17:29 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:32:52 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
 	if (!mini->hist_file)
 		error_handler("ft_strjoin failed", 1);
 	env_init(mini, envp);
-	if (!mini->env_list)
-		error_handler("ft_strdup_array failed", 1);
 	mini->error = 0;
 	mini->exit_status = 0;
 	(void)argc;
