@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 12:49:55 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:29:29 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "fd_collector.h"
 # include "garbage_collector.h"
 # include "libft.h"
+# include "signal_handler.h"
 # include "struct.h"
 # include "utils.h"
 # include "wrapper.h"

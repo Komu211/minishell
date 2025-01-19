@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:00:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:21:19 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/19 10:15:12 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/19 10:25:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SIGNAL_HANDLER_H
+# define SIGNAL_HANDLER_H
 
-void	cleanup_main(t_minishell *mini)
-{
-	env_empty(&mini->env_list);
-	gc_free(mini->hist_file);
-	gc_free(mini->pwd);
-	fd_collector_empty();
-	garbage_collector_empty();
-	exit(mini->exit_status);
-}
+# include "minishell.h"
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+void	signal_setup(t_minishell *mini);
+void	signal_handler(int signum, siginfo_t *info, void *context);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 13:41:56 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:50:03 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int	main(int argc, char **argv, char **envp)
 
 	// print_welcome();
 	mini_init(argc, argv, envp, &mini);
+	signal_setup(&mini);
 	while (1)
 	{
-		prompt = gc_strjoin(mini.pwd, " > \n");
+		prompt = gc_strjoin(mini.pwd, " > ");
 		if (isatty(fileno(stdin)))
 			user_in = readline(prompt);
 		else
