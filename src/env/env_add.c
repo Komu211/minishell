@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 17:36:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:23:29 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/18 15:40:13 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/19 10:01:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "custom_builtins.h"
+#include "env.h"
 
-int	builtin_env(t_list *env_list)
+void	env_add(t_minishell *mini, char *key, char *value)
 {
 	t_env	*env;
 
-	while (env_list)
-	{
-		env = (t_env *)env_list->content;
-		env_list = env_list->next;
-		if (env->value)
-			printf("%s=%s\n", env->key, env->value);
-	}
-	return (0);
+	env = gc_malloc(sizeof(t_env));
+	env->key = gc_strdup(key);
+	if (value)
+		env->value = gc_strdup(value);
+	else
+		env->value = NULL;
+	ft_lstadd_back(&mini->env_list, ft_lstnew(env));
 }

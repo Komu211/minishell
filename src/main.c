@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 10:58:57 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:17:29 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int	main(int argc, char **argv, char **envp)
 	char		*prompt;
 	char		*line;
 
+	// print_welcome();
 	mini_init(argc, argv, envp, &mini);
+	signal_setup(&mini);
 	while (1)
 	{
 		prompt = gc_strjoin(mini.pwd, " > ");
@@ -93,18 +95,21 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (!user_in || ft_strcmp(user_in, "exit") == 0)
 			break ;
+		garbage_collector_add(user_in);
 		if (*user_in) // Only process non-empty input
 		{
 			ast_init(&mini.ast, user_in, &mini);
 			if (mini.ast)
 			{
+				// printf("\nCommand entered: %s\n", user_in);
+				// debug_ast(mini.ast);
 				mini.exit_status = execute_ast(&mini, mini.ast);
 				// Free previous AST before next iteration
 				mini.ast = ast_empty(mini.ast);
 			}
 			add_history(user_in); // Add command to readline history
 		}
-		free(user_in); // readline allocated memory needs to be freed
+		gc_free(user_in);
 		gc_free(prompt);
 	}
 	cleanup_main(&mini);

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:53:59 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:15:37 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTION_H
 
 # include "ast.h"
-# include "builtins.h"
+# include "custom_builtins.h"
 # include "enums.h"
 # include "env.h"
 # include "struct.h"

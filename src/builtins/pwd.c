@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 18:31:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 10:56:05 by obehavka         ###   ########.fr       */
+/*   Created: 2025/01/17 01:57:35 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/18 12:11:09 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "custom_builtins.h"
+#include "minishell.h"
+#include "struct.h"
 
-# include <libft.h>
-# include <unistd.h>
-# include "env.h"
-# include <stdio.h>
-
-int	builtin_echo(char **args);
-int	builtin_env(t_list *env_list);
-
-#endif
+int	builtin_pwd(t_minishell *mini)
+{
+	printf("%s\n", mini->pwd);
+	return (0);
+}

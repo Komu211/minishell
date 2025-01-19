@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 18:27:23 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:15:21 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_saved_fds
 typedef struct s_minishell
 {
 	char						*pwd;
+	char						*old_pwd;
 	char						*hist_file;
 	int							error;
 	int							exit_status;
@@ -57,6 +58,7 @@ struct							s_ast_node
 	t_redirection				*redirections_in;
 	t_redirection				*redirections_out;
 	char						**args;
+	int							in_parentheses;
 };
 
 #endif

@@ -16,4 +16,9 @@
 
 
 
+
+Check Parentheses parsing again (ex: "echo )"
+Remvove quotes when executing a command
+manually check env file for $HOME, else set ourselves && check also for pwd
+
 fd_saved_in = dup()

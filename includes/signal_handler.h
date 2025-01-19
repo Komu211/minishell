@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 17:36:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:23:29 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/19 10:15:12 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/19 10:25:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "custom_builtins.h"
+#ifndef SIGNAL_HANDLER_H
+# define SIGNAL_HANDLER_H
 
-int	builtin_env(t_list *env_list)
-{
-	t_env	*env;
+# include "minishell.h"
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-	while (env_list)
-	{
-		env = (t_env *)env_list->content;
-		env_list = env_list->next;
-		if (env->value)
-			printf("%s=%s\n", env->key, env->value);
-	}
-	return (0);
-}
+void	signal_setup(t_minishell *mini);
+void	signal_handler(int signum, siginfo_t *info, void *context);
+
+#endif

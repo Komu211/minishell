@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 09:17:32 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:18:42 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	env_init(t_minishell *mini, char **envp)
 	t_env	*env;
 	t_list	*tmp;
 
-	i = 0;
+	i = -1;
 	mini->env_list_orig = envp;
 	mini->env_list = NULL;
-	while (envp[i])
+	while (envp[++i])
 	{
 		j = 0;
 		while (envp[i][j] != '=')
@@ -36,6 +36,5 @@ void	env_init(t_minishell *mini, char **envp)
 		if (!tmp)
 			error_handler("ft_lstnew failed", 1);
 		ft_lstadd_back(&mini->env_list, tmp);
-		i++;
 	}
 }

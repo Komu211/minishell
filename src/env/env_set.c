@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 17:36:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:23:29 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/18 15:54:18 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/19 10:01:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "custom_builtins.h"
+#include "env.h"
 
-int	builtin_env(t_list *env_list)
+void	env_set(t_minishell *mini, char *key, char *value)
 {
 	t_env	*env;
+	t_list	*tmp;
 
-	while (env_list)
+	tmp = mini->env_list;
+	while (tmp)
 	{
-		env = (t_env *)env_list->content;
-		env_list = env_list->next;
-		if (env->value)
-			printf("%s=%s\n", env->key, env->value);
+		env = (t_env *)tmp->content;
+		if (ft_strcmp(env->key, key) == 0)
+		{
+			gc_free(env->value);
+			env->value = gc_strdup(value);
+			return ;
+		}
+		tmp = tmp->next;
 	}
-	return (0);
+	env_add(mini, key, value);
 }

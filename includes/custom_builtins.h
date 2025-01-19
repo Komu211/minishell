@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   custom_builtins.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/19 10:29:29 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2024/12/13 18:31:53 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/19 10:30:25 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef CUSTOM_BUILTINS_H
+# define CUSTOM_BUILTINS_H
 
-// Include libraries
-# include "ast.h"
 # include "env.h"
-# include "error.h"
-# include "execution.h"
-# include "fd_collector.h"
-# include "garbage_collector.h"
-# include "libft.h"
-# include "signal_handler.h"
-# include "struct.h"
 # include "utils.h"
 # include "wrapper.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+# include <libft.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
 
-// Function prototypes
-void	print_welcome(void);
-void	cleanup_main(t_minishell *mini);
+int		builtin_echo(char **args);
+int		builtin_env(t_list *env_list);
+int		builtin_pwd(t_minishell *minishell);
+int		builtin_cd(t_minishell *minishell, char **args);
+void	builtin_exit(t_minishell *minishell, char **args);
+int		builtin_export(t_minishell *minishell, char **args);
 
 #endif

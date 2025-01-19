@@ -6,17 +6,17 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:32:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/13 19:07:24 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:42:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "custom_builtins.h"
 
-static int	is_n_flag(char *arg)
+static int	is_n_flag(char **arg)
 {
-	if (!arg || arg[0] != '-')
+	if (!arg[1] || arg[1][0] != '-')
 		return (0);
-	if (arg[1] != 'n')
+	if (arg[1][1] != 'n')
 		return (0);
 	return (1);
 }
@@ -24,28 +24,23 @@ static int	is_n_flag(char *arg)
 int	builtin_echo(char **args)
 {
 	int	i;
-	int	newline;
+	int	n_flag;
 
-	if (!args || !args[0])
+	if (!args || !args[1])
 	{
 		ft_putchar_fd('\n', 1);
 		return (0);
 	}
-	newline = 1;
-	i = 0;
-	while (args[i] && is_n_flag(args[i]))
+	n_flag = is_n_flag(args);
+	i = 1;
+	while (args[i + n_flag])
 	{
-		newline = 0;
+		printf("%s", args[i + n_flag]);
+		if (args[i + n_flag + 1])
+			printf(" ");
 		i++;
 	}
-	while (args[i])
-	{
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			ft_putchar_fd(' ', 1);
-		i++;
-	}
-	if (newline)
-		ft_putchar_fd('\n', 1);
+	if (!n_flag)
+		printf("\n");
 	return (0);
 }
