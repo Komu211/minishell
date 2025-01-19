@@ -22,3 +22,7 @@ Remvove quotes when executing a command
 manually check env file for $HOME, else set ourselves && check also for pwd
 
 fd_saved_in = dup()
+
+
+
+When killed add 128 to kill num

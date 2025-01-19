@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:32:52 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:49:51 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
 	env_init(mini, envp);
 	mini->error = 0;
 	mini->exit_status = 0;
+	mini->old_pwd = NULL;
 	(void)argc;
 	(void)argv;
 }

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:00:58 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:38:58 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,16 @@ static int	check_only_valid_chars(char *str)
 int	builtin_export(t_minishell *minishell, char **args)
 {
 	char	**split;
+	char	*equals_pos;
 
 	if (!args[1])
 		print_declare_export(minishell->env_list);
 	else
 	{
-		if (ft_strchr(args[1], '='))
+		if ((equals_pos = ft_strchr(args[1], '=')))
 		{
 			split = gc_split_at(args[1], '=');
-			if (!split || !split[0] || !split[1])
+			if (!split || !split[0])
 			{
 				gc_split_free(&split);
 				return (error_handler("Invalid export format", 1), 1);
@@ -61,7 +62,10 @@ int	builtin_export(t_minishell *minishell, char **args)
 				gc_split_free(&split);
 				return (error_handler("Invalid export format", 1), 1);
 			}
-			env_set(minishell, split[0], split[1]);
+			if (equals_pos[1] == '\0')
+				env_set(minishell, split[0], "");
+			else
+				env_set(minishell, split[0], split[1]);
 			gc_split_free(&split);
 		}
 		else

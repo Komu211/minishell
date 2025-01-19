@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:30:25 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:51:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int		builtin_pwd(t_minishell *minishell);
 int		builtin_cd(t_minishell *minishell, char **args);
 void	builtin_exit(t_minishell *minishell, char **args);
 int		builtin_export(t_minishell *minishell, char **args);
+int		builtin_unset(t_minishell *minishell, t_ast_node *ast);
 
 #endif
