@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:19:16 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:39:27 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 		ret = 0;
 	if (ast->redirections_in || ast->redirections_out)
 		reset_fds(&saved);
+	mini->exit_status = ret;
 	return (ret);
 }
