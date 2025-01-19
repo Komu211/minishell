@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 11:07:15 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:20:40 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	execute_pipe(t_minishell *mini, t_ast_node *ast)
 	close(pipefd[1]);
 	waitpid(pid1, &status1, 0);
 	waitpid(pid2, &status2, 0);
-	mini->exit_status = WEXITSTATUS(status2);
+	status1 = WEXITSTATUS(status1);
+	status2 = WEXITSTATUS(status2);
+	mini->exit_status = status2;
 	return (mini->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:32:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 11:42:39 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:03:02 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 static int	is_n_flag(char **arg)
 {
-	if (!arg[1] || arg[1][0] != '-')
-		return (0);
-	if (arg[1][1] != 'n')
-		return (0);
-	return (1);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (arg[i + 1] && arg[i + 1][0] == '-')
+	{
+		j = 1;
+		while (arg[i + 1][j] == 'n')
+			j++;
+		if (arg[i + 1][j] != '\0')
+			break ;
+		if (j == 1)
+			break ;
+		i++;
+	}
+	return (i);
 }
 
 int	builtin_echo(char **args)
