@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:54:18 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:08:32 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:01:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void	env_set(t_minishell *mini, char *key, char *value)
 		}
 		tmp = tmp->next;
 	}
-	printf("env_set %s = %s\n", key, value);
 	env_add(mini, key, value);
 }

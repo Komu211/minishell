@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 12:50:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:41:56 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,26 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	mini;
 	char		*user_in;
 	char		*prompt;
+	char		*line;
 
-	print_welcome();
+	// print_welcome();
 	mini_init(argc, argv, envp, &mini);
 	while (1)
 	{
-		prompt = gc_strjoin(mini.pwd, " > ");
-		user_in = readline(prompt);
+		prompt = gc_strjoin(mini.pwd, " > \n");
+		if (isatty(fileno(stdin)))
+			user_in = readline(prompt);
+		else
+		{
+			line = get_next_line(fileno(stdin));
+			if (line)
+			{
+				user_in = ft_strtrim(line, "\n");
+				free(line);
+			}
+			else
+				user_in = NULL;
+		}
 		if (!user_in || ft_strcmp(user_in, "exit") == 0)
 			break ;
 		garbage_collector_add(user_in);
@@ -87,8 +100,8 @@ int	main(int argc, char **argv, char **envp)
 			ast_init(&mini.ast, user_in);
 			if (mini.ast)
 			{
-				printf("\nCommand entered: %s\n", user_in);
-				debug_ast(mini.ast);
+				// printf("\nCommand entered: %s\n", user_in);
+				// debug_ast(mini.ast);
 				mini.exit_status = execute_ast(&mini, mini.ast);
 				// Free previous AST before next iteration
 				mini.ast = ast_empty(mini.ast);

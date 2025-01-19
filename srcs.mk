@@ -64,4 +64,6 @@ SRCS = main.c \
        unset.c \
        exit.c \
        pwd.c \
-	   cd.c
+	cd.c \
+       env_set.c \
+       env_add.c

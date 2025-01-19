@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:40:13 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 16:22:43 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:01:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	env_add(t_minishell *mini, char *key, char *value)
 	t_env	*env;
 
 	env = gc_malloc(sizeof(t_env));
-	printf("env_add %s = %s\n", key, value);
 	env->key = gc_strdup(key);
 	if (value)
 		env->value = gc_strdup(value);
