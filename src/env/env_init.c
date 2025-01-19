@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 12:04:00 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:15:36 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	env_init(t_minishell *mini, char **envp)
 		env->key = gc_calloc(j + 1, 1);
 		ft_memcpy(env->key, envp[i], j);
 		env->value = gc_strdup(envp[i] + j + 1);
-		tmp = ft_lstnew(env);
-		if (!tmp)
-			error_handler("ft_lstnew failed", 1);
+		tmp = gc_lstnew(env);
 		ft_lstadd_back(&mini->env_list, tmp);
 	}
 	verify_env(mini);

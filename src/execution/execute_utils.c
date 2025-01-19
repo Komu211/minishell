@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:18:58 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:39:50 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_builtin_type	is_own_builtin(char *command, char **args)
 		return (BUILTIN_EXPORT);
 	if (ft_strncmp(command, "pwd", 3) == 0)
 		return (BUILTIN_PWD);
-	// if (ft_strncmp(command, "unset", 5) == 0)
-	// 	return (1);
+	if (ft_strncmp(command, "unset", 5) == 0)
+		return (BUILTIN_UNSET);
 	return (BUILTIN_NONE);
 }
 

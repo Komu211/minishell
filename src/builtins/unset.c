@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:42:45 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/17 01:55:51 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:14:39 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_invalid_var_name(char *name)
 {
 	if (ft_strchr(name, '=') || !name[0] || ft_isdigit(name[0])
-		|| name[0] == '?' || name[0] == '$')
+		|| name[0] == '?')
 		return (1);
 	return (0);
 }
