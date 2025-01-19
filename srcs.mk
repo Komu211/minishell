@@ -68,7 +68,6 @@ SRCS = main.c \
        env_set.c \
        env_add.c \
        handler.c \
-       handle_out_redirections.c \
        get_env.c \
        gc_itoa.c \
        gc_unsplit.c \

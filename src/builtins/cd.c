@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:19:43 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 11:25:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	builtin_cd(t_minishell *minishell, char **args)
 	char	cwd[PATH_MAX];
 
 	if (!args[1])
-		path = get_env_value("HOME", minishell->env_list);
+		path = gc_strdup(get_env_value("HOME", minishell->env_list));
 	else if (args[1][0] == '-')
 		if (minishell->old_pwd)
 			path = minishell->old_pwd;
