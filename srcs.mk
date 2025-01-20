@@ -38,7 +38,6 @@ SRCS = main.c \
        execute_pipe.c \
        execute_logical.c \
        execute_utils.c \
-       test_execution.c \
        ast_parse_redirection.c \
        gc_split_at.c \
        gc_split_free.c \
