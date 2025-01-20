@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 15:40:13 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 10:01:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:13:53 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void	env_add(t_minishell *mini, char *key, char *value)
 		env->value = gc_strdup(value);
 	else
 		env->value = NULL;
-	ft_lstadd_back(&mini->env_list, ft_lstnew(env));
+	ft_lstadd_back(&mini->env_list, gc_lstnew(env));
 }

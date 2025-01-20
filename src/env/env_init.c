@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 17:43:38 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:59:22 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	env_init(t_minishell *mini, char **envp)
 	t_list	*tmp;
 
 	i = -1;
-	mini->env_list_orig = envp;
 	mini->env_list = NULL;
 	while (envp[++i])
 	{
