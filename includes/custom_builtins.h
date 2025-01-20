@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:31:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 12:55:55 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:20:07 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		builtin_export(t_minishell *minishell, char **args);
 int		builtin_unset(t_minishell *minishell, t_ast_node *ast);
 int		print_invalid_identifier(char *cmd, char *arg, t_minishell *mini);
 int		print_invalid_option(char *cmd, char *arg, t_minishell *mini);
+int		command_not_found(t_minishell *mini, t_ast_node *ast);
 
 #endif

@@ -66,7 +66,7 @@ SRCS = main.c \
 	cd.c \
        env_set.c \
        env_add.c \
-       handler.c \
+       main_handler.c \
        get_env.c \
        gc_itoa.c \
        gc_unsplit.c \
@@ -74,4 +74,6 @@ SRCS = main.c \
        expand_args.c \
        remove_quotes.c \
        gc_split_size.c \
-       print_invalid.c
+       print_invalid.c \
+       signal_utils.c \
+       get_mini.c

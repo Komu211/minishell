@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:15:12 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:38:55 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:25:08 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@
 
 void	signal_setup(t_minishell *mini);
 void	signal_handler(int signum, siginfo_t *info, void *context);
+void	setup_child_signals(void);
+void	setup_parent_signals(void);
+void	restore_signals(struct sigaction *sa);
 
 #endif

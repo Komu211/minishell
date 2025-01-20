@@ -6,21 +6,12 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:18:20 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:26:11 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "minishell.h"
-
-static int	command_not_found(t_minishell *mini, t_ast_node *ast)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(ast->args[0], 2);
-	ft_putendl_fd(": command not found", 2);
-	mini->exit_status = 127;
-	return (127);
-}
 
 static char	**env_ll_to_array(t_list *env_list)
 {
@@ -50,44 +41,47 @@ static char	**env_ll_to_array(t_list *env_list)
 	return (env_array);
 }
 
+static int	handle_child_exit(t_minishell *mini, int status)
+{
+	if (WIFSIGNALED(status))
+		mini->exit_status = 128 + WTERMSIG(status);
+	else
+		mini->exit_status = WEXITSTATUS(status);
+	return (mini->exit_status);
+}
+
+static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
+		char *cmd_path)
+{
+	pid_t				pid;
+	int					status;
+	struct sigaction	sa;
+
+	setup_parent_signals();
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"), 1);
+	if (pid == 0)
+	{
+		setup_child_signals();
+		execve(cmd_path, ast->args, env_ll_to_array(mini->env_list));
+		perror(ast->args[0]);
+		mini->exit_status = 126;
+		cleanup_main(mini);
+	}
+	waitpid(pid, &status, 0);
+	restore_signals(&sa);
+	return (handle_child_exit(mini, status));
+}
+
 int	execute_external_command(t_minishell *mini, t_ast_node *ast)
 {
-	pid_t	pid;
-	int		status;
-	char	*cmd_path;
+	char *cmd_path;
 
 	if (ast->args[0] == NULL)
 		return (mini->exit_status = 0);
 	cmd_path = get_command_path(ast->args[0], mini->env_list);
 	if (!cmd_path || ast->args[0][0] == '\0')
 		return (command_not_found(mini, ast));
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		execve(cmd_path, ast->args, env_ll_to_array(mini->env_list));
-		perror(ast->args[0]);
-		mini->exit_status = 126;
-		cleanup_main(mini);
-	}
-	while (waitpid(pid, &status, 0) == -1)
-	{
-		if (errno != EINTR)
-		{
-			perror("waitpid");
-			return (mini->exit_status = 1);
-		}
-	}
-	if (WIFSIGNALED(status))
-	{
-		mini->exit_status = 128 + WTERMSIG(status);
-		if (WTERMSIG(status) == SIGQUIT)
-			ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
-	}
-	else
-		mini->exit_status = WEXITSTATUS(status);
-	return (mini->exit_status);
+	return (execute_child_process(mini, ast, cmd_path));
 }

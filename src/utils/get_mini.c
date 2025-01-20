@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   get_mini.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:54:20 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/20 16:18:37 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/20 16:31:21 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/20 16:36:30 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "utils.h"
 
-void	error_handler(char *message, int status)
+t_minishell	**get_mini(void)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(message, 2);
-	exit(status);
+	static t_minishell	*mini;
+
+	return &mini;
 }

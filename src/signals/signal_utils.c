@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:54:20 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/20 16:18:37 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/20 16:23:33 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/20 16:24:27 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "signal_handler.h"
 
-void	error_handler(char *message, int status)
+void	setup_child_signals(void)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(message, 2);
-	exit(status);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	setup_parent_signals(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	restore_signals(struct sigaction *sa)
+{
+	sa->sa_flags = SA_SIGINFO;
+	sigemptyset(&sa->sa_mask);
+	sa->sa_sigaction = signal_handler;
+	sigaction(SIGINT, sa, NULL);
+	sigaction(SIGQUIT, sa, NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   main_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:08:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:38:49 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:48:41 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 	(void)context;
 	if (signum == SIGINT)
 	{
+		(*get_mini())->exit_status = 1;
 		if (isatty(STDIN_FILENO))
 		{
 			write(STDOUT_FILENO, "\n", 1);

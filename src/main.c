@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:21:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:21:34 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,36 @@ void	print_welcome(void)
 	ft_putstr_fd("\033[0m\n", 1);
 }
 
-void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
+void	mini_init(char **envp, t_minishell **mini)
 {
-	mini->pwd = gc_getcwd(NULL);
-	if (!mini->pwd)
+	*mini = gc_calloc(1, sizeof(t_minishell));
+	*get_mini() = *mini;
+	(*mini)->pwd = gc_getcwd(NULL);
+	if (!(*mini)->pwd)
 		error_handler("getcwd failed", 1);
-	mini->hist_file = gc_strjoin(mini->pwd, "/.minishell_history");
-	if (!mini->hist_file)
+	(*mini)->hist_file = gc_strjoin((*mini)->pwd, "/.minishell_history");
+	if (!(*mini)->hist_file)
 		error_handler("ft_strjoin failed", 1);
-	env_init(mini, envp);
-	mini->error = 0;
-	mini->exit_status = 0;
-	mini->old_pwd = NULL;
-	(void)argc;
-	(void)argv;
+	env_init(*mini, envp);
+	(*mini)->error = 0;
+	(*mini)->exit_status = 0;
+	(*mini)->old_pwd = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell	mini;
+	t_minishell	*mini;
 	char		*user_in;
 	char		*prompt;
 	char		*line;
 
-	// print_welcome();
-	mini_init(argc, argv, envp, &mini);
-	signal_setup(&mini);
+	(void)argc;
+	(void)argv;
+	mini_init(envp, &mini);
+	signal_setup(mini);
 	while (42)
 	{
-		prompt = gc_strjoin(mini.pwd, " > ");
+		prompt = gc_strjoin(mini->pwd, " > ");
 		if (isatty(fileno(stdin)))
 			user_in = readline(prompt);
 		else
@@ -83,20 +84,20 @@ int	main(int argc, char **argv, char **envp)
 		garbage_collector_add(user_in);
 		if (*user_in) // Only process non-empty input
 		{
-			ast_init(&mini.ast, user_in, &mini);
-			if (mini.ast)
+			ast_init(&mini->ast, user_in, mini);
+			if (mini->ast)
 			{
 				// printf("\nCommand entered: %s\n", user_in);
 				// debug_ast(mini.ast);
-				mini.exit_status = execute_ast(&mini, mini.ast);
+				mini->exit_status = execute_ast(mini, mini->ast);
 				// Free previous AST before next iteration
-				mini.ast = ast_empty(mini.ast);
+				mini->ast = ast_empty(mini->ast);
 			}
 			add_history(user_in); // Add command to readline history
 		}
 		gc_free(user_in);
 		gc_free(prompt);
 	}
-	cleanup_main(&mini);
-	return (mini.exit_status);
+	cleanup_main(mini);
+	return (mini->exit_status);
 }
