@@ -6,13 +6,13 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 16:20:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/10 16:26:28 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:23:32 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void gc_split_free(char ***split)
+void	gc_split_free(char ***split)
 {
 	int	i;
 

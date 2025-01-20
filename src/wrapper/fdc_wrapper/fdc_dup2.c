@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:29:49 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 14:31:49 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:23:14 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	fdc_dup2(int oldfd, int newfd)
 {
-	int result;
+	int	result;
 
 	result = dup2(oldfd, newfd);
 	if (result != -1)
@@ -24,4 +24,3 @@ int	fdc_dup2(int oldfd, int newfd)
 	}
 	return (result);
 }
-

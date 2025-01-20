@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 12:00:44 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:31:52 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	builtin_cd(t_minishell *minishell, char **args)
 	if (!args[1])
 		path = gc_strdup(get_env_value("HOME", minishell->env_list));
 	else if (args[1][0] == '-')
+	{
 		if (minishell->old_pwd)
 		{
 			path = minishell->old_pwd;
@@ -49,6 +50,7 @@ int	builtin_cd(t_minishell *minishell, char **args)
 		}
 		else
 			return (old_pwd_not_set(minishell));
+	}
 	else
 		path = args[1];
 	if (chdir(path) == -1 || getcwd(cwd, sizeof(cwd)) == NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_unsplit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:20:48 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 16:31:27 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:23:27 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ char	*gc_unsplit(char **split)
 	str[j - 1] = '\0';
 	return (str);
 }
-

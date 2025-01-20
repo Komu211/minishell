@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 14:38:35 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:23:37 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,4 @@ int	fd_collector_remove(int fd)
 		return (0);
 	gc_lstremove(holder, &fd);
 	return (1);
-} 
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 12:57:34 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 13:30:49 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:23:07 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	gc_free(void *ptr)
 		return ;
 	if (!garbage_collector_remove(ptr))
 		error_handler("Possible double free:\n"
-						"Trying to gc_free pointer that was not gc_malloced, "
-						"gc_calloced or gc_realloced ",
-						1);
+			"Trying to gc_free pointer that was not gc_malloced, "
+			"gc_calloced or gc_realloced ",
+			1);
 }

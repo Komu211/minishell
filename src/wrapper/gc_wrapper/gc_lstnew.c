@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 14:34:45 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:22:50 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,4 @@ t_list	*gc_lstnew(void *content)
 	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);
-} 
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 11:13:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:29:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	*get_command_path(char *command, t_list *env_list)
 	if (!env_path)
 		return (NULL);
 	path = gc_split_at(env_path, ':');
-	i = 0;
-	while (path[i])
+	i = -1;
+	while (path[++i])
 	{
 		tmp = gc_strjoin(path[i], "/");
 		command_path = gc_strjoin(tmp, command);
@@ -59,8 +59,6 @@ char	*get_command_path(char *command, t_list *env_list)
 		if (access(command_path, F_OK) == 0)
 			return (gc_split_free(&path), command_path);
 		gc_free(command_path);
-		i++;
 	}
-	gc_split_free(&path);
-	return (NULL);
+	return (gc_split_free(&path), NULL);
 }

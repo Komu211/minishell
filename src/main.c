@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 10:47:45 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:21:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_welcome(void)
 {
-	ft_putstr_fd("\033[1;36m", 1); // Bright cyan color
+	ft_putstr_fd("\033[1;36m", 1);
 	ft_putendl_fd("┌──────────────────────────────────────────────────────┐",
 		1);
 	ft_putendl_fd("│    ____  __ __                  _____ __         ____│",
