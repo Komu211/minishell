@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 17:43:46 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:13:42 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 t_builtin_type	is_own_builtin(char *command, char **args)
 {
 	(void)args;
+	if (command == NULL)
+		return (BUILTIN_NONE);
 	if (ft_strncmp(command, "cd", 3) == 0)
 		return (BUILTIN_CD);
 	if (ft_strncmp(command, "echo", 5) == 0)

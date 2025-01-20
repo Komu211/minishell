@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 09:51:49 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:15:17 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "minishell.h"
 
-static int command_not_found(t_minishell *mini, t_ast_node *ast)
+static int	command_not_found(t_minishell *mini, t_ast_node *ast)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(ast->args[0], 2);
@@ -48,8 +48,10 @@ int	execute_external_command(t_minishell *mini, t_ast_node *ast)
 	int		status;
 	char	*cmd_path;
 
+	if (ast->args[0] == NULL)
+		return (mini->exit_status = 0);
 	cmd_path = get_command_path(ast->args[0], mini->env_list);
-	if (!cmd_path)
+	if (!cmd_path || ast->args[0][0] == '\0')
 		return (command_not_found(mini, ast));
 	pid = fork();
 	if (pid == -1)
