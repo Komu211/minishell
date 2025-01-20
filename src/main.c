@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 14:49:51 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:47:45 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,6 @@ void	mini_init(int argc, char **argv, char **envp, t_minishell *mini)
 	(void)argv;
 }
 
-// void	print_envs(t_list *env_list)
-// {
-// 	t_list	*tmp;
-// 	t_env	*envs;
-
-// 	tmp = env_list;
-// 	while (tmp)
-// 	{
-// 		envs = (t_env *)tmp->content;
-// 		printf("%s: %s\n", envs->key, envs->value);
-// 		tmp = tmp->next;
-// 	}
-// }
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	mini;
@@ -76,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	// print_welcome();
 	mini_init(argc, argv, envp, &mini);
 	signal_setup(&mini);
-	while (1)
+	while (42)
 	{
 		prompt = gc_strjoin(mini.pwd, " > ");
 		if (isatty(fileno(stdin)))
@@ -92,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
 			else
 				user_in = NULL;
 		}
-		if (!user_in || ft_strcmp(user_in, "exit") == 0)
+		if (!user_in)
 			break ;
 		garbage_collector_add(user_in);
 		if (*user_in) // Only process non-empty input

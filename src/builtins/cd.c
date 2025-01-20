@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 18:07:28 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:00:44 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ static int	update_pwd(t_minishell *minishell, char *cwd)
 	return (0);
 }
 
+static int	old_pwd_not_set(t_minishell *minishell)
+{
+	ft_putendl_fd("cd: OLDPWD not set", 2);
+	minishell->exit_status = 1;
+	return (1);
+}
+
 int	builtin_cd(t_minishell *minishell, char **args)
 {
 	char	*path;
@@ -41,18 +48,10 @@ int	builtin_cd(t_minishell *minishell, char **args)
 			printf("%s\n", path);
 		}
 		else
-			printf("cd: OLDPWD not set\n");
+			return (old_pwd_not_set(minishell));
 	else
 		path = args[1];
-	if (chdir(path) == -1)
-	{
-		perror("cd");
-		return (1);
-	}
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("cd");
-		return (1);
-	}
+	if (chdir(path) == -1 || getcwd(cwd, sizeof(cwd)) == NULL)
+		return (perror("cd"), 1);
 	return (update_pwd(minishell, cwd));
 }

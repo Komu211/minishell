@@ -73,4 +73,5 @@ SRCS = main.c \
        gc_append.c \
        expand_args.c \
        remove_quotes.c \
-       gc_split_size.c
+       gc_split_size.c \
+       print_invalid.c

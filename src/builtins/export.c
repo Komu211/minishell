@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 18:54:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:03:09 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ static void	print_declare_export(t_list *env_list)
 
 static int	check_only_valid_chars(char *str)
 {
+	if (!str)
+		return (0);
+	if (ft_isdigit(str[0]))
+		return (0);
 	while (*str)
 	{
 		if (!ft_isalnum(*str) && *str != '_')
@@ -46,15 +50,14 @@ static int	handle_single_export(t_minishell *minishell, char *arg)
 	char	*equals_pos;
 
 	equals_pos = ft_strchr(arg, '=');
+	if (arg[0] == '-')
+		return (print_invalid_option("export", arg, minishell));
 	if (equals_pos)
 	{
 		split = gc_split_at(arg, '=');
-		if (!split || !split[0])
-			return (gc_split_free(&split),
-				error_handler("Invalid export format", 1), 1);
-		if (!check_only_valid_chars(split[0]))
-			return (gc_split_free(&split),
-				error_handler("Invalid export format", 1), 1);
+		if (!split || !split[0] || !check_only_valid_chars(split[0]))
+			return (gc_split_free(&split), print_invalid_identifier("export",
+					arg, minishell), 1);
 		if (equals_pos[1] == '\0')
 			env_set(minishell, split[0], "");
 		else
@@ -62,7 +65,11 @@ static int	handle_single_export(t_minishell *minishell, char *arg)
 		gc_split_free(&split);
 	}
 	else
+	{
+		if (!check_only_valid_chars(arg))
+			return (print_invalid_identifier("export", arg, minishell), 1);
 		env_add(minishell, arg, NULL);
+	}
 	return (0);
 }
 
@@ -85,10 +92,7 @@ int	builtin_export(t_minishell *minishell, char **args)
 				i++;
 				continue ;
 			}
-			if (handle_single_export(minishell, args[i]) != 0)
-				status = 1;
-			else
-				status = 0;
+			status = handle_single_export(minishell, args[i]);
 			i++;
 		}
 		return (status);

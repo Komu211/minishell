@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:42:45 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 15:14:39 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:56:59 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 static int	is_invalid_var_name(char *name)
 {
-	if (ft_strchr(name, '=') || !name[0] || ft_isdigit(name[0])
-		|| name[0] == '?')
+	if (!*name)
 		return (1);
+	if (ft_isdigit(name[0]))
+		return (1);
+	while (*name)
+	{
+		if (!ft_isalnum(*name) && *name != '_')
+			return (1);
+		name++;
+	}
 	return (0);
 }
 
@@ -58,8 +65,10 @@ int	builtin_unset(t_minishell *minishell, t_ast_node *ast)
 	i = 1;
 	while (args[i])
 	{
-		if (is_invalid_var_name(args[i]))
-			status = 1;
+		if (args[i][0] == '-')
+			status = print_invalid_option("unset", args[i], minishell);
+		else if (is_invalid_var_name(args[i]))
+			status = print_invalid_identifier("unset", args[i], minishell);
 		else
 			remove_env_var(minishell, args[i]);
 		i++;
