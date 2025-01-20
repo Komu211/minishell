@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 11:15:21 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:59:14 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_minishell
 	int							exit_status;
 	t_list						*env_list;
 	t_ast_node					*ast;
-	char						**env_list_orig;
 }								t_minishell;
 
 struct							s_redirection

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 14:38:58 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:54:54 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,58 @@ static int	check_only_valid_chars(char *str)
 	return (1);
 }
 
-int	builtin_export(t_minishell *minishell, char **args)
+static int	handle_single_export(t_minishell *minishell, char *arg)
 {
 	char	**split;
 	char	*equals_pos;
+
+	equals_pos = ft_strchr(arg, '=');
+	if (equals_pos)
+	{
+		split = gc_split_at(arg, '=');
+		if (!split || !split[0])
+			return (gc_split_free(&split),
+				error_handler("Invalid export format", 1), 1);
+		if (!check_only_valid_chars(split[0]))
+			return (gc_split_free(&split),
+				error_handler("Invalid export format", 1), 1);
+		if (equals_pos[1] == '\0')
+			env_set(minishell, split[0], "");
+		else
+			env_set(minishell, split[0], split[1]);
+		gc_split_free(&split);
+	}
+	else
+		env_add(minishell, arg, NULL);
+	return (0);
+}
+
+int	builtin_export(t_minishell *minishell, char **args)
+{
+	int	i;
+	int	status;
 
 	if (!args[1])
 		print_declare_export(minishell->env_list);
 	else
 	{
-		if ((equals_pos = ft_strchr(args[1], '=')))
+		status = 0;
+		i = 1;
+		while (args[i])
 		{
-			split = gc_split_at(args[1], '=');
-			if (!split || !split[0])
+			if (!ft_strchr(args[i], '=') && get_env_value(args[i],
+					minishell->env_list))
 			{
-				gc_split_free(&split);
-				return (error_handler("Invalid export format", 1), 1);
+				i++;
+				continue ;
 			}
-			if (!check_only_valid_chars(split[0]))
-			{
-				gc_split_free(&split);
-				return (error_handler("Invalid export format", 1), 1);
-			}
-			if (equals_pos[1] == '\0')
-				env_set(minishell, split[0], "");
+			if (handle_single_export(minishell, args[i]) != 0)
+				status = 1;
 			else
-				env_set(minishell, split[0], split[1]);
-			gc_split_free(&split);
+				status = 0;
+			i++;
 		}
-		else
-			env_add(minishell, args[1], NULL);
+		return (status);
 	}
 	return (0);
 }
