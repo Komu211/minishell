@@ -76,4 +76,5 @@ SRCS = main.c \
        gc_split_size.c \
        print_invalid.c \
        signal_utils.c \
-       get_mini.c
+       get_mini.c \
+       handle_here_doc.c \

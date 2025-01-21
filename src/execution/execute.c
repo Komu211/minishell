@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:38:39 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:19:32 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 	if (!ast)
 		return (0);
 	if (expand_redirections(mini, ast) == -1)
-		return (1);
-	handle_redirections(ast, &saved);
+		return (mini->exit_status = 1);
+	if (handle_redirections(ast, &saved))
+		return (mini->exit_status = 1);
 	if (ast->type == TOKEN_COMMAND)
 	{
 		// wildcard
