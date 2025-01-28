@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 17:35:18 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:58:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+typedef struct s_heredoc
+{
+	char *delimiter; // The heredoc delimiter (e.g., "EOF")
+	char *temp_file; // Path to temp file that will store content
+	struct s_heredoc	*next;
+}						t_heredoc;
+void					collect_heredocs_from_node(t_ast_node *node,
+							t_heredoc **heredocs, int *counter);
+void					read_heredocs(t_heredoc *heredocs);
 
 void	print_welcome(void)
 {
@@ -58,11 +68,15 @@ int	main(int argc, char **argv, char **envp)
 	char		*user_in;
 	char		*prompt;
 	char		*line;
+	t_heredoc	*heredocs;
+	int			heredoc_counter;
 
 	(void)argc;
 	(void)argv;
 	mini_init(envp, &mini);
 	signal_setup(mini);
+	heredoc_counter = 0;
+	heredocs = NULL;
 	while (42)
 	{
 		prompt = gc_strjoin(mini->pwd, " > ");
@@ -89,6 +103,13 @@ int	main(int argc, char **argv, char **envp)
 			{
 				// printf("\nCommand entered: %s\n", user_in);
 				// debug_ast(mini.ast);
+				collect_heredocs_from_node(mini->ast, &heredocs,
+					&heredoc_counter);
+				if (heredocs)
+				{
+					read_heredocs(heredocs);
+					//append_heredocs_to_ast(mini->ast, heredocs);
+				}
 				mini->exit_status = execute_ast(mini, mini->ast);
 				// Free previous AST before next iteration
 				mini->ast = ast_empty(mini->ast);

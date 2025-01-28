@@ -1,4 +1,4 @@
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd:$(SRC_DIR)/builtins:$(SRC_DIR)/signals
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd:$(SRC_DIR)/builtins:$(SRC_DIR)/signals:$(SRC_DIR)/heredoc
 
 
 
@@ -77,4 +77,5 @@ SRCS = main.c \
        print_invalid.c \
        signal_utils.c \
        get_mini.c \
-       handle_here_doc.c \
+       collect_heredocs.c \
+       read_heredocs.c

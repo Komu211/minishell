@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_in_redirections.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:29:23 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 18:21:32 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:55:31 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	handle_all_inputs(t_redirection *redir, t_saved_fds *saved)
 	ret = 0;
 	while (redir && !ret)
 	{
-		if (redir->type == REDIRECT_HERE_DOC)
-			ret = handle_here_doc(redir, saved);
-		else
+		if (redir->type == REDIRECT_IN)
 			ret = handle_input_redirection(redir, saved);
 		redir = redir->next;
 	}
