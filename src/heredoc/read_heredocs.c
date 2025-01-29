@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/28 18:54:09 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:44:51 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,23 @@ static void	read_single_heredoc(t_heredoc *current)
 void	read_heredocs(t_heredoc *heredocs)
 {
 	t_heredoc	*current;
-	pid_t		pid;
-	int			status;
+	void		(*old_sigint)(int);
+	void		(*old_sigquit)(int);
 
 	current = heredocs;
+	// Save current signal handlers
+	old_sigint = signal(SIGINT, SIG_DFL);
+	old_sigquit = signal(SIGQUIT, SIG_IGN);
+
 	while (current)
 	{
-		pid = fork();
-		if (pid == -1)
-			return ;
-		else if (pid == 0)
-		{
-			// Child process
-			signal(SIGINT, SIG_DFL); // Reset signal handling
-			signal(SIGQUIT, SIG_IGN);
-			read_single_heredoc(current);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			// Parent process
-			waitpid(pid, &status, 0);
-			if (WIFSIGNALED(status))
-			{
-				(*get_mini())->exit_status = 128 + WTERMSIG(status);
-				return ;
-			}
-		}
+		printf("Processing heredoc with delimiter: %s\n", current->delimiter);
+		read_single_heredoc(current);
 		current = current->next;
 	}
+
+	// Restore signal handlers
+	signal(SIGINT, old_sigint);
+	signal(SIGQUIT, old_sigquit);
+	printf("Finished reading heredocs\n");
 }

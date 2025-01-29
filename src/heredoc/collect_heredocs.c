@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/28 18:32:39 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:50:32 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static char	*create_temp_heredoc_file(int *counter)
 	if (!temp_path)
 		return (NULL);
 	ft_strlcpy(temp_path, "/tmp/.heredoc_", ft_strlen("/tmp/.heredoc_") + 1);
-	ft_strlcat(temp_path, pid_str, ft_strlen(temp_path) + ft_strlen(pid_str) + 1);
+	ft_strlcat(temp_path, pid_str, ft_strlen(temp_path) + ft_strlen(pid_str)
+		+ 1);
 	ft_strlcat(temp_path, "_", ft_strlen(temp_path) + 2);
 	ft_strlcat(temp_path, counter_str, ft_strlen(temp_path)
 		+ ft_strlen(counter_str) + 1);
@@ -86,6 +87,7 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 {
 	t_redirection	*redir;
 	t_heredoc		*new_heredoc;
+	t_heredoc		*current;
 
 	if (!node)
 		return ;
@@ -102,11 +104,21 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 				// Handle error
 				return ;
 			}
-			new_heredoc->next = *heredocs;
-			*heredocs = new_heredoc;
+			new_heredoc->next = NULL;
+			// Add to end of list instead of front
+			if (!*heredocs)
+				*heredocs = new_heredoc;
+			else
+			{
+				current = *heredocs;
+				while (current->next)
+					current = current->next;
+				current->next = new_heredoc;
+			}
 		}
 		redir = redir->next;
 	}
+	// Process left subtree first to maintain order
 	collect_heredocs_from_node(node->left, heredocs, counter);
 	collect_heredocs_from_node(node->right, heredocs, counter);
 }
