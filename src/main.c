@@ -6,21 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/29 12:58:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:56:10 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-typedef struct s_heredoc
-{
-	char *delimiter; // The heredoc delimiter (e.g., "EOF")
-	char *temp_file; // Path to temp file that will store content
-	struct s_heredoc	*next;
-}						t_heredoc;
-void					collect_heredocs_from_node(t_ast_node *node,
-							t_heredoc **heredocs, int *counter);
-void					read_heredocs(t_heredoc *heredocs);
 
 void	print_welcome(void)
 {
@@ -105,11 +95,8 @@ int	main(int argc, char **argv, char **envp)
 				// debug_ast(mini.ast);
 				collect_heredocs_from_node(mini->ast, &heredocs,
 					&heredoc_counter);
-				if (heredocs)
-				{
-					read_heredocs(heredocs);
-					//append_heredocs_to_ast(mini->ast, heredocs);
-				}
+				read_heredocs(heredocs);
+				apply_heredocs_to_ast(mini->ast, heredocs);
 				mini->exit_status = execute_ast(mini, mini->ast);
 				// Free previous AST before next iteration
 				mini->ast = ast_empty(mini->ast);

@@ -78,4 +78,5 @@ SRCS = main.c \
        signal_utils.c \
        get_mini.c \
        collect_heredocs.c \
-       read_heredocs.c
+       read_heredocs.c \
+       apply_heredocs.c

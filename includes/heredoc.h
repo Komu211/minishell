@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 10:36:19 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/29 18:50:57 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/01/29 18:47:06 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/01/29 18:54:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-// Include libraries
 # include "ast.h"
-# include "env.h"
-# include "error.h"
 # include "execution.h"
-# include "fd_collector.h"
-# include "garbage_collector.h"
-# include "heredoc.h"
-# include "libft.h"
 # include "signal_handler.h"
-# include "struct.h"
-# include "utils.h"
-# include "wrapper.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 
-// Function prototypes
-void	print_welcome(void);
-void	cleanup_main(t_minishell *mini);
+typedef struct s_heredoc
+{
+	char				*delimiter;
+	char				*temp_file;
+	struct s_heredoc	*next;
+}						t_heredoc;
+
+void					apply_heredocs_to_ast(t_ast_node *ast,
+							t_heredoc *heredocs);
+void					read_heredocs(t_heredoc *heredocs);
+void					collect_heredocs_from_node(t_ast_node *node,
+							t_heredoc **heredocs, int *counter);
 
 #endif

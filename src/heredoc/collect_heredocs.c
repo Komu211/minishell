@@ -6,19 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/29 12:50:32 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:55:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
-#include "execution.h"
-
-typedef struct s_heredoc
-{
-	char *delimiter; // The heredoc delimiter (e.g., "EOF")
-	char *temp_file; // Path to temp file that will store content
-	struct s_heredoc	*next;
-}						t_heredoc;
+#include "heredoc.h"
 
 static void	ft_itoa_to_buf(int n, char *buf)
 {
@@ -40,7 +32,6 @@ static void	ft_itoa_to_buf(int n, char *buf)
 		n = n / 10;
 	}
 	buf[i] = '\0';
-	// Reverse the string
 	len = i;
 	start = 0;
 	while (start < len / 2)
@@ -72,13 +63,13 @@ static char	*create_temp_heredoc_file(int *counter)
 	ft_strlcat(temp_path, counter_str, ft_strlen(temp_path)
 		+ ft_strlen(counter_str) + 1);
 	(*counter)++;
-	fd = open(temp_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	fd = fdc_open_mode(temp_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		gc_free(temp_path);
 		return (NULL);
 	}
-	close(fd);
+	fdc_close(fd);
 	return (temp_path);
 }
 
@@ -105,7 +96,6 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 				return ;
 			}
 			new_heredoc->next = NULL;
-			// Add to end of list instead of front
 			if (!*heredocs)
 				*heredocs = new_heredoc;
 			else
@@ -118,7 +108,6 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 		}
 		redir = redir->next;
 	}
-	// Process left subtree first to maintain order
 	collect_heredocs_from_node(node->left, heredocs, counter);
 	collect_heredocs_from_node(node->right, heredocs, counter);
 }

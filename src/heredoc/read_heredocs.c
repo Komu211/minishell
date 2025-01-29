@@ -6,20 +6,12 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/29 12:44:51 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:55:36 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
-#include "execution.h"
-#include "signal_handler.h"
+#include "heredoc.h"
 
-typedef struct s_heredoc
-{
-	char *delimiter; // The heredoc delimiter (e.g., "EOF")
-	char *temp_file; // Path to temp file that will store content
-	struct s_heredoc	*next;
-}						t_heredoc;
 
 static void	read_single_heredoc(t_heredoc *current)
 {
@@ -39,7 +31,7 @@ static void	read_single_heredoc(t_heredoc *current)
 		if (line)
 		{
 			user_in = gc_strdup(line);
-			free(line); // Free readline/get_next_line allocated memory
+			free(line);
 		}
 		else
 			user_in = NULL;
@@ -58,23 +50,13 @@ static void	read_single_heredoc(t_heredoc *current)
 void	read_heredocs(t_heredoc *heredocs)
 {
 	t_heredoc	*current;
-	void		(*old_sigint)(int);
-	void		(*old_sigquit)(int);
 
 	current = heredocs;
-	// Save current signal handlers
-	old_sigint = signal(SIGINT, SIG_DFL);
-	old_sigquit = signal(SIGQUIT, SIG_IGN);
-
 	while (current)
 	{
 		printf("Processing heredoc with delimiter: %s\n", current->delimiter);
 		read_single_heredoc(current);
 		current = current->next;
 	}
-
-	// Restore signal handlers
-	signal(SIGINT, old_sigint);
-	signal(SIGQUIT, old_sigquit);
 	printf("Finished reading heredocs\n");
 }
