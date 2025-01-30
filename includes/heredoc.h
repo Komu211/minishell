@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:47:06 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/29 18:54:05 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:48:57 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_heredoc
 	char				*delimiter;
 	char				*temp_file;
 	struct s_heredoc	*next;
+	int					processed;
 }						t_heredoc;
 
 void					apply_heredocs_to_ast(t_ast_node *ast,
