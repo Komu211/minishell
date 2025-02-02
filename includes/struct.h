@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 12:49:58 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:50:35 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef struct s_minishell
 	char						*hist_file;
 	int							error;
 	int							exit_status;
+	int							heredoc_interrupted;
 	t_list						*env_list;
 	t_ast_node					*ast;
+	struct sigaction			sa;
 }								t_minishell;
 
 struct							s_redirection

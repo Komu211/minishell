@@ -1,4 +1,4 @@
-VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd:$(SRC_DIR)/builtins:$(SRC_DIR)/signals
+VPATH = $(SRC_DIR):$(SRC_DIR)/wrapper/fdc_wrapper:$(SRC_DIR)/wrapper/gc_wrapper:$(SRC_DIR)/gc:$(SRC_DIR)/error:$(SRC_DIR)/env:$(SRC_DIR)/utils:$(SRC_DIR)/ast:$(SRC_DIR)/builtins:$(SRC_DIR)/execution:$(SRC_DIR)/env:$(SRC_DIR)/fd:$(SRC_DIR)/builtins:$(SRC_DIR)/signals:$(SRC_DIR)/heredoc
 
 
 
@@ -82,4 +82,7 @@ SRCS = main.c \
        apply_heredocs.c \
        gc_size.c \
        gc_print.c \
-       empty_heredoc.c
+       empty_heredoc.c \
+       collect_heredocs.c \
+       read_heredocs.c \
+       apply_heredocs.c

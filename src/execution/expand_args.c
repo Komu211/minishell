@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/19 15:54:38 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:43:48 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	expand_variable(char **line, char **result, t_minishell *mini,
 	expanded = get_env_value(var_name, mini->env_list);
 	if (expanded)
 		append_string(result, expanded);
+	else
+		append_string(result, "");
 }
 
 void	expand_env(t_minishell *mini, char **args)

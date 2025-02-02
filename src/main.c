@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:45:40 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:51:03 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,23 @@ int	main(int argc, char **argv, char **envp)
 	char		*user_in;
 	char		*prompt;
 	char		*line;
+	t_heredoc	*heredocs;
+	int			heredoc_counter;
 
 	(void)argc;
 	(void)argv;
 	mini_init(envp, &mini);
 	signal_setup(mini);
 	heredoc_counter = 0;
+	heredoc_counter = 0;
 	while (42)
 	{
 		prompt = gc_strjoin(mini->pwd, " > ");
-		if (isatty(fileno(stdin)))
+		if (isatty(STDIN_FILENO))
 			user_in = readline(prompt);
 		else
 		{
-			line = get_next_line(fileno(stdin));
+			line = get_next_line(STDIN_FILENO);
 			if (line)
 			{
 				user_in = ft_strtrim(line, "\n");
@@ -85,11 +88,14 @@ int	main(int argc, char **argv, char **envp)
 		garbage_collector_add(user_in);
 		if (*user_in) // Only process non-empty input
 		{
+			heredocs = NULL;
 			ast_init(&mini->ast, user_in, mini);
-			if (mini->ast)
+			if (mini->ast && collect_heredocs_from_node(mini->ast, &heredocs,
+					&heredoc_counter) && read_heredocs(heredocs, mini))
 			{
 				// printf("\nCommand entered: %s\n", user_in);
 				// debug_ast(mini.ast);
+				apply_heredocs_to_ast(mini->ast, heredocs);
 				mini->exit_status = execute_ast(mini, mini->ast);
 				// Free previous AST before next iteration
 				mini->ast = ast_empty(mini->ast);

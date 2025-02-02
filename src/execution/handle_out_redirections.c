@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_out_redirections.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:30:41 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/12 17:43:52 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:11:17 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	get_mode(t_redirection_type type)
 	return (-1);
 }
 
-static void	handle_output_redirection(t_redirection *redir, t_saved_fds *saved)
+static int	handle_output_redirection(t_redirection *redir, t_saved_fds *saved)
 {
 	int	fd;
 	int	mode;
@@ -37,22 +37,27 @@ static void	handle_output_redirection(t_redirection *redir, t_saved_fds *saved)
 		ft_putstr_fd(redir->file, 2);
 		ft_putendl_fd(": Permission denied", 2);
 		reset_fds(saved);
-		exit(1);
+		return (1);
 	}
 	if (fdc_dup2(fd, STDOUT_FILENO) == -1)
 	{
 		fdc_close(fd);
 		reset_fds(saved);
-		exit(1);
+		return (1);
 	}
 	fdc_close(fd);
+	return (0);
 }
 
-void	handle_all_outputs(t_redirection *redir, t_saved_fds *saved)
+int	handle_all_outputs(t_redirection *redir, t_saved_fds *saved)
 {
-	while (redir)
+	int	ret;
+
+	ret = 0;
+	while (redir && !ret)
 	{
-		handle_output_redirection(redir, saved);
+		ret = handle_output_redirection(redir, saved);
 		redir = redir->next;
 	}
+	return (ret);
 }
