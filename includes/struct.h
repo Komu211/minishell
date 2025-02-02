@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:18:20 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:33:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef struct s_minishell
 	char						*hist_file;
 	int							error;
 	int							exit_status;
+	int							heredoc_interrupted;
 	t_list						*env_list;
 	t_ast_node					*ast;
+	struct sigaction			sa;
 }								t_minishell;
 
 struct							s_redirection

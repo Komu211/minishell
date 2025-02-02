@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:08:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 16:48:41 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:33:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,13 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 
 void	signal_setup(t_minishell *mini)
 {
-	struct sigaction	sa;
-
-	(void)mini;
-	sa.sa_sigaction = signal_handler;
-	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
+	mini->sa.sa_sigaction = signal_handler;
+	mini->sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&mini->sa.sa_mask);
 	if (isatty(STDIN_FILENO))
 	{
-		sigaction(SIGINT, &sa, NULL);
-		sigaction(SIGQUIT, &sa, NULL);
+		sigaction(SIGINT, &mini->sa, NULL);
+		sigaction(SIGQUIT, &mini->sa, NULL);
 		rl_catch_signals = 0;
 	}
 	else

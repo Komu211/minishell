@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:23:33 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 16:24:27 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:33:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	setup_parent_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	restore_signals(struct sigaction *sa)
+void	restore_signals(t_minishell *mini)
 {
-	sa->sa_flags = SA_SIGINFO;
-	sigemptyset(&sa->sa_mask);
-	sa->sa_sigaction = signal_handler;
-	sigaction(SIGINT, sa, NULL);
-	sigaction(SIGQUIT, sa, NULL);
+	mini->sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&mini->sa.sa_mask);
+	mini->sa.sa_sigaction = signal_handler;
+	sigaction(SIGINT, &mini->sa, NULL);
+	sigaction(SIGQUIT, &mini->sa, NULL);
 }

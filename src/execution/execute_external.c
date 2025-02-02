@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 16:26:11 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:33:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 {
 	pid_t				pid;
 	int					status;
-	struct sigaction	sa;
 
 	setup_parent_signals();
 	pid = fork();
@@ -70,7 +69,7 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 		cleanup_main(mini);
 	}
 	waitpid(pid, &status, 0);
-	restore_signals(&sa);
+	restore_signals(mini);
 	return (handle_child_exit(mini, status));
 }
 
