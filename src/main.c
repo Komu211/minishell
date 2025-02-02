@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:51:03 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:54:19 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	mini_init(envp, &mini);
 	signal_setup(mini);
 	heredoc_counter = 0;
-	heredoc_counter = 0;
+	heredocs = NULL;
 	while (42)
 	{
 		prompt = gc_strjoin(mini->pwd, " > ");

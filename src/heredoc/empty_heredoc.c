@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.h                                          :+:      :+:    :+:   */
+/*   empty_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 18:47:06 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:52:45 by obehavka         ###   ########.fr       */
+/*   Created: 2025/02/02 12:48:37 by obehavka          #+#    #+#             */
+/*   Updated: 2025/02/02 13:30:19 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEREDOC_H
-# define HEREDOC_H
+#include "heredoc.h"
 
-# include "ast.h"
-# include "execution.h"
-# include "signal_handler.h"
-# include "struct.h"
+void	empty_heredoc(t_heredoc **heredocs)
+{
+	t_heredoc	*current;
+	t_heredoc	*next;
 
-void	apply_heredocs_to_ast(t_ast_node *ast, t_heredoc *heredocs);
-int		read_heredocs(t_heredoc *heredocs, t_minishell *mini);
-int		collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
-			int *counter);
-void	empty_heredoc(t_heredoc **heredocs);
-
-#endif
+	if (!heredocs || !*heredocs)
+		return ;
+	current = *heredocs;
+	while (current)
+	{
+		next = current->next;
+		unlink(current->temp_file);
+		gc_free(current->temp_file);
+		gc_free(current->delimiter);
+		gc_free(current);
+		current = next;
+	}
+	*heredocs = NULL;
+}
