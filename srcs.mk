@@ -82,4 +82,5 @@ SRCS = main.c \
        apply_heredocs.c \
        gc_size.c \
        gc_print.c \
-       empty_heredoc.c
+       empty_heredoc.c \
+       wildcard.c
