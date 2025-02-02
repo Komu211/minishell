@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:07:37 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:59:28 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:34:55 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ static int	is_hidden(char *str)
 	return (0);
 }
 
+static char	**add_match(char **matches, int *count, char *name)
+{
+	matches = gc_realloc(matches, (*count + 1) * sizeof(char *));
+	matches[*count] = gc_strjoin_three("\"", name, "\"");
+	(*count)++;
+	return (matches);
+}
+
 static char	**expand_wildcard(char *str)
 {
 	DIR				*dir;
@@ -79,16 +87,13 @@ static char	**expand_wildcard(char *str)
 	dir = opendir(".");
 	if (!dir)
 		return (NULL);
-	while ((entry = readdir(dir)))
+	entry = readdir(dir);
+	while (entry)
 	{
-		if (entry->d_name[0] == '.' && !is_hidden(str))
-			continue ;
-		if (matches_pattern(str, entry->d_name))
-		{
-			matches = gc_realloc(matches, (count + 1) * sizeof(char *));
-			matches[count] = gc_strjoin_three("\"", entry->d_name, "\"");
-			count++;
-		}
+		if (entry->d_name[0] != '.' || is_hidden(str))
+			if (matches_pattern(str, entry->d_name))
+				matches = add_match(matches, &count, entry->d_name);
+		entry = readdir(dir);
 	}
 	closedir(dir);
 	if (count == 0)
