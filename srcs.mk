@@ -76,4 +76,10 @@ SRCS = main.c \
        gc_split_size.c \
        print_invalid.c \
        signal_utils.c \
-       get_mini.c
+       get_mini.c \
+       collect_heredocs.c \
+       read_heredocs.c \
+       apply_heredocs.c \
+       gc_size.c \
+       gc_print.c \
+       empty_heredoc.c

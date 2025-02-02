@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_add.c                                           :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:23:31 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/02 12:14:33 by obehavka         ###   ########.fr       */
+/*   Created: 2025/01/29 18:47:06 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/02/02 12:49:50 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-void	garbage_collector_add(void *ptr)
-{
-	t_list	*new;
+# include "ast.h"
+# include "execution.h"
+# include "signal_handler.h"
+# include "struct.h"
 
-	new = ft_lstnew(ptr);
-	if (!new)
-		error_handler("Failed to allocate memory for garbage collector", 1);
-	ft_lstadd_front(garbage_holder(), new);
-}
+void	apply_heredocs_to_ast(t_ast_node *ast, t_heredoc *heredocs);
+void	read_heredocs(t_heredoc *heredocs);
+int		collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
+			int *counter);
+void	empty_heredoc(t_heredoc **heredocs);
+
+#endif

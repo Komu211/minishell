@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enums.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:48:07 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/11 14:37:37 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:58:33 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,19 @@ typedef enum e_builtin_type
 	BUILTIN_ENV,
 	BUILTIN_EXIT
 }	t_builtin_type;
+
+typedef enum e_malloc_source
+{
+	MALLOC_AST,
+	MALLOC_ENV,
+	MALLOC_EXEC,
+	MALLOC_GC,
+	MALLOC_HEREDOC,
+	MALLOC_PARSER,
+	MALLOC_TOKENIZER,
+	MALLOC_UTILS,
+	MALLOC_WRAPPER,
+	MALLOC_UNDEFINED
+}	t_malloc_source;
 
 #endif

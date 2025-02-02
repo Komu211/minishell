@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 17:21:34 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:45:40 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	mini_init(envp, &mini);
 	signal_setup(mini);
+	heredoc_counter = 0;
 	while (42)
 	{
 		prompt = gc_strjoin(mini->pwd, " > ");
@@ -97,6 +98,10 @@ int	main(int argc, char **argv, char **envp)
 		}
 		gc_free(user_in);
 		gc_free(prompt);
+		fd_collector_empty();
+		empty_heredoc(&heredocs);
+		// printf("garbage size: %zu\n", garbage_collector_size());
+		// garbage_collector_print();
 	}
 	cleanup_main(mini);
 	return (mini->exit_status);

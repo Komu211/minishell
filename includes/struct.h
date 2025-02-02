@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:18:20 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:49:58 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,13 @@ struct							s_ast_node
 	char						**args;
 	int							in_parentheses;
 };
+
+typedef struct s_heredoc
+{
+	char						*delimiter;
+	char						*temp_file;
+	struct s_heredoc			*next;
+	int							processed;
+}								t_heredoc;
 
 #endif
