@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:19:53 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 12:34:22 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:29:16 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ t_ast_node	*ast_build(t_token_type *tokens, char **split_line,
 
 	if (!tokens)
 		return (NULL);
+	if (*tokens == TOKEN_EMPTY)
+	{
+		mini->exit_status = 0;
+		return (NULL);
+	}
 	node = parse_logical_ops(&tokens, &split_line);
 	if (!node || *tokens != TOKEN_EMPTY)
 	{

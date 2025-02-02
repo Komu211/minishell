@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 19:00:13 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/13 11:54:41 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:26:38 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ char	**gc_split(const char *s)
 
 	word_count = ft_word_count(s);
 	ret_ptr = gc_calloc(sizeof(char *), (word_count + 1));
-	if (!ret_ptr)
-		return (NULL);
 	tmp_ptr = ret_ptr;
 	while (word_count--)
 	{
