@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:19:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 09:59:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:18:28 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	verify_env(t_minishell *mini)
 			pwd = env->value;
 		tmp = tmp->next;
 	}
-	if (shlvl == -1)
-		env_add(mini, "SHLVL", "1");
+	if (shlvl < 0 || shlvl >= 999)
+		env_set(mini, "SHLVL", "1");
 	else
 		env_set(mini, "SHLVL", gc_itoa(shlvl + 1));
 	if (pwd == NULL)
