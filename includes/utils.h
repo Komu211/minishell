@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/02/02 17:40:21 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:15:57 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void		*gc_strdup(const char *s);
 char		*gc_strjoin(char const *s1, char const *s2);
+char		*gc_strjoin_three(char const *s1, char const *s2, char const *s3);
 char		*gc_substr(char const *s, unsigned int start, size_t len);
 char		**gc_split(char const *s);
 char		**gc_split_at(char const *s, char c);
