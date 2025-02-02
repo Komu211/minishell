@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:50:35 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:17:11 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,11 @@ typedef struct s_heredoc
 	struct s_heredoc			*next;
 	int							processed;
 }								t_heredoc;
+
+typedef struct s_quotes
+{
+	int		in_double;
+	int		in_single;
+}			t_quotes;
 
 #endif

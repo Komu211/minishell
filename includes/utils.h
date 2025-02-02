@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:21:41 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:19:22 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char		*gc_unsplit(char **split);
 int			gc_split_size(char **split);
 t_minishell	**get_mini(void);
 char		*get_user_input(char *prompt);
+int			matches_pattern(const char *pattern, const char *string);
 
 #endif

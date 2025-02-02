@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:41:56 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:19:35 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "enums.h"
 # include "env.h"
 # include "struct.h"
+# include "utils.h"
 # include "wrapper.h"
 # include <dirent.h>
 # include <readline/readline.h>
