@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/12 14:39:12 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:23:51 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 typedef struct s_fd
 {
-	int	fd;
-	char *filename; // Name of the file this fd belongs to
-}		t_fd;
+	int		fd;
+	char	*filename;
+}			t_fd;
 
-t_list	**fd_collector(void);
-void	fd_collector_add(int fd, char *description);
-int		fd_collector_remove(int fd);
-void	fd_collector_empty(void);
+t_list		**fd_collector(void);
+void		fd_collector_add(int fd, char *description);
+int			fd_collector_remove(int fd);
+void		fd_collector_empty(void);
 
 #endif

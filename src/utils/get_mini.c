@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:31:21 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 16:36:30 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:24:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ t_minishell	**get_mini(void)
 {
 	static t_minishell	*mini;
 
-	return &mini;
+	return (&mini);
 }
