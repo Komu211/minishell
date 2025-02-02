@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/01 16:29:50 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:45:59 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int	main(int argc, char **argv, char **envp)
 	while (42)
 	{
 		prompt = gc_strjoin(mini->pwd, " > ");
-		if (isatty(fileno(stdin)))
+		if (isatty(STDIN_FILENO))
 			user_in = readline(prompt);
 		else
 		{
-			line = get_next_line(fileno(stdin));
+			line = get_next_line(STDIN_FILENO);
 			if (line)
 			{
 				user_in = ft_strtrim(line, "\n");
@@ -89,12 +89,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			heredocs = NULL;
 			ast_init(&mini->ast, user_in, mini);
-			if (mini->ast)
+			if (mini->ast && collect_heredocs_from_node(mini->ast, &heredocs,
+					&heredoc_counter))
 			{
 				// printf("\nCommand entered: %s\n", user_in);
 				// debug_ast(mini.ast);
-				collect_heredocs_from_node(mini->ast, &heredocs,
-					&heredoc_counter);
 				read_heredocs(heredocs);
 				apply_heredocs_to_ast(mini->ast, heredocs);
 				mini->exit_status = execute_ast(mini, mini->ast);

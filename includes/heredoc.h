@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:47:06 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/30 18:48:57 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:14:29 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_heredoc
 void					apply_heredocs_to_ast(t_ast_node *ast,
 							t_heredoc *heredocs);
 void					read_heredocs(t_heredoc *heredocs);
-void					collect_heredocs_from_node(t_ast_node *node,
+int						collect_heredocs_from_node(t_ast_node *node,
 							t_heredoc **heredocs, int *counter);
 
 #endif

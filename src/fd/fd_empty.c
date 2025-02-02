@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:00:00 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/20 15:23:48 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:45:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	fd_destroy(void *content)
 	t_fd	*fd_info;
 
 	fd_info = (t_fd *)content;
-	close(fd_info->fd);
+	if (fd_info->fd > 2)
+		close(fd_info->fd);
 	if (fd_info->filename)
 		gc_free(fd_info->filename);
 	gc_free(fd_info);

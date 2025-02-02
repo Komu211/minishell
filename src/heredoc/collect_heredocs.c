@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/30 18:53:16 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:47:53 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static char	*create_temp_heredoc_file(int *counter)
 	return (temp_path);
 }
 
-void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
+// Return 0 if error, 1 if success
+int	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 		int *counter)
 {
 	t_redirection	*redir;
@@ -81,7 +82,11 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 	t_heredoc		*current;
 
 	if (!node)
-		return ;
+		return (1);
+	if (!collect_heredocs_from_node(node->left, heredocs, counter))
+		return (0);
+	if (!collect_heredocs_from_node(node->right, heredocs, counter))
+		return (0);
 	redir = node->redirections_in;
 	while (redir)
 	{
@@ -89,7 +94,7 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 		{
 			new_heredoc = gc_calloc(1, sizeof(t_heredoc));
 			if (!new_heredoc)
-				return ;
+				return (0);
 					// TODO: change to return int to detect wrong initialization
 			new_heredoc->delimiter = gc_strdup(redir->file);
 			new_heredoc->temp_file = create_temp_heredoc_file(counter);
@@ -97,7 +102,7 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 			if (!new_heredoc->temp_file)
 			{
 				// Handle error
-				return ;
+				return (0);
 			}
 			new_heredoc->next = NULL;
 			if (!*heredocs)
@@ -112,6 +117,6 @@ void	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 		}
 		redir = redir->next;
 	}
-	collect_heredocs_from_node(node->left, heredocs, counter);
-	collect_heredocs_from_node(node->right, heredocs, counter);
+	return (1);
 }
+
