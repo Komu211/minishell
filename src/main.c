@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 10:45:59 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:40:33 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ int	main(int argc, char **argv, char **envp)
 			heredocs = NULL;
 			ast_init(&mini->ast, user_in, mini);
 			if (mini->ast && collect_heredocs_from_node(mini->ast, &heredocs,
-					&heredoc_counter))
+					&heredoc_counter) && read_heredocs(heredocs, mini))
 			{
 				// printf("\nCommand entered: %s\n", user_in);
 				// debug_ast(mini.ast);
-				read_heredocs(heredocs);
 				apply_heredocs_to_ast(mini->ast, heredocs);
 				mini->exit_status = execute_ast(mini, mini->ast);
 				// Free previous AST before next iteration
