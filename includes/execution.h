@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/28 18:54:37 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:41:56 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "env.h"
 # include "struct.h"
 # include "wrapper.h"
+# include <dirent.h>
 # include <readline/readline.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -40,5 +41,6 @@ int				handle_all_inputs(t_redirection *redir, t_saved_fds *saved);
 void			expand_args(t_minishell *mini, char ***args);
 void			remove_quotes(char **str);
 void			expand_env(t_minishell *mini, char **args);
+char			**expand_wildcards(char **str);
 
 #endif

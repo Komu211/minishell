@@ -3,21 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:07:37 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 15:47:28 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:59:28 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include <dirent.h>
 
 static int	matches_pattern(const char *pattern, const char *string)
 {
+	int	is_in_double_quote;
+	int	is_in_single_quote;
+
+	is_in_double_quote = 0;
+	is_in_single_quote = 0;
 	while (*pattern && *string)
 	{
-		if (*pattern == '*')
+		if (*pattern == '\'' && !is_in_double_quote)
+		{
+			is_in_single_quote = !is_in_single_quote;
+			pattern++;
+			continue ;
+		}
+		if (*pattern == '\"' && !is_in_single_quote)
+		{
+			is_in_double_quote = !is_in_double_quote;
+			pattern++;
+			continue ;
+		}
+		if (*pattern == '*' && !is_in_double_quote && !is_in_single_quote)
 		{
 			while (*pattern == '*')
 				pattern++;
@@ -36,27 +52,20 @@ static int	matches_pattern(const char *pattern, const char *string)
 		pattern++;
 		string++;
 	}
-	while (*pattern == '*')
+	while (*pattern == '*' || (is_in_double_quote && *pattern == '\"')
+		|| (is_in_single_quote && *pattern == '\''))
 		pattern++;
 	return (*pattern == '\0' && *string == '\0');
 }
 
-// static char	**join_matches(char **strs)
-// {
-// 	int		count;
-// 	char	**result;
-// 	int		i;
-
-// 	count = 0;
-// 	while (strs[count])
-// 		count++;
-// 	result = gc_malloc((count + 1) * sizeof(char *));
-// 	i = -1;
-// 	while (strs[++i])
-// 		result[i] = gc_strdup(strs[i]);
-// 	result[i] = NULL;
-// 	return (result);
-// }
+static int	is_hidden(char *str)
+{
+	if (*str == '\"' || *str == '\'')
+		str++;
+	if (*str == '.')
+		return (1);
+	return (0);
+}
 
 static char	**expand_wildcard(char *str)
 {
@@ -72,12 +81,12 @@ static char	**expand_wildcard(char *str)
 		return (NULL);
 	while ((entry = readdir(dir)))
 	{
-		if (entry->d_name[0] == '.')
+		if (entry->d_name[0] == '.' && !is_hidden(str))
 			continue ;
 		if (matches_pattern(str, entry->d_name))
 		{
 			matches = gc_realloc(matches, (count + 1) * sizeof(char *));
-			matches[count] = gc_strdup(entry->d_name);
+			matches[count] = gc_strjoin_three("\"", entry->d_name, "\"");
 			count++;
 		}
 	}
@@ -94,12 +103,13 @@ char	**expand_wildcards(char **str)
 	int		i;
 	char	**tmp;
 
-	i = 0;
+	i = -1;
 	while (str[++i])
 	{
 		tmp = expand_wildcard(str[i]);
 		if (!tmp)
 			continue ;
+		gc_free(str[i]);
 		str[i] = gc_unsplit(tmp);
 	}
 	return (str);

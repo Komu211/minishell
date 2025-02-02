@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/01 16:43:48 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:06:14 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	expand_args(t_minishell *mini, char ***args)
 	i = -1;
 	while ((*args)[++i])
 		expand_env(mini, (*args) + i);
+	split_again(args);
+	expand_wildcards(*args);
 	split_again(args);
 	i = -1;
 	while ((*args)[++i])
