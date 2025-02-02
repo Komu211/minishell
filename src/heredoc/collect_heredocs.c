@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 10:47:53 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:30:07 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	ft_itoa_to_buf(int n, char *buf)
 	int		i;
 	int		len;
 	char	tmp;
-	int		start;
 
 	if (n == 0)
 	{
@@ -33,13 +32,11 @@ static void	ft_itoa_to_buf(int n, char *buf)
 	}
 	buf[i] = '\0';
 	len = i;
-	start = 0;
-	while (start < len / 2)
+	while (--len > i / 2)
 	{
-		tmp = buf[start];
-		buf[start] = buf[len - 1 - start];
-		buf[len - 1 - start] = tmp;
-		start++;
+		tmp = buf[i - len - 1];
+		buf[i - len - 1] = buf[len];
+		buf[len] = tmp;
 	}
 }
 
@@ -65,21 +62,50 @@ static char	*create_temp_heredoc_file(int *counter)
 	(*counter)++;
 	fd = fdc_open_mode(temp_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
-	{
-		gc_free(temp_path);
-		return (NULL);
-	}
+		return (gc_free(temp_path), NULL);
 	fdc_close(fd);
 	return (temp_path);
 }
 
 // Return 0 if error, 1 if success
+static void	append_heredoc(t_heredoc **heredocs, t_heredoc *new_heredoc)
+{
+	t_heredoc	*current;
+
+	if (!*heredocs)
+		*heredocs = new_heredoc;
+	else
+	{
+		current = *heredocs;
+		while (current->next)
+			current = current->next;
+		current->next = new_heredoc;
+	}
+}
+
+static t_heredoc	*create_heredoc(t_redirection *redir, int *counter)
+{
+	t_heredoc	*new_heredoc;
+
+	new_heredoc = gc_calloc(1, sizeof(t_heredoc));
+	if (!new_heredoc)
+		return (NULL);
+	// TODO: change to return int to detect wrong initialization
+	new_heredoc->delimiter = gc_strdup(redir->file);
+	new_heredoc->temp_file = create_temp_heredoc_file(counter);
+	new_heredoc->processed = 0;
+	new_heredoc->next = NULL;
+	if (!new_heredoc->temp_file)
+		return (NULL);
+		// Handle error
+	return (new_heredoc);
+}
+
 int	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 		int *counter)
 {
 	t_redirection	*redir;
 	t_heredoc		*new_heredoc;
-	t_heredoc		*current;
 
 	if (!node)
 		return (1);
@@ -92,31 +118,12 @@ int	collect_heredocs_from_node(t_ast_node *node, t_heredoc **heredocs,
 	{
 		if (redir->type == REDIRECT_HERE_DOC)
 		{
-			new_heredoc = gc_calloc(1, sizeof(t_heredoc));
+			new_heredoc = create_heredoc(redir, counter);
 			if (!new_heredoc)
 				return (0);
-					// TODO: change to return int to detect wrong initialization
-			new_heredoc->delimiter = gc_strdup(redir->file);
-			new_heredoc->temp_file = create_temp_heredoc_file(counter);
-			new_heredoc->processed = 0;
-			if (!new_heredoc->temp_file)
-			{
-				// Handle error
-				return (0);
-			}
-			new_heredoc->next = NULL;
-			if (!*heredocs)
-				*heredocs = new_heredoc;
-			else
-			{
-				current = *heredocs;
-				while (current->next)
-					current = current->next;
-				current->next = new_heredoc;
-			}
+			append_heredoc(heredocs, new_heredoc);
 		}
 		redir = redir->next;
 	}
 	return (1);
 }
-
