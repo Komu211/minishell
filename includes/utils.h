@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/01/20 16:37:12 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:40:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "enums.h"
 # include "struct.h"
 # include "wrapper.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 
 void		*gc_strdup(const char *s);
 char		*gc_strjoin(char const *s1, char const *s2);
@@ -32,4 +34,6 @@ void		append_string(char **dest, const char *src);
 char		*gc_unsplit(char **split);
 int			gc_split_size(char **split);
 t_minishell	**get_mini(void);
+char		*get_user_input(char *prompt);
+
 #endif

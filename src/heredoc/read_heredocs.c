@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:20:06 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:39:28 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	read_single_heredoc(t_heredoc *current, t_minishell *mini)
 {
 	int		fd;
-	char	*line;
 	char	*user_in;
 
 	fd = fdc_open_mode(current->temp_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -23,14 +22,9 @@ static void	read_single_heredoc(t_heredoc *current, t_minishell *mini)
 		return ;
 	while (!mini->heredoc_interrupted)
 	{
-		if (isatty(fileno(stdin)))
-			line = readline("heredoc> ");
-		else
-			line = get_next_line(fileno(stdin));
-		if (!line)
+		user_in = get_user_input("heredoc> ");
+		if (!user_in)
 			break ;
-		user_in = ft_strtrim(line, "\n");
-		free(line);
 		garbage_collector_add(user_in);
 		if (ft_strcmp(user_in, current->delimiter) == 0)
 		{

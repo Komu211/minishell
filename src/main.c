@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:34:29 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:38:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,6 @@ static void	handle_heredocs(t_minishell *mini, t_heredoc **heredocs,
 	{
 		apply_heredocs_to_ast(mini->ast, *heredocs);
 	}
-}
-
-static char	*get_user_input(char *prompt)
-{
-	char	*user_in;
-	char	*line;
-
-	if (isatty(STDIN_FILENO))
-		user_in = readline(prompt);
-	else
-	{
-		line = get_next_line(STDIN_FILENO);
-		if (line)
-		{
-			user_in = ft_strtrim(line, "\n");
-			free(line);
-		}
-		else
-			user_in = NULL;
-	}
-	return (user_in);
 }
 
 static void	process_command(t_minishell *mini, char *user_in,

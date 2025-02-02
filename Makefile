@@ -56,7 +56,7 @@ fclean: clean
 
 norm:
 	@echo "Norminette for $(NAME):"
-	@-norminette $(SRC_DIR) $(LIBFT_DIR) $(INC_DIR) || true
+	@-norminette $(SRC_DIR) $(LIBFT_DIR) $(INC_DIR) | grep "Error"|| true
 
 bonus: all
 
