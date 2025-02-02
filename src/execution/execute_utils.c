@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:36:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 17:18:00 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:54:05 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_command_path(char *command, t_list *env_list)
 	const char	*env_path;
 	char		*command_path;
 	int			i;
-	
+
 	if (access(command, F_OK) == 0 && ft_strchr(command, '/'))
 		return (gc_strdup(command));
 	else if (ft_strchr(command, '/'))

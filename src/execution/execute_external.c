@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 12:33:05 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:53:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static int	handle_child_exit(t_minishell *mini, int status)
 static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 		char *cmd_path)
 {
-	pid_t				pid;
-	int					status;
+	pid_t	pid;
+	int		status;
 
 	setup_parent_signals();
 	pid = fork();
@@ -75,7 +75,7 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 
 int	execute_external_command(t_minishell *mini, t_ast_node *ast)
 {
-	char *cmd_path;
+	char	*cmd_path;
 
 	if (ast->args[0] == NULL)
 		return (mini->exit_status = 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/18 17:08:15 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:46:24 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ static t_token_type	get_token_type(char *word)
 		return (TOKEN_REDIRECT_HERE_DOC);
 	return (TOKEN_COMMAND);
 }
-
-// static char			*g_token_names[] = {[TOKEN_AND] = "AND",
-//				[TOKEN_OR] = "OR",
-// 				[TOKEN_PIPE] = "PIPE", [TOKEN_PAREN_OPEN] = "PAREN_OPEN",
-// 				[TOKEN_PAREN_CLOSE] = "PAREN_CLOSE",
-// 				[TOKEN_REDIRECT_IN] = "REDIRECT_IN",
-// 				[TOKEN_REDIRECT_OUT] = "REDIRECT_OUT",
-// 				[TOKEN_REDIRECT_OUT_APPEND] = "REDIRECT_OUT_APPEND",
-// 				[TOKEN_REDIRECT_HERE_DOC] = " REDIRECT_HERE_DOC",
-// 				[TOKEN_COMMAND] = "COMMAND", [TOKEN_EMPTY] = "EMPTY"};
 
 static void	validate_quotes(char *line)
 {
@@ -76,11 +66,7 @@ static t_token_type	*gc_tokenizer(char **split_line)
 	tokens = gc_calloc(i + 1, sizeof(t_token_type));
 	i = -1;
 	while (split_line[++i])
-	{
 		tokens[i] = get_token_type(split_line[i]);
-		// printf("Token: %s, word: %s\n", g_token_names[tokens[i]],
-		// 	split_line[i]);
-	}
 	tokens[i] = TOKEN_EMPTY;
 	return (tokens);
 }
