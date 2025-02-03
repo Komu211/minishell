@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:21:41 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:40:35 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char		*gc_unsplit(char **split);
 int			gc_split_size(char **split);
 t_minishell	**get_mini(void);
 char		*get_user_input(char *prompt);
+int			remove_quotes(char **str);
 
 #endif

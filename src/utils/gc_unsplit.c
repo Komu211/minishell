@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_unsplit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:20:48 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/20 15:23:27 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:21:28 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*gc_unsplit(char **split)
 	size_t	i;
 	size_t	j;
 
-	len = 0;
+	len = 1;
 	i = 0;
 	while (split[i])
 		len += ft_strlen(split[i++]) + 1;

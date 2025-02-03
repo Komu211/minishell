@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 13:03:09 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:59:21 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	check_only_valid_chars(char *str)
 {
 	if (!str)
 		return (0);
+	if (ft_strlen(str) == 0)
+		return (0);
 	if (ft_isdigit(str[0]))
 		return (0);
 	while (*str)
@@ -46,23 +48,23 @@ static int	check_only_valid_chars(char *str)
 
 static int	handle_single_export(t_minishell *minishell, char *arg)
 {
-	char	**split;
 	char	*equals_pos;
+	char	*key;
+	char	*value;
 
 	equals_pos = ft_strchr(arg, '=');
 	if (arg[0] == '-')
 		return (print_invalid_option("export", arg, minishell));
 	if (equals_pos)
 	{
-		split = gc_split_at(arg, '=');
-		if (!split || !split[0] || !check_only_valid_chars(split[0]))
-			return (gc_split_free(&split), print_invalid_identifier("export",
+		key = gc_substr(arg, 0, equals_pos - arg);
+		if (!key || !check_only_valid_chars(key))
+			return (gc_free((void **)&key), print_invalid_identifier("export",
 					arg, minishell), 1);
-		if (equals_pos[1] == '\0')
-			env_set(minishell, split[0], "");
-		else
-			env_set(minishell, split[0], split[1]);
-		gc_split_free(&split);
+		value = gc_strdup(equals_pos + 1);
+		env_set(minishell, key, value);
+		gc_free(key);
+		gc_free(value);
 	}
 	else
 	{
