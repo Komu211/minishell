@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/20 15:31:52 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:58:25 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,32 @@ static int	update_pwd(t_minishell *minishell, char *cwd)
 	return (0);
 }
 
-static int	old_pwd_not_set(t_minishell *minishell)
+static int	not_set(char *var, t_minishell *minishell)
 {
-	ft_putendl_fd("cd: OLDPWD not set", 2);
+	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd(var, 2);
+	ft_putendl_fd(" not set", 2);
 	minishell->exit_status = 1;
 	return (1);
 }
 
 int	builtin_cd(t_minishell *minishell, char **args)
 {
-	char	*path;
-	char	cwd[PATH_MAX];
+	const char	*path;
+	char		cwd[PATH_MAX];
 
-	if (!args[1])
-		path = gc_strdup(get_env_value("HOME", minishell->env_list));
-	else if (args[1][0] == '-')
+	if (!args[1] || (args[1][0] == '-' && args[1][1] == '-' && !args[1][2]))
 	{
-		if (minishell->old_pwd)
-		{
-			path = minishell->old_pwd;
-			printf("%s\n", path);
-		}
-		else
-			return (old_pwd_not_set(minishell));
+		path = get_env_value("HOME", minishell->env_list);
+		if (!path)
+			return (not_set("HOME", minishell));
+	}
+	else if (args[1][0] == '-' && !args[1][1])
+	{
+		path = minishell->old_pwd;
+		if (!path)
+			return (not_set("OLD_PWD", minishell));
+		printf("%s\n", path);
 	}
 	else
 		path = args[1];

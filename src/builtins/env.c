@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:36:30 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 13:41:22 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:08:17 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	builtin_env(t_list *env_list)
 		if (env->value && env->value[0] != '\0')
 			printf("%s=%s\n", env->key, env->value);
 		else if (env->value)
-			printf("%s=%c%c\n", env->key, '\"', '\"');
+			printf("%s=\n", env->key);
 	}
 	return (0);
 }

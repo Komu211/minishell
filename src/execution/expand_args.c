@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/03 09:23:41 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:35:23 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	expand_variable(char **line, char **result, t_minishell *mini,
 	while (**line && (ft_isalnum(**line) || **line == '_') && i < 255)
 		var_name[i++] = *(*line)++;
 	var_name[i] = '\0';
-	if (i == 0 && (**line == '\0' || quotes))
+	if (i == 0 && ((**line != '\'' && **line != '\"') || quotes))
 	{
 		append_char(result, '$');
 		return ;

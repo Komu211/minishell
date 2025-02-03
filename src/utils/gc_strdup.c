@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:41:14 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 19:33:13 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:51:36 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*gc_strdup(const char *s)
 	char	*str;
 	size_t	len;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	str = gc_malloc(len + 1);
 	ft_memcpy(str, s, len);

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:22:00 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 09:59:21 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:40:22 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	handle_single_export(t_minishell *minishell, char *arg)
 	{
 		key = gc_substr(arg, 0, equals_pos - arg);
 		if (!key || !check_only_valid_chars(key))
-			return (gc_free((void **)&key), print_invalid_identifier("export",
-					arg, minishell), 1);
+			return (gc_free(key), print_invalid_identifier("export", arg,
+					minishell), 1);
 		value = gc_strdup(equals_pos + 1);
 		env_set(minishell, key, value);
 		gc_free(key);
