@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:34:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 16:15:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:29:23 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,39 @@ static int	expand_redirections(t_minishell *mini, t_ast_node *ast)
 	return (0);
 }
 
-int	execute_ast(t_minishell *mini, t_ast_node *ast)
+static int	execute_command_node(t_minishell *mini, t_ast_node *ast)
 {
 	t_builtin_type	builtin_type;
-	t_saved_fds		saved;
 	int				ret;
+
+	expand_args(mini, &(ast->args));
+	builtin_type = is_own_builtin(ast->args[0], ast->args);
+	if (builtin_type != BUILTIN_NONE)
+		ret = execute_own_builtin(mini, ast, builtin_type);
+	else
+		ret = execute_external_command(mini, ast);
+	return (ret);
+}
+
+static int	execute_operator_node(t_minishell *mini, t_ast_node *ast)
+{
+	int	ret;
+
+	if (ast->type == TOKEN_PIPE)
+		ret = execute_pipe(mini, ast);
+	else if (ast->type == TOKEN_AND)
+		ret = execute_and(mini, ast);
+	else if (ast->type == TOKEN_OR)
+		ret = execute_or(mini, ast);
+	else
+		ret = 0;
+	return (ret);
+}
+
+int	execute_ast(t_minishell *mini, t_ast_node *ast)
+{
+	t_saved_fds	saved;
+	int			ret;
 
 	if (!ast)
 		return (0);
@@ -65,22 +93,9 @@ int	execute_ast(t_minishell *mini, t_ast_node *ast)
 	if (handle_redirections(ast, &saved))
 		return (mini->exit_status = 1);
 	if (ast->type == TOKEN_COMMAND)
-	{
-		expand_args(mini, &(ast->args));
-		builtin_type = is_own_builtin(ast->args[0], ast->args);
-		if (builtin_type != BUILTIN_NONE)
-			ret = execute_own_builtin(mini, ast, builtin_type);
-		else
-			ret = execute_external_command(mini, ast);
-	}
-	else if (ast->type == TOKEN_PIPE)
-		ret = execute_pipe(mini, ast);
-	else if (ast->type == TOKEN_AND)
-		ret = execute_and(mini, ast);
-	else if (ast->type == TOKEN_OR)
-		ret = execute_or(mini, ast);
+		ret = execute_command_node(mini, ast);
 	else
-		ret = 0;
+		ret = execute_operator_node(mini, ast);
 	if (ast->redirections_in || ast->redirections_out)
 		reset_fds(&saved);
 	mini->exit_status = ret;

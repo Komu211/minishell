@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_transformation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 02:51:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 15:09:22 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:16:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,11 @@ int	get_mod_len(char *line)
 	}
 	return (len);
 }
-static void	handle_operator(char *line, char *mod_line, int *i, int *j)
-{
-	if ((*i) > 0 && line[(*i) - 1] != ' ')
-		mod_line[(*j)++] = ' ';
-	mod_line[(*j)++] = line[(*i)];
-	mod_line[(*j)++] = line[(*i) + 1];
-	if (line[(*i) + 2] && line[(*i) + 2] != ' ')
-		mod_line[(*j)++] = ' ';
-	(*i) += 2;
-}
 
 void	*transform_line(char *line, char *mod_line)
 {
-	int		i;
-	int		j;
-	char	quote_char;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -83,22 +72,9 @@ void	*transform_line(char *line, char *mod_line)
 			|| ft_strncmp(&line[i], "<<", 2) == 0)
 			handle_operator(line, mod_line, &i, &j);
 		else if (ft_strchr(SPECIAL_TOKENS, line[i]))
-		{
-			if (i > 0 && line[i - 1] != ' ')
-				mod_line[j++] = ' ';
-			mod_line[j++] = line[i++];
-			if (line[i] && line[i] != ' ')
-				mod_line[j++] = ' ';
-		}
+			handle_special_token(line, mod_line, &i, &j);
 		else if (line[i] == '\'' || line[i] == '\"')
-		{
-			quote_char = line[i];
-			mod_line[j++] = line[i++];
-			while (line[i] && line[i] != quote_char)
-				mod_line[j++] = line[i++];
-			if (line[i])
-				mod_line[j++] = line[i++];
-		}
+			handle_quotes(line, mod_line, &i, &j);
 		else
 			mod_line[j++] = line[i++];
 	}

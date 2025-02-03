@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 19:04:26 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 19:19:04 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:04:09 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	matches_pattern(const char *pattern, const char *string)
 	while (*pattern && *string)
 	{
 		if (handle_quotes(&pattern, &quotes))
-			continue;
+			continue ;
 		if (*pattern == '*' && !quotes.in_double && !quotes.in_single)
 		{
 			while (*pattern == '*')
