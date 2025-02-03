@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 16:11:08 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 16:14:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:36:56 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parent_handler(int signum, siginfo_t *info, void *context)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 }
 
-void	signal_handler(int signum, siginfo_t *info, void *context)
+void	regular_signal_handler(int signum, siginfo_t *info, void *context)
 {
 	(void)info;
 	(void)context;
