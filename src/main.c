@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:38:26 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:14:59 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_welcome(void)
 	ft_putstr_fd("\033[0m\n", 1);
 }
 
-static void	handle_heredocs(t_minishell *mini, t_heredoc **heredocs,
+static int	handle_heredocs(t_minishell *mini, t_heredoc **heredocs,
 		int *heredoc_counter)
 {
 	*heredocs = NULL;
@@ -42,7 +42,9 @@ static void	handle_heredocs(t_minishell *mini, t_heredoc **heredocs,
 			heredoc_counter) && read_heredocs(*heredocs, mini))
 	{
 		apply_heredocs_to_ast(mini->ast, *heredocs);
+		return (1);
 	}
+	return (0);
 }
 
 static void	process_command(t_minishell *mini, char *user_in,
@@ -51,13 +53,11 @@ static void	process_command(t_minishell *mini, char *user_in,
 	if (*user_in)
 	{
 		ast_init(&mini->ast, user_in, mini);
-		handle_heredocs(mini, heredocs, heredoc_counter);
-		if (mini->ast)
-		{
+		if (handle_heredocs(mini, heredocs, heredoc_counter))
 			mini->exit_status = execute_ast(mini, mini->ast);
-			mini->ast = ast_empty(mini->ast);
-		}
+		mini->ast = ast_empty(mini->ast);
 		add_history(user_in);
+		gc_free(user_in);
 	}
 }
 
@@ -81,7 +81,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		garbage_collector_add(user_in);
 		process_command(mini, user_in, &heredocs, &heredoc_counter);
-		gc_free(user_in);
 		gc_free(prompt);
 		fd_collector_empty();
 		empty_heredoc(&heredocs);

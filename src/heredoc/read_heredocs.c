@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_heredocs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 10:04:31 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:13:31 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	expand_env_heredoc(t_minishell *mini, char **args)
 	if (!args || !*args)
 		return ;
 	src = *args;
-	result = NULL;
+	result = gc_strdup("");
 	while (*src)
 	{
 		if (*src == '$')

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/03 11:10:29 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:33:06 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ static void	split_again(char ***args)
 	gc_free(oneliner);
 	gc_split_free(args);
 	*args = new_split;
+}
+
+static void	handle_tilde(char **line, char **result, t_minishell *mini)
+{
+	if (**line == '~' && (!(*line)[1] || (*line)[1] == '/'))
+	{
+		append_string(result, get_env_value("HOME", mini->env_list));
+		(*line)++;
+	}
 }
 
 static void	expand_variable(char **line, char **result, t_minishell *mini,
@@ -65,6 +74,7 @@ void	expand_env(t_minishell *mini, char **args)
 	src = *args;
 	result = NULL;
 	quotes = (t_quotes){0, 0};
+	handle_tilde(&src, &result, mini);
 	while (*src)
 	{
 		if (*src == '\'' && !quotes.in_double)
