@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:53:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:20:18 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ static char	**env_ll_to_array(t_list *env_list)
 static int	handle_child_exit(t_minishell *mini, int status)
 {
 	if (WIFSIGNALED(status))
+	{
 		mini->exit_status = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGINT)
+			ft_putchar_fd('\n', STDOUT_FILENO);
+	}
 	else
 		mini->exit_status = WEXITSTATUS(status);
 	return (mini->exit_status);
