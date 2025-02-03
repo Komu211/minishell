@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:16:25 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 11:57:13 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:01:44 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	handle_transform_operator(char *line, char *mod_line, int *i, int *j)
 	(*i) += 2;
 }
 
-void	handle_transform_special_token(char *line, char *mod_line, int *i, int *j)
+void	handle_transform_special_token(char *line, char *mod_line, int *i,
+		int *j)
 {
 	if (*i > 0 && line[*i - 1] != ' ')
 		mod_line[(*j)++] = ' ';

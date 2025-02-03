@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 11:16:26 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:01:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	validate_quotes(char *line)
 			while (line[i] && line[i] != quote)
 				++i;
 			if (!line[i])
-				return ((*get_mini())->exit_status = 2, ft_putstr_fd("syntax error: unclosed quote\n", 2), 1);
+				return ((*get_mini())->exit_status = 2,
+					ft_putstr_fd("syntax error: unclosed quote\n", 2), 1);
 		}
 		++i;
 	}
