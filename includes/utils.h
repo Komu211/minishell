@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 10:17:09 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:57:35 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_minishell	**get_mini(void);
 char		*get_user_input(char *prompt);
 int			matches_pattern(const char *pattern, const char *string);
 int			remove_quotes(char **str);
-void		handle_operator(char *line, char *mod_line, int *i, int *j);
-void		handle_special_token(char *line, char *mod_line, int *i, int *j);
-void		handle_quotes(char *line, char *mod_line, int *i, int *j);
+void		handle_transform_operator(char *line, char *mod_line, int *i, int *j);
+void		handle_transform_special_token(char *line, char *mod_line, int *i, int *j);
+void		handle_transform_quotes(char *line, char *mod_line, int *i, int *j);
 
 #endif
