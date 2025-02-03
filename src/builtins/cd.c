@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 01:57:52 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 10:58:25 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:23:03 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 
 static int	update_pwd(t_minishell *minishell, char *cwd)
 {
-	if (minishell->old_pwd)
-		gc_free(minishell->old_pwd);
-	minishell->old_pwd = minishell->pwd;
+	env_set(minishell, "OLD_PWD", minishell->pwd);
 	minishell->pwd = gc_strdup(cwd);
 	env_set(minishell, "PWD", minishell->pwd);
 	return (0);
@@ -49,7 +47,7 @@ int	builtin_cd(t_minishell *minishell, char **args)
 	}
 	else if (args[1][0] == '-' && !args[1][1])
 	{
-		path = minishell->old_pwd;
+		path = get_env_value("OLD_PWD", minishell->env_list);
 		if (!path)
 			return (not_set("OLD_PWD", minishell));
 		printf("%s\n", path);

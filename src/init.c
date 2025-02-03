@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:34:20 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 13:30:04 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:19:47 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void	mini_init(char **envp, t_minishell **mini, int argc, char **argv)
 	env_init(*mini, envp);
 	(*mini)->error = 0;
 	(*mini)->exit_status = 0;
-	(*mini)->old_pwd = NULL;
 	(*mini)->identifier = generate_unique_identifier();
 }

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 13:24:15 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:17:12 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "enums.h"
 # include "libft.h"
+# include <signal.h>
 
 typedef struct s_ast_node		t_ast_node;
 typedef struct s_redirection	t_redirection;
