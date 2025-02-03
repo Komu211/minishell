@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:06:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 13:14:59 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:37:19 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_welcome(void)
-{
-	ft_putstr_fd("\033[1;36m", 1);
-	ft_putendl_fd("┌──────────────────────────────────────────────────────┐",
-		1);
-	ft_putendl_fd("│    ____  __ __                  _____ __         ____│",
-		1);
-	ft_putendl_fd("│   / __ \\/ //_/__  ____ ___  __ / ___// /_  ___  / / /│",
-		1);
-	ft_putendl_fd("│  / / / / ,< / _ \\/ __ `/ / / / \\__ \\/ __ \\/ _ \\/ / "
-		"/ │", 1);
-	ft_putendl_fd("│ / /_/ / /| /  __/ /_/ / /_/ / ___/ / / / /  __/ / /  │",
-		1);
-	ft_putendl_fd("│ \\____/_/ |_\\___/\\__,_/\\__, / /____/_/ /_/\\___/_/_"
-		"/   │", 1);
-	ft_putendl_fd("│                      /____/                          │",
-		1);
-	ft_putendl_fd("└──────────────────────────────────────────────────────┘",
-		1);
-	ft_putstr_fd("\033[0m\n", 1);
-}
 
 static int	handle_heredocs(t_minishell *mini, t_heredoc **heredocs,
 		int *heredoc_counter)
