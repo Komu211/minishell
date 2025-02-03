@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:53:09 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 17:46:24 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:16:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_token_type	get_token_type(char *word)
 	return (TOKEN_COMMAND);
 }
 
-static void	validate_quotes(char *line)
+static int	validate_quotes(char *line)
 {
 	char	quote;
 	int		i;
@@ -49,10 +49,11 @@ static void	validate_quotes(char *line)
 			while (line[i] && line[i] != quote)
 				++i;
 			if (!line[i])
-				error_handler("syntax error: unclosed quote\n", 0);
+				return ((*get_mini())->exit_status = 2, ft_putstr_fd("syntax error: unclosed quote\n", 2), 1);
 		}
 		++i;
 	}
+	return (0);
 }
 
 static t_token_type	*gc_tokenizer(char **split_line)
@@ -77,7 +78,8 @@ void	ast_init(t_ast_node **node, char *line, t_minishell *minishell)
 	t_token_type	*tokens;
 	char			*mod_line;
 
-	validate_quotes(line);
+	if (validate_quotes(line))
+		return ;
 	mod_line = gc_calloc(get_mod_len(line) + 1, sizeof(char));
 	transform_line(line, mod_line);
 	split_line = gc_split(mod_line);
