@@ -86,4 +86,5 @@ SRCS = main.c \
        wildcard.c \
        get_user_input.c \
        init.c \
-       matches_pattern.c
+       matches_pattern.c \
+       transformation_utils.c

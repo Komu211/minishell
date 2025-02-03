@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_heredocs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 19:19:55 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:04:31 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	expand_variable(char **line, char **result, t_minishell *mini)
 	const char	*expanded;
 
 	i = 0;
-	(*line)++; // Skip the '$'
+	(*line)++;
 	if (*line && **line == '?')
 	{
 		(*line)++;
