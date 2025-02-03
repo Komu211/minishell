@@ -6,57 +6,11 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:07:37 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:34:55 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:18:54 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-static int	matches_pattern(const char *pattern, const char *string)
-{
-	int	is_in_double_quote;
-	int	is_in_single_quote;
-
-	is_in_double_quote = 0;
-	is_in_single_quote = 0;
-	while (*pattern && *string)
-	{
-		if (*pattern == '\'' && !is_in_double_quote)
-		{
-			is_in_single_quote = !is_in_single_quote;
-			pattern++;
-			continue ;
-		}
-		if (*pattern == '\"' && !is_in_single_quote)
-		{
-			is_in_double_quote = !is_in_double_quote;
-			pattern++;
-			continue ;
-		}
-		if (*pattern == '*' && !is_in_double_quote && !is_in_single_quote)
-		{
-			while (*pattern == '*')
-				pattern++;
-			if (*pattern == '\0')
-				return (1);
-			while (*string)
-			{
-				if (matches_pattern(pattern, string))
-					return (1);
-				string++;
-			}
-			return (matches_pattern(pattern, string));
-		}
-		if (*pattern != *string)
-			return (0);
-		pattern++;
-		string++;
-	}
-	while (*pattern == '*' || (is_in_double_quote && *pattern == '\"')
-		|| (is_in_single_quote && *pattern == '\''))
-		pattern++;
-	return (*pattern == '\0' && *string == '\0');
-}
 
 static int	is_hidden(char *str)
 {

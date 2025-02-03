@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:40:35 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:02:04 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char		*gc_unsplit(char **split);
 int			gc_split_size(char **split);
 t_minishell	**get_mini(void);
 char		*get_user_input(char *prompt);
+int			matches_pattern(const char *pattern, const char *string);
 int			remove_quotes(char **str);
 
 #endif

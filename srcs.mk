@@ -85,4 +85,5 @@ SRCS = main.c \
        empty_heredoc.c \
        wildcard.c \
        get_user_input.c \
-       init.c
+       init.c \
+       matches_pattern.c

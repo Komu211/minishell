@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:09:36 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:32:42 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:01:39 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "enums.h"
 # include "env.h"
 # include "struct.h"
+# include "utils.h"
 # include "wrapper.h"
 # include <dirent.h>
 # include <readline/readline.h>
