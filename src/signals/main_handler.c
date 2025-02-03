@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:08:57 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 13:07:14 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:09:18 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ void	setup_heredoc_handler(t_minishell *mini)
 	sigemptyset(&mini->sa.sa_mask);
 	sigaction(SIGINT, &mini->sa, NULL);
 	sigaction(SIGQUIT, &mini->sa, NULL);
+}
+
+void	parent_handler(int signum, siginfo_t *info, void *context)
+{
+	(void)info;
+	(void)context;
+	if (signum == SIGQUIT)
+		ft_putendl_fd("Quit: 3", 2);
+	if (signum == SIGINT)
+		ft_putchar_fd('\n', STDOUT_FILENO);
 }

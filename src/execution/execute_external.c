@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 15:20:39 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:08:48 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ static char	**env_ll_to_array(t_list *env_list)
 static int	handle_child_exit(t_minishell *mini, int status)
 {
 	if (WIFSIGNALED(status))
-	{
 		mini->exit_status = 128 + WTERMSIG(status);
-		if (WTERMSIG(status) == SIGINT)
-			ft_putchar_fd('\n', STDOUT_FILENO);
-	}
 	else
 		mini->exit_status = WEXITSTATUS(status);
 	return (mini->exit_status);
@@ -62,7 +58,7 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 	char	**env;
 
 	env = env_ll_to_array(mini->env_list);
-	setup_parent_signals();
+	setup_parent_handler(mini);
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), 1);
