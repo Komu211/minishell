@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 14:20:18 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:20:39 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 {
 	pid_t	pid;
 	int		status;
+	char	**env;
 
+	env = env_ll_to_array(mini->env_list);
 	setup_parent_signals();
 	pid = fork();
 	if (pid == -1)
@@ -67,13 +69,14 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 	if (pid == 0)
 	{
 		setup_child_signals();
-		execve(cmd_path, ast->args, env_ll_to_array(mini->env_list));
+		execve(cmd_path, ast->args, env);
 		perror(ast->args[0]);
 		mini->exit_status = 126;
 		cleanup_main(mini);
 	}
 	waitpid(pid, &status, 0);
 	restore_signals(mini);
+	gc_split_free(&env);
 	return (handle_child_exit(mini, status));
 }
 

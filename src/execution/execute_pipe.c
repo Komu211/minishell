@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/01/19 18:20:40 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:33:13 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static pid_t	execute_left(t_minishell *mini, t_ast_node *ast, int pipefd[2])
 {
 	pid_t	pid1;
+	int		ret;
 
 	pid1 = fork();
 	if (pid1 == -1)
@@ -24,7 +25,9 @@ static pid_t	execute_left(t_minishell *mini, t_ast_node *ast, int pipefd[2])
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-		exit(execute_ast(mini, ast->left));
+		ret = execute_ast(mini, ast->left);
+		garbage_collector_empty();
+		exit(ret);
 	}
 	return (pid1);
 }
@@ -32,6 +35,7 @@ static pid_t	execute_left(t_minishell *mini, t_ast_node *ast, int pipefd[2])
 static pid_t	execute_right(t_minishell *mini, t_ast_node *ast, int pipefd[2])
 {
 	pid_t	pid2;
+	int		ret;
 
 	pid2 = fork();
 	if (pid2 == -1)
@@ -41,7 +45,9 @@ static pid_t	execute_right(t_minishell *mini, t_ast_node *ast, int pipefd[2])
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
-		exit(execute_ast(mini, ast->right));
+		ret = execute_ast(mini, ast->right);
+		garbage_collector_empty();
+		exit(ret);
 	}
 	return (pid2);
 }
