@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/03 09:23:41 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:35:23 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,27 @@ static void	expand_variable(char **line, char **result, t_minishell *mini,
 
 void	expand_env(t_minishell *mini, char **args)
 {
-	char	*src;
-	char	*result;
-	int		in_single_quote;
-	int		in_double_quote;
+	char		*src;
+	char		*result;
+	t_quotes	quotes;
 
 	if (!args || !*args)
 		return ;
 	src = *args;
 	result = NULL;
-	in_single_quote = 0;
-	in_double_quote = 0;
+	quotes = (t_quotes){0, 0};
 	while (*src)
 	{
-		if (*src == '\'' && !in_double_quote)
+		if (*src == '\'' && !quotes.in_double)
+			quotes.in_single = !quotes.in_single;
+		else if (*src == '"' && !quotes.in_single)
+			quotes.in_double = !quotes.in_double;
+		else if (!quotes.in_single && *src == '$')
 		{
-			in_single_quote = !in_single_quote;
-			append_char(&result, *src++);
+			expand_variable(&src, &result, mini, quotes.in_double);
+			continue ;
 		}
-		else if (*src == '"' && !in_single_quote)
-		{
-			in_double_quote = !in_double_quote;
-			append_char(&result, *src++);
-		}
-		else if (!in_single_quote && *src == '$')
-			expand_variable(&src, &result, mini, in_double_quote);
-		else
-			append_char(&result, *src++);
+		append_char(&result, *src++);
 	}
 	gc_free(*args);
 	*args = result;
