@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:41:01 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:47 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:40:22 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	execute_child_process(t_minishell *mini, t_ast_node *ast,
 
 	status = mini->exit_status;
 	env = env_ll_to_array(mini->env_list);
-	setup_parent_handler(mini);
+	parent_ignore_signals();
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), 1);
