@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 16:17:21 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:09:51 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	expand_variable(char **line, char **result, t_minishell *mini)
 	if (*line && **line == '?')
 	{
 		(*line)++;
-		append_string(result, ft_itoa(mini->exit_status));
+		append_string(result, gc_itoa(mini->exit_status));
 		return ;
 	}
 	while (**line && (ft_isalnum(**line) || **line == '_') && i < 255)

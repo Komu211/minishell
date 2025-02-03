@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:25:29 by obehavka          #+#    #+#             */
-/*   Updated: 2025/02/03 12:33:06 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:01:42 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	expand_variable(char **line, char **result, t_minishell *mini,
 	if (*line && **line == '?')
 	{
 		(*line)++;
-		append_string(result, ft_itoa(mini->exit_status));
+		append_string(result, gc_itoa(mini->exit_status));
 		return ;
 	}
 	while (**line && (ft_isalnum(**line) || **line == '_') && i < 255)

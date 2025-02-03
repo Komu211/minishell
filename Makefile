@@ -63,3 +63,18 @@ bonus: all
 re: fclean all
 
 .PHONY: all clean fclean re norm debug docker bonus
+
+
+
+# { 
+#     leak readline
+#     Memcheck:Leak
+#     ...
+#     fun:readline
+# }
+# {
+#     leak add_history
+#     Memcheck:Leak
+#     ...
+#     fun:add_history
+# }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:07:37 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 15:41:20 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:49:37 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static char	**add_match(char **matches, int *count, char *name)
 {
 	char	**new_matches;
 
-	new_matches = gc_realloc(matches, (*count + 2) * sizeof(char *));
+	if (!matches)
+		new_matches = gc_calloc(2, sizeof(char *));
+	else
+		new_matches = gc_realloc(matches, (*count + 2) * sizeof(char *), *count
+				* sizeof(char *));
 	new_matches[*count] = gc_strjoin_three("\"", name, "\"");
 	(*count)++;
 	new_matches[*count] = NULL;
@@ -55,7 +59,8 @@ static char	**expand_wildcard(char *str)
 	closedir(dir);
 	if (count == 0)
 		return (NULL);
-	matches = gc_realloc(matches, (count + 1) * sizeof(char *));
+	matches = gc_realloc(matches, (count + 1) * sizeof(char *), count
+			* sizeof(char *));
 	matches[count] = NULL;
 	return (matches);
 }

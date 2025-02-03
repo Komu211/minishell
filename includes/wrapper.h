@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrapper.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obehavka <obehavka@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:31:50 by obehavka          #+#    #+#             */
-/*   Updated: 2025/01/18 10:48:13 by obehavka         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:51:17 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // Function prototypes
 void	*gc_malloc(size_t size);
 void	*gc_calloc(size_t num, size_t size);
-void	*gc_realloc(void *ptr, size_t size);
+void	*gc_realloc(void *ptr, size_t size, size_t copy_size);
 void	gc_free(void *ptr);
 char	*gc_getcwd(char *buf);
 

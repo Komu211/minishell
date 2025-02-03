@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:35 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2024/12/07 16:43:31 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:50:27 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*gc_getcwd(char *buf)
 	while (!str && errno == ERANGE)
 	{
 		size *= 2;
-		str = gc_realloc(buf, size);
+		str = gc_realloc(buf, size, size / 2);
 		str = getcwd(buf, size);
 	}
 	if (!str)
