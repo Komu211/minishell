@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_utils.c                                     :+:      :+:    :+:   */
+/*   signal_setups.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 16:23:33 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 16:05:40 by kmuhlbau         ###   ########.fr       */
+/*   Created: 2025/02/03 16:11:06 by kmuhlbau          #+#    #+#             */
+/*   Updated: 2025/02/03 16:15:17 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal_handler.h"
-
-void	setup_child_signals(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
-
-void	setup_parent_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 void	setup_parent_handler(t_minishell *mini)
 {
@@ -35,9 +23,36 @@ void	setup_parent_handler(t_minishell *mini)
 
 void	restore_signals(t_minishell *mini)
 {
+	mini->sa.sa_sigaction = signal_handler;
 	mini->sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&mini->sa.sa_mask);
+	sigaction(SIGINT, &mini->sa, NULL);
+	sigaction(SIGQUIT, &mini->sa, NULL);
+}
+
+void	signal_setup(t_minishell *mini)
+{
 	mini->sa.sa_sigaction = signal_handler;
+	mini->sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&mini->sa.sa_mask);
+	if (isatty(STDIN_FILENO))
+	{
+		sigaction(SIGINT, &mini->sa, NULL);
+		sigaction(SIGQUIT, &mini->sa, NULL);
+		rl_catch_signals = 0;
+	}
+	else
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+}
+
+void	setup_heredoc_handler(t_minishell *mini)
+{
+	mini->sa.sa_sigaction = heredoc_signal_handler;
+	mini->sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&mini->sa.sa_mask);
 	sigaction(SIGINT, &mini->sa, NULL);
 	sigaction(SIGQUIT, &mini->sa, NULL);
 }

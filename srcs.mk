@@ -66,7 +66,6 @@ SRCS = main.c \
 	cd.c \
        env_set.c \
        env_add.c \
-       main_handler.c \
        get_env.c \
        gc_itoa.c \
        gc_unsplit.c \
@@ -75,7 +74,6 @@ SRCS = main.c \
        remove_quotes.c \
        gc_split_size.c \
        print_invalid.c \
-       signal_utils.c \
        get_mini.c \
        collect_heredocs.c \
        read_heredocs.c \
@@ -88,4 +86,7 @@ SRCS = main.c \
        init.c \
        matches_pattern.c \
        transformation_utils.c \
-       create_identifier.c
+       create_identifier.c \
+       signal_setups.c \
+       signal_handlers.c \
+       regular_signal.c

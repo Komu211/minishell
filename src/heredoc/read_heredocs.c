@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:42:59 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 16:05:29 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:17:21 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	read_heredocs(t_heredoc *heredocs, t_minishell *mini)
 		return (1);
 	current = heredocs;
 	mini->heredoc_interrupted = 0;
-	setup_parent_signals();
+	parent_ignore_signals();
 	setup_heredoc_handler(mini);
 	while (current)
 	{
