@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:34 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 19:17:11 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:24:15 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_minishell
 	int							heredoc_interrupted;
 	t_list						*env_list;
 	t_ast_node					*ast;
+	char						*identifier;
 	struct sigaction			sa;
 }								t_minishell;
 
@@ -72,8 +73,8 @@ typedef struct s_heredoc
 
 typedef struct s_quotes
 {
-	int		in_double;
-	int		in_single;
-}			t_quotes;
+	int							in_double;
+	int							in_single;
+}								t_quotes;
 
 #endif

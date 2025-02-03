@@ -87,4 +87,5 @@ SRCS = main.c \
        get_user_input.c \
        init.c \
        matches_pattern.c \
-       transformation_utils.c
+       transformation_utils.c \
+       create_identifier.c

@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:19:43 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 12:01:54 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:23:43 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void		handle_transform_operator(char *line, char *mod_line, int *i,
 void		handle_transform_special_token(char *line, char *mod_line, int *i,
 				int *j);
 void		handle_transform_quotes(char *line, char *mod_line, int *i, int *j);
-
+char		*generate_unique_identifier(void);
 #endif

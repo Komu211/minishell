@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/03 12:03:29 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:24:26 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static void	ft_itoa_to_buf(int n, char *buf)
 static char	*create_temp_heredoc_file(int *counter)
 {
 	char	*temp_path;
-	char	pid_str[32];
+	char	*pid_str;
 	char	counter_str[32];
 	int		fd;
 
-	ft_itoa_to_buf(getpid(), pid_str);
+	pid_str = gc_strdup((*get_mini())->identifier);
 	ft_itoa_to_buf(*counter, counter_str);
 	temp_path = gc_calloc(1, ft_strlen("/tmp/.heredoc_") + ft_strlen(pid_str)
 			+ ft_strlen(counter_str) + 2);
