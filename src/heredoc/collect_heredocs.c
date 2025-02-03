@@ -6,7 +6,7 @@
 /*   By: kmuhlbau <kmuhlbau@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:45:17 by kmuhlbau          #+#    #+#             */
-/*   Updated: 2025/02/02 18:30:07 by kmuhlbau         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:03:29 by kmuhlbau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,10 @@ static t_heredoc	*create_heredoc(t_redirection *redir, int *counter)
 	t_heredoc	*new_heredoc;
 
 	new_heredoc = gc_calloc(1, sizeof(t_heredoc));
-	if (!new_heredoc)
-		return (NULL);
-	// TODO: change to return int to detect wrong initialization
 	new_heredoc->delimiter = gc_strdup(redir->file);
 	new_heredoc->temp_file = create_temp_heredoc_file(counter);
 	new_heredoc->processed = 0;
 	new_heredoc->next = NULL;
-	if (!new_heredoc->temp_file)
-		return (NULL);
-		// Handle error
 	return (new_heredoc);
 }
 
