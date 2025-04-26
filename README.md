@@ -109,16 +109,6 @@ Run the shell:
 
 ---
 
-## 📞 Contacts
-
-[![GitHub](https://img.shields.io/badge/GitHub-ondbeh-181717?style=for-the-badge&logo=github)](https://github.com/ondbeh)
-
-[![Email](https://img.shields.io/badge/Email-ondbeh@gmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:ondbeh@gmail.com)
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ondřej_Běhávka-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/ondrej-behavka/)
-
----
-
 ## 📜 License
 
 This project is licensed under the MIT License - see the [license](LICENSE) file for details.
